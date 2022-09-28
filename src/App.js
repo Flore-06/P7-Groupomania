@@ -1,7 +1,7 @@
 import { Routes, Route } from "react-router-dom";
-import { LoginPage } from "./pages/Login";
+import { LoginPage } from "../pages/Login";
 import { HomePage } from "./pages/Home";
-import { SignUpPage } from "./pages/SignUp";
+import { SignUpPage } from "../pages/SignUp";
 import { ProfilePage } from "./pages/Profile";
 import { SettingsPage } from "./pages/Settings";
 import { ProtectedRoute } from "./components/ProtectedRoute";
