@@ -2,12 +2,13 @@ import { useRef, useState, useEffect } from "react";
 import { faCheck, faTimes, faInfoCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from '../api/axios';
+import { Link } from "react-router-dom";
 
 const USER_REGEX = /^[A-z][A-z0-9-_]{3,23}$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
-const REGISTER_URL = '/register';
+const REGISTER_URL = 'auth/register';
 
-const SignUpPage = () => {
+const Register = () => {
     const userRef = useRef();
     const errRef = useRef();
 
@@ -60,22 +61,21 @@ const SignUpPage = () => {
                     withCredentials: true
                 }
             );
-            console.log(response?.data);
-            console.log(response?.accessToken);
-            console.log(JSON.stringify(response))
+            // TODO: remove console.logs before deployment
+            console.log(JSON.stringify(response?.data));
+            //console.log(JSON.stringify(response))
             setSuccess(true);
             //clear state and controlled inputs
-            //need value attrib on inputs for this
             setUser('');
             setPwd('');
             setMatchPwd('');
         } catch (err) {
             if (!err?.response) {
-                setErrMsg('Pas de réponse du serveur');
+                setErrMsg('No Server Response');
             } else if (err.response?.status === 409) {
-                setErrMsg('Username déjà utilisé');
+                setErrMsg('Username Taken');
             } else {
-                setErrMsg('Inscription échouée')
+                setErrMsg('Registration Failed')
             }
             errRef.current.focus();
         }
@@ -85,7 +85,7 @@ const SignUpPage = () => {
         <>
             {success ? (
                 <section>
-                    <h1>Succès!</h1>
+                    <h1>Success!</h1>
                     <p>
                         <a href="#">Sign In</a>
                     </p>
@@ -93,10 +93,10 @@ const SignUpPage = () => {
             ) : (
                 <section>
                     <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
-                    <h1>Inscription</h1>
+                    <h1>Register</h1>
                     <form onSubmit={handleSubmit}>
                         <label htmlFor="username">
-                            Nom d'utilisateur:
+                            Username:
                             <FontAwesomeIcon icon={faCheck} className={validName ? "valid" : "hide"} />
                             <FontAwesomeIcon icon={faTimes} className={validName || !user ? "hide" : "invalid"} />
                         </label>
@@ -115,14 +115,14 @@ const SignUpPage = () => {
                         />
                         <p id="uidnote" className={userFocus && user && !validName ? "instructions" : "offscreen"}>
                             <FontAwesomeIcon icon={faInfoCircle} />
-                            4 à 24 caractères.<br />
-                            Doit commencer par une lettre.<br />
-                            Lettres, nombres, underscores, Letters, numbers, underscores, tirets autorisés.
+                            4 to 24 characters.<br />
+                            Must begin with a letter.<br />
+                            Letters, numbers, underscores, hyphens allowed.
                         </p>
 
 
                         <label htmlFor="password">
-                            Mot de passe:
+                            Password:
                             <FontAwesomeIcon icon={faCheck} className={validPwd ? "valid" : "hide"} />
                             <FontAwesomeIcon icon={faTimes} className={validPwd || !pwd ? "hide" : "invalid"} />
                         </label>
@@ -139,14 +139,14 @@ const SignUpPage = () => {
                         />
                         <p id="pwdnote" className={pwdFocus && !validPwd ? "instructions" : "offscreen"}>
                             <FontAwesomeIcon icon={faInfoCircle} />
-                            8 à 24 caractères.<br />
-                            Doit contenir des lettres en majuscule et minuscule, un nombre et un caractère spécial.<br />
-                            Caractères spéciaux autorisés: <span aria-label="exclamation mark">!</span> <span aria-label="at symbol">@</span> <span aria-label="hashtag">#</span> <span aria-label="dollar sign">$</span> <span aria-label="percent">%</span>
+                            8 to 24 characters.<br />
+                            Must include uppercase and lowercase letters, a number and a special character.<br />
+                            Allowed special characters: <span aria-label="exclamation mark">!</span> <span aria-label="at symbol">@</span> <span aria-label="hashtag">#</span> <span aria-label="dollar sign">$</span> <span aria-label="percent">%</span>
                         </p>
 
 
                         <label htmlFor="confirm_pwd">
-                            Confirmation du mot de passe:
+                            Confirm Password:
                             <FontAwesomeIcon icon={faCheck} className={validMatch && matchPwd ? "valid" : "hide"} />
                             <FontAwesomeIcon icon={faTimes} className={validMatch || !matchPwd ? "hide" : "invalid"} />
                         </label>
@@ -163,16 +163,15 @@ const SignUpPage = () => {
                         />
                         <p id="confirmnote" className={matchFocus && !validMatch ? "instructions" : "offscreen"}>
                             <FontAwesomeIcon icon={faInfoCircle} />
-                            Doit correspondre au mot de passe créé plus haut.
+                            Must match the first password input field.
                         </p>
 
-                        <button disabled={!validName || !validPwd || !validMatch ? true : false}>S'inscrire'</button>
+                        <button disabled={!validName || !validPwd || !validMatch ? true : false}>Sign Up</button>
                     </form>
                     <p>
-                        Déjà inscrit?<br />
+                        Already registered?<br />
                         <span className="line">
-                            {/*put router link here*/}
-                            <a href="#">Sign In</a>
+                            <Link to="/">Sign In</Link>
                         </span>
                     </p>
                 </section>
@@ -181,16 +180,4 @@ const SignUpPage = () => {
     )
 }
 
-export default SignUpPage
-
-
-
-
-
-
-
-/*export const SignUpPage = () => (
-    <div>
-      <h1>This is the Signup Page</h1>
-    </div>
-  );*/
+export default Register
