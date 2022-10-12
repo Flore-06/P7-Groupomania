@@ -62,37 +62,47 @@ const Login = () => {
 
     return (
 
-        <section>
-            <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
-            <h1>Connexion</h1>
-            <form onSubmit={handleSubmit}>
-                <label htmlFor="email">Email:</label>
-                <input
-                    type="text"
-                    id="email"
-                    ref={emailRef}
-                    autoComplete="off"
-                    onChange={(e) => setEmail(e.target.value)}
-                    value={email}
-                    required
-                />
+        <section class="row">
+            
+            <div class="column dark-background column_image-title">
+                <p class="groupomania-title">Le Réseau Social de</p>
+                <img src='..\public\logo-blanc-centre-groupomania.png' alt='logo de Groupomania'></img>
+            </div>
 
-                <label htmlFor="password">Mot de passe:</label>
-                <input
-                    type="password"
-                    id="password"
-                    onChange={(e) => setPassword(e.target.value)}
-                    value={password}
-                    required
-                />
-                <button>Se connecter</button>
-            </form>
-            <p>
-                Besoin de créer un compte?<br />
-                <span className="line">
-                    <Link to="/register">S'inscrire</Link>
-                </span>
-            </p>
+            <div class="column column_form">
+                <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
+                <h1 class="form-title">Connexion</h1>
+                <form onSubmit={handleSubmit}>
+                    <label htmlFor="email">Email :</label>
+                    <input
+                        type="text"
+                        id="email"
+                        ref={emailRef}
+                        autoComplete="off"
+                        onChange={(e) => setEmail(e.target.value)}
+                        value={email}
+                        required
+                    />
+
+                    <label htmlFor="password">Mot de passe :</label>
+                    <input
+                        type="password"
+                        id="password"
+                        onChange={(e) => setPassword(e.target.value)}
+                        value={password}
+                        required
+                    />
+                    <button>Se connecter</button>
+                </form>
+                <p class="form-redirection">
+                    Besoin de créer un compte ?<br />
+                    <span className="line">
+                        <Link to="/register">S'inscrire</Link>
+                    </span>
+                </p>
+            </div>
+            
+            
         </section>
 
     )

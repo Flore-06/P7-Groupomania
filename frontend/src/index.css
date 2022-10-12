@@ -9,12 +9,16 @@
 html {
     font-family: 'Lato', sans-serif;
     font-size: 22px;
-    color: #fff;
+    /*color: #fff;*/
+    color:rgba(78, 81, 102, 1);
 }
 
 body {
     min-height: 100vh;
-    background-color: dodgerblue;
+    /*background-color: #4E5166;*/
+    background: url(../../frontend/public/team-groupomania-1920x1281.jpg) rgba(78, 81, 102, 0.7);
+    background-size: cover;
+    background-blend-mode: multiply;
 }
 
 .App {
@@ -23,18 +27,53 @@ body {
   justify-content: center;
   align-items: center;
   min-height: 100vh; 
-  padding: 1rem 0.5rem;
+  /*padding: 1rem 0.5rem;*/
 }
 
-section {
+/*section {
     width: 100%;
     max-width: 420px;
     min-height: 400px;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    padding: 1rem;
+    padding: 2rem;
     background-color: rgba(0,0,0,0.4);
+}*/
+
+section.row {
+    display: flex;
+    width: 100%;
+  }
+
+.dark-background {
+    color: white;
+}
+  
+.column {
+    flex: 50%;
+    width: 100%;
+    /*max-width: 420px;
+    min-height: 400px;*/
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    /*padding: 2rem;
+    background-color: rgba(0,0,0,0.4);*/
+  }
+
+.column_image-title {
+    align-items: center;
+    justify-content: center;
+}
+
+.groupomania-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+.column_form {
+    padding: 5rem;
+    background-color: rgba(255, 255, 255, 1);
 }
 
 form {
@@ -46,7 +85,7 @@ form {
 }
 
 a, a:visited {
-    color: #fff;
+    color: black;
 }
 
 input[type="text"],
@@ -56,16 +95,28 @@ textarea {
   font-family: 'Nunito', sans-serif;
   font-size: 22px;
   padding: 0.25rem;
-  border-radius: 0.5rem;
+  border-radius: 2rem;
+  border-color: rgba(78, 81, 102, 1);
+}
+
+h1.form-title{
+    text-align: center;
+}
+
+p.form-redirection{
+    text-align: center;
 }
 
 label,
 button {
   margin-top: 1rem;
+  padding: 0.5rem;
 }
 
 button {
   padding: 0.5rem;
+  background-color:rgba(78, 81, 102, 1);
+  color: white;
 }
 
 li {
