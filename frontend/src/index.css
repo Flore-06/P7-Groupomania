@@ -1,5 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Nunito&display=swap');
 
+:root {
+    --first-color: 78, 81, 102;
+    --second-color: 253, 45, 1;
+    --third-color: 255, 215, 215;
+  }
+
 * {
     margin: 0;
     padding: 0;
@@ -10,13 +16,13 @@ html {
     font-family: 'Lato', sans-serif;
     font-size: 22px;
     /*color: #fff;*/
-    color:rgba(78, 81, 102, 1);
+    color: rgba(var(--first-color), 1);
 }
 
 body {
     min-height: 100vh;
     /*background-color: #4E5166;*/
-    background: url(../../frontend/public/team-groupomania-1920x1281.jpg) rgba(78, 81, 102, 0.7);
+    background: url(../../frontend/public/team-groupomania-1920x1281.jpg) rgba(var(--first-color), 0.7);
     background-size: cover;
     background-blend-mode: multiply;
 }
@@ -96,7 +102,7 @@ textarea {
   font-size: 22px;
   padding: 0.25rem;
   border-radius: 2rem;
-  border-color: rgba(78, 81, 102, 1);
+  border-color: rgba(var(--first-color), 1);
 }
 
 h1.form-title{
@@ -115,7 +121,7 @@ button {
 
 button {
   padding: 0.5rem;
-  background-color:rgba(78, 81, 102, 1);
+  background-color: rgba(var(--first-color), 1);
   color: white;
 }
 
