@@ -64,7 +64,7 @@ const Login = () => {
 
         <section>
             <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
-            <h1>Sign In</h1>
+            <h1>Connexion</h1>
             <form onSubmit={handleSubmit}>
                 <label htmlFor="email">Email:</label>
                 <input
@@ -77,7 +77,7 @@ const Login = () => {
                     required
                 />
 
-                <label htmlFor="password">Password:</label>
+                <label htmlFor="password">Mot de passe:</label>
                 <input
                     type="password"
                     id="password"
@@ -85,12 +85,12 @@ const Login = () => {
                     value={password}
                     required
                 />
-                <button>Sign In</button>
+                <button>Se connecter</button>
             </form>
             <p>
-                Need an Account?<br />
+                Besoin de créer un compte?<br />
                 <span className="line">
-                    <Link to="/register">Sign Up</Link>
+                    <Link to="/register">S'inscrire</Link>
                 </span>
             </p>
         </section>

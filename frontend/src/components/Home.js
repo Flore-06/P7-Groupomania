@@ -15,19 +15,19 @@ const Home = () => {
 
     return (
         <section>
-            <h1>Home</h1>
+            <h1>Accueil</h1>
             <br />
-            <p>You are logged in!</p>
+            <p>Vous êtes connecté!</p>
             <br />
-            <Link to="/editor">Go to the Editor page</Link>
+            <Link to="/editor">Aller à la page d'éditeur</Link>
             <br />
-            <Link to="/admin">Go to the Admin page</Link>
+            <Link to="/admin">Aller à la page d'administrateur</Link>
             <br />
-            <Link to="/lounge">Go to the Lounge</Link>
+            <Link to="/lounge">Aller au Lounge</Link>
             <br />
-            <Link to="/linkpage">Go to the link page</Link>
+            <Link to="/linkpage">Aller à la page de lien</Link>
             <div className="flexGrow">
-                <button onClick={logout}>Sign Out</button>
+                <button onClick={logout}>Se déconnecter</button>
             </div>
         </section>
     )

@@ -4,9 +4,9 @@ const Missing = () => {
     return (
         <article style={{ padding: "100px" }}>
             <h1>Oops!</h1>
-            <p>Page Not Found</p>
+            <p>Cette page ne semble pas exister.</p>
             <div className="flexGrow">
-                <Link to="/">Visit Our Homepage</Link>
+                <Link to="/">Page d'accueil</Link>
             </div>
         </article>
     )

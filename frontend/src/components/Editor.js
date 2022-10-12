@@ -3,11 +3,11 @@ import { Link } from "react-router-dom"
 const Editor = () => {
     return (
         <section>
-            <h1>Editors Page</h1>
+            <h1>Page éditeur</h1>
             <br />
-            <p>You must have been assigned an Editor role.</p>
+            <p>Vous devez avoir reçu un rôle d'éditeur.</p>
             <div className="flexGrow">
-                <Link to="/">Home</Link>
+                <Link to="/">Accueil</Link>
             </div>
         </section>
     )

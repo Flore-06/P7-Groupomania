@@ -35,13 +35,13 @@ const Users = () => {
 
     return (
         <article>
-            <h2>Users List</h2>
+            <h2>Liste des utilisateurs</h2>
             {users?.length
                 ? (
                     <ul>
                         {users.map((user, i) => <li key={i}>{user?.username}</li>)}
                     </ul>
-                ) : <p>No users to display</p>
+                ) : <p>Aucun utilisateur à afficher</p>
             }
         </article>
     );
