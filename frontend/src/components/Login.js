@@ -64,7 +64,7 @@ const Login = () => {
 
         <section class="row">
             
-            <div class="column dark-background column_image-title">
+            <div class="column dark-image-background column_image-title">
                 <p class="groupomania-title">Le Réseau Social de</p>
                 <img src='..\public\logo-blanc-centre-groupomania.png' alt='logo de Groupomania'></img>
             </div>

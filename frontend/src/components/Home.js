@@ -16,7 +16,7 @@ const Home = () => {
     }
 
     return (
-        <main>
+        <main class="light-background">
             <section>
                 <h1>Accueil</h1>
                 <br />

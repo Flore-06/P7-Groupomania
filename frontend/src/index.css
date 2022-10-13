@@ -15,16 +15,12 @@
 html {
     font-family: 'Lato', sans-serif;
     font-size: 22px;
-    /*color: #fff;*/
     color: rgba(var(--first-color), 1);
 }
 
 body {
     min-height: 100vh;
-    /*background-color: #4E5166;*/
-    background: url(../../frontend/public/team-groupomania-1920x1281.jpg) rgba(var(--first-color), 0.7);
-    background-size: cover;
-    background-blend-mode: multiply;
+    
 }
 
 .App {
@@ -33,40 +29,36 @@ body {
   justify-content: center;
   align-items: center;
   min-height: 100vh; 
-  /*padding: 1rem 0.5rem;*/
 }
-
-/*section {
-    width: 100%;
-    max-width: 420px;
-    min-height: 400px;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    padding: 2rem;
-    background-color: rgba(0,0,0,0.4);
-}*/
 
 section.row {
     display: flex;
     width: 100%;
   }
 
-.dark-background {
+main {
+    width: 100%;
+    height: 100vh;
+}
+
+/*.light-background {
+    background-color: white;
+}*/
+
+.dark-image-background {
     color: white;
+    background: url(../../frontend/public/team-groupomania-1920x1281.jpg) rgba(var(--first-color), 0.7);
+    background-size: cover;
+    background-blend-mode: multiply;
 }
   
 .column {
     flex: 50%;
     width: 100%;
     height: 100vh;
-    /*max-width: 420px;
-    min-height: 400px;*/
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    /*padding: 2rem;
-    background-color: rgba(0,0,0,0.4);*/
   }
 
 .column_image-title {
