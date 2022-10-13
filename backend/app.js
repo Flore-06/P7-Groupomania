@@ -1,5 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const cors = require("cors");
 
 // Appel de app : notre application
 const app = express();
@@ -16,7 +17,7 @@ require('dotenv').config();
 
 
 // Appel des différentes routes
-const sauceRoutes = require('./routes/sauce');
+const postRoutes = require('./routes/post');
 const userRoutes = require('./routes/user');
 
 /*app.use(helmet({
@@ -42,13 +43,25 @@ mongoose.connect(process.env.SECRET_DB,
     next();
   });
 
-
+  
+  const whitelist = ["http://localhost:3000"]
+  const corsOptions = {
+    origin: function (origin, callback) {
+      if (!origin || whitelist.indexOf(origin) !== -1) {
+        callback(null, true)
+      } else {
+        callback(new Error("Not allowed by CORS"))
+      }
+    },
+    credentials: true,
+  }
+  app.use(cors(corsOptions))
 
 
 
 app.use(express.json());
 
-app.use('/api/sauces', sauceRoutes);
+app.use('/api/posts', postRoutes);
 app.use('/api/auth', userRoutes);
 app.use('/images', express.static(path.join(__dirname, 'images')));
 

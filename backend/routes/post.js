@@ -11,15 +11,15 @@ const auth = require('../middleware/auth');
 const multer = require('../middleware/multer-config');
 
 // Import de la logique des routes
-const saucesCtrl = require('../controllers/sauces');
+const postsCtrl = require('../controllers/posts');
 
 // Intercepter les différentes requêtes
-router.get('/', auth, saucesCtrl.getAllSauce);
-router.post('/', auth, multer, saucesCtrl.createSauce);
-router.get('/:id', auth, saucesCtrl.getOneSauce);
-router.put('/:id', auth, multer, saucesCtrl.modifySauce);
-router.delete('/:id', auth, saucesCtrl.deleteSauce);
-router.post("/:id/like", auth, saucesCtrl.likeDislikeSauce);
+router.get('/', auth, postsCtrl.getAllPost);
+router.post('/', auth, multer, postsCtrl.createPost);
+router.get('/:id', auth, postsCtrl.getOnePost);
+router.put('/:id', auth, multer, postsCtrl.modifyPost);
+router.delete('/:id', auth, postsCtrl.deletePost);
+router.post("/:id/like", auth, postsCtrl.likeDislikePost);
 
 // Exporter le routeur
 module.exports = router;

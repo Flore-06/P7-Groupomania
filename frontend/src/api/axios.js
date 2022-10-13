@@ -1,6 +1,6 @@
 //Axios is a Javascript library used to make HTTP requests from node. js or XMLHttpRequests from the browser
 import axios from 'axios';
-const BASE_URL = 'http://localhost:4200/api';
+const BASE_URL = 'http://localhost:3500/api';
 
 export default axios.create({
     baseURL: BASE_URL
