@@ -37,16 +37,26 @@ const Home = () => {
                 </div>
             </section>
 
-            <section id="create-post">
+            <section class="create-post post">
                 <form>
-					<div class="create-post__div">
-						<textarea
-							class="create-post__posttextarea"
-							v-model="myText"
-							placeholder="Que voulez-vous partager ?"
-							aria-label="Un champ de texte pour créer un post"
-						></textarea>
+                    <div class="create-post__div">
+						<div class="create-post__user-image">
+                            <img 
+                                src="../../public/default-user-image.png"
+                                alt="icone utilisateur par défaut"
+                            ></img>
+                        </div>
+
+                        <div class="create-post__message">
+                            <textarea
+                                class="create-post__posttextarea"
+                                v-model="myText"
+                                placeholder="Que voulez-vous partager ?"
+                                aria-label="Un champ de texte pour créer un post"
+                            ></textarea>
+                        </div>
 					</div>
+					
 					
 					<div class="create-post__div create-post__fileinput">
 						<label for="myImage"

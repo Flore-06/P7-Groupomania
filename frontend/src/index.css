@@ -173,3 +173,42 @@ li {
     justify-content: flex-start;
     align-items: flex-end;
 }
+
+
+
+
+
+
+
+
+.post {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 75%;
+    margin: 50px;
+    background-color: white;
+    padding: 16px;
+    /*border: solid black;*/
+    border-radius: 8px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
+
+.create-post__div {
+    display: flex;
+    justify-content: space-between;
+}
+
+.create-post__user-image {
+    width: 10%
+}
+
+.create-post__message {
+    width: 85%;
+}
+
+.create-post textarea {
+    background-color: #F0F2F5;
+    border-color: none !important;
+    width: 100%;
+}
