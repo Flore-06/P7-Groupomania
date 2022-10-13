@@ -4,19 +4,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from '../api/axios';
 import { Link } from "react-router-dom";
 
-const USER_REGEX = /^[A-z][A-z0-9-_]{3,23}$/;
 const EMAIL_REGEX = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
 const REGISTER_URL = 'auth/register';
 
 const Register = () => {
-    const userRef = useRef();
     const emailRef = useRef();
     const errRef = useRef();
-
-    const [user, setUser] = useState('');
-    const [validName, setValidName] = useState(false);
-    const [userFocus, setUserFocus] = useState(false);
 
     const [email, setEmail] = useState('');
     const [validEmail, setValidEmail] = useState(false);
@@ -34,16 +28,8 @@ const Register = () => {
     const [success, setSuccess] = useState(false);
 
     useEffect(() => {
-        userRef.current.focus();
-    }, [])
-
-    useEffect(() => {
         emailRef.current.focus();
     }, [])
-
-    useEffect(() => {
-        setValidName(USER_REGEX.test(user));
-    }, [user])
 
     useEffect(() => {
         setValidEmail(EMAIL_REGEX.test(email));
@@ -56,21 +42,20 @@ const Register = () => {
 
     useEffect(() => {
         setErrMsg('');
-    }, [user, email, pwd, matchPwd])
+    }, [email, pwd, matchPwd])
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         // if button enabled with JS hack
-        const v1 = USER_REGEX.test(user);
-        const v2 = EMAIL_REGEX.test(email);
-        const v3 = PWD_REGEX.test(pwd);
-        if (!v1 || !v2 || !v3) {
+        const v1 = EMAIL_REGEX.test(email);
+        const v2 = PWD_REGEX.test(pwd);
+        if (!v1 || !v2) {
             setErrMsg("Invalid Entry");
             return;
         }
         try {
             const response = await axios.post(REGISTER_URL,
-                JSON.stringify({ user, email, pwd }),
+                JSON.stringify({ email, pwd }),
                 {
                     headers: { 'Content-Type': 'application/json' },
                     withCredentials: true
@@ -81,7 +66,6 @@ const Register = () => {
             //console.log(JSON.stringify(response))
             setSuccess(true);
             //clear state and controlled inputs
-            setUser('');
             setEmail('');
             setPwd('');
             setMatchPwd('');
@@ -89,7 +73,7 @@ const Register = () => {
             if (!err?.response) {
                 setErrMsg('No Server Response');
             } else if (err.response?.status === 409) {
-                setErrMsg('Username Taken');
+                setErrMsg('Email already used');
             } else {
                 setErrMsg('Registration Failed')
             }
@@ -117,30 +101,7 @@ const Register = () => {
                         <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
                         <h1 class="form-title">Inscription</h1>
                         <form onSubmit={handleSubmit}>
-                            <label htmlFor="username">
-                                Nom d'utilisateur :
-                                <FontAwesomeIcon icon={faCheck} className={validName ? "valid" : "hide"} />
-                                <FontAwesomeIcon icon={faTimes} className={validName || !user ? "hide" : "invalid"} />
-                            </label>
-                            <input
-                                type="text"
-                                id="username"
-                                ref={userRef}
-                                autoComplete="off"
-                                onChange={(e) => setUser(e.target.value)}
-                                value={user}
-                                required
-                                aria-invalid={validName ? "false" : "true"}
-                                aria-describedby="uidnote"
-                                onFocus={() => setUserFocus(true)}
-                                onBlur={() => setUserFocus(false)}
-                            />
-                            <p id="uidnote" className={userFocus && user && !validName ? "instructions" : "offscreen"}>
-                                <FontAwesomeIcon icon={faInfoCircle} />
-                                8 à 24 caractères<br />
-                                Doit commencer par une lettre.<br />
-                                Lettres, chiffres, underscore, tiret du milieu autorisés.
-                            </p>
+                            
 
                             <label htmlFor="email">
                                 Email :
@@ -213,7 +174,7 @@ const Register = () => {
                                 Doit correspondre au premier mot de passe.
                             </p>
 
-                            <button disabled={!validName || !validPwd || !validMatch ? true : false}>S'inscrire</button>
+                            <button disabled={!validEmail || !validPwd || !validMatch ? true : false}>S'inscrire</button>
                         </form>
                         <p class="form-redirection">
                             Déjà inscrit ?<br />
