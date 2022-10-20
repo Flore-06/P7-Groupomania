@@ -1,7 +1,7 @@
 import { useNavigate, Link } from "react-router-dom";
 import { useContext } from "react";
 import AuthContext from "../context/AuthProvider";
-import { faRightFromBracket, faImage, faPaperPlane, faThumbsUp, faThumbsDown, faComment, faUser } from "@fortawesome/free-solid-svg-icons";
+import { faRightFromBracket, faImage, faPaperPlane, faThumbsUp, faThumbsDown, faComment, faUser, faHome } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const Home = () => {
@@ -17,7 +17,14 @@ const Home = () => {
 
     return (
         <main class="light-background">
-            <section class="bg-ligh-grey">
+            <section class="bg-light-grey">
+
+                <div class="icon-bar">
+                    <a class="active" href="/"><FontAwesomeIcon icon={faHome}/></a>
+                    <a href="/editor"><FontAwesomeIcon icon={faUser}/></a>
+                    <a onClick={logout}><FontAwesomeIcon icon={faRightFromBracket}/></a>
+                </div>
+
                 <h1>Accueil</h1>
                 <br />
                 <p>Vous êtes connecté !</p>
@@ -157,10 +164,6 @@ const Home = () => {
                             </div>                         
                         
                         </div>
-
-                        
-
-
                     </div>
                 </div>
 
@@ -217,10 +220,6 @@ const Home = () => {
                             </div>                       
                         
                         </div>
-
-                        
-
-
                     </div>
                 </div>
             </section>
