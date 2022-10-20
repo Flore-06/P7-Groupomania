@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 
 const EMAIL_REGEX = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
-const REGISTER_URL = 'auth/register';
+const REGISTER_URL = 'auth/signup';
 
 const Register = () => {
     const emailRef = useRef();
@@ -16,7 +16,7 @@ const Register = () => {
     const [validEmail, setValidEmail] = useState(false);
     const [emailFocus, setEmailFocus] = useState(false);
 
-    const [pwd, setPwd] = useState('');
+    const [password, setPwd] = useState('');
     const [validPwd, setValidPwd] = useState(false);
     const [pwdFocus, setPwdFocus] = useState(false);
 
@@ -36,26 +36,26 @@ const Register = () => {
     }, [email])
 
     useEffect(() => {
-        setValidPwd(PWD_REGEX.test(pwd));
-        setValidMatch(pwd === matchPwd);
-    }, [pwd, matchPwd])
+        setValidPwd(PWD_REGEX.test(password));
+        setValidMatch(password === matchPwd);
+    }, [password, matchPwd])
 
     useEffect(() => {
         setErrMsg('');
-    }, [email, pwd, matchPwd])
+    }, [email, password, matchPwd])
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         // if button enabled with JS hack
         const v1 = EMAIL_REGEX.test(email);
-        const v2 = PWD_REGEX.test(pwd);
+        const v2 = PWD_REGEX.test(password);
         if (!v1 || !v2) {
             setErrMsg("Invalid Entry");
             return;
         }
         try {
             const response = await axios.post(REGISTER_URL,
-                JSON.stringify({ email, pwd }),
+                JSON.stringify({ email, password }),
                 {
                     headers: { 'Content-Type': 'application/json' },
                     withCredentials: true
@@ -87,7 +87,7 @@ const Register = () => {
                 <section class="row">
                     <h1>Succès !</h1>
                     <p>
-                        <a href="#">Connexion</a>
+                        <a href="/login">Connexion</a>
                     </p>
                 </section>
             ) : (
@@ -132,13 +132,13 @@ const Register = () => {
                             <label htmlFor="password">
                                 Mot de passe :
                                 <FontAwesomeIcon icon={faCheck} className={validPwd ? "valid" : "hide"} />
-                                <FontAwesomeIcon icon={faTimes} className={validPwd || !pwd ? "hide" : "invalid"} />
+                                <FontAwesomeIcon icon={faTimes} className={validPwd || !password ? "hide" : "invalid"} />
                             </label>
                             <input
                                 type="password"
                                 id="password"
                                 onChange={(e) => setPwd(e.target.value)}
-                                value={pwd}
+                                value={password}
                                 required
                                 aria-invalid={validPwd ? "false" : "true"}
                                 aria-describedby="pwdnote"

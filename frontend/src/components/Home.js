@@ -50,7 +50,7 @@ const Home = () => {
                         <div class="create-post__div create-post__message">
                             <div class="create-post__user-image">
                                 <img 
-                                    src="../../public/default-user-image.png"
+                                    src="/default-user-icon.png"
                                     alt="icone utilisateur par défaut"
                                 ></img>
                             </div>
