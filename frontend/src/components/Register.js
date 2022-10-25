@@ -3,14 +3,27 @@ import { faCheck, faTimes, faInfoCircle } from "@fortawesome/free-solid-svg-icon
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from '../api/axios';
 import { Link } from "react-router-dom";
+import { text } from "@fortawesome/fontawesome-svg-core";
 
+const NAME_REGEX = /^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$/u;
+const SURNAME_REGEX = /^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$/u;
 const EMAIL_REGEX = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
 const REGISTER_URL = 'auth/signup';
 
 const Register = () => {
+    const nameRef = useRef();
+    const surnameRef = useRef();
     const emailRef = useRef();
     const errRef = useRef();
+
+    const [name, setName] = useState('');
+    const [validName, setValidName] = useState(false);
+    const [nameFocus, setNameFocus] = useState(false);
+
+    const [surname, setSurname] = useState('');
+    const [validSurname, setValidSurname] = useState(false);
+    const [surnameFocus, setSurnameFocus] = useState(false);
 
     const [email, setEmail] = useState('');
     const [validEmail, setValidEmail] = useState(false);
@@ -28,8 +41,24 @@ const Register = () => {
     const [success, setSuccess] = useState(false);
 
     useEffect(() => {
+        nameRef.current.focus();
+    }, [])
+
+    useEffect(() => {
+        surnameRef.current.focus();
+    }, [])
+
+    useEffect(() => {
         emailRef.current.focus();
     }, [])
+
+    useEffect(() => {
+        setValidEmail(NAME_REGEX.test(email));
+    }, [email])
+
+    useEffect(() => {
+        setValidEmail(SURNAME_REGEX.test(email));
+    }, [email])
 
     useEffect(() => {
         setValidEmail(EMAIL_REGEX.test(email));
@@ -42,20 +71,22 @@ const Register = () => {
 
     useEffect(() => {
         setErrMsg('');
-    }, [email, password, matchPwd])
+    }, [name, surname, email, password, matchPwd])
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         // if button enabled with JS hack
         const v1 = EMAIL_REGEX.test(email);
-        const v2 = PWD_REGEX.test(password);
-        if (!v1 || !v2) {
+        const v2 = EMAIL_REGEX.test(email);
+        const v3 = EMAIL_REGEX.test(email);
+        const v4 = PWD_REGEX.test(password);
+        if (!v1 || !v2 || !v3 || !v4) {
             setErrMsg("Invalid Entry");
             return;
         }
         try {
             const response = await axios.post(REGISTER_URL,
-                JSON.stringify({ email, password }),
+                JSON.stringify({ name, surname, email, password }),
                 {
                     headers: { 'Content-Type': 'application/json' },
                     withCredentials: true
@@ -66,6 +97,8 @@ const Register = () => {
             //console.log(JSON.stringify(response))
             setSuccess(true);
             //clear state and controlled inputs
+            setName('');
+            setSurname('');
             setEmail('');
             setPwd('');
             setMatchPwd('');
@@ -102,6 +135,51 @@ const Register = () => {
                         <h1 class="form-title">Inscription</h1>
                         <form onSubmit={handleSubmit}>
                             
+                            <label htmlFor="name">
+                                Prénom :
+                                <FontAwesomeIcon icon={faCheck} className={validName ? "valid" : "hide"} />
+                                <FontAwesomeIcon icon={faTimes} className={validName || !name ? "hide" : "invalid"} />
+                            </label>
+                            <input
+                                type="text"
+                                id="name"
+                                ref={nameRef}
+                                autoComplete="off"
+                                onChange={(e) => setName(e.target.value)}
+                                value={text}
+                                required
+                                aria-invalid={validEmail ? "false" : "true"}
+                                aria-describedby="namenote"
+                                onFocus={() => setNameFocus(true)}
+                                onBlur={() => setNameFocus(false)}
+                            />
+                            <p id="namenote" className={nameFocus && !validName ? "instructions" : "offscreen"}>
+                                <FontAwesomeIcon icon={faInfoCircle} />
+                                Le Prénom doit contenir que des lettres.
+                            </p>
+
+                            <label htmlFor="surname">
+                                Nom :
+                                <FontAwesomeIcon icon={faCheck} className={validSurname ? "valid" : "hide"} />
+                                <FontAwesomeIcon icon={faTimes} className={validSurname || !surname ? "hide" : "invalid"} />
+                            </label>
+                            <input
+                                type="text"
+                                id="surname"
+                                ref={surnameRef}
+                                autoComplete="off"
+                                onChange={(e) => setSurname(e.target.value)}
+                                value={text}
+                                required
+                                aria-invalid={validSurname ? "false" : "true"}
+                                aria-describedby="surnamenote"
+                                onFocus={() => setSurnameFocus(true)}
+                                onBlur={() => setSurnameFocus(false)}
+                            />
+                            <p id="surnamenote" className={surnameFocus && !validSurname ? "instructions" : "offscreen"}>
+                                <FontAwesomeIcon icon={faInfoCircle} />
+                                Le Nom doit contenir que des lettres.
+                            </p>
 
                             <label htmlFor="email">
                                 Email :
