@@ -20,22 +20,18 @@ const Home = () => {
             <section class="bg-light-grey">
 
                 <div class="icon-bar">
-                    <a class="active" href="/"><FontAwesomeIcon icon={faHome}/></a>
-                    <a href="/editor"><FontAwesomeIcon icon={faUser}/></a>
-                    <a onClick={logout}><FontAwesomeIcon icon={faRightFromBracket}/></a>
+                    <a aria-label="Home" class="active" href="/" style={{width:'33%'}}><FontAwesomeIcon icon={faHome}/></a>
+                    <a aria-label="Administrateur" href="/editor" style={{width:'34%'}}><FontAwesomeIcon icon={faUser}/></a>
+                    <a aria-label="Déconnexion" href="/" style={{width:'33%'}}><FontAwesomeIcon icon={faRightFromBracket}/></a>
                 </div>
 
-                <h1>Accueil</h1>
-                <br />
-                <p>Vous êtes connecté !</p>
+                <h1>Bienvenue sur le Réseau Social de</h1>
+                <img class="logo-groupomania" src='/logo-blanc-centre-groupomania.png' alt='logo de Groupomania'></img>
                 <br />
                 <Link to="/editor">Aller à la page d'éditeur</Link>
                 <br />
                 <Link to="/admin">Aller à la page d'administrateur</Link>
                 <br />
-                <Link to="/lounge">Aller au Lounge</Link>
-                <br />
-                <Link to="/linkpage">Aller à la page de lien</Link>
                 <div className="flexGrow">
                     <button onClick={logout}>
                         Se déconnecter
@@ -111,7 +107,12 @@ const Home = () => {
                                     <p class="published-date">Publié le 19/10/2022</p>
                                 </div>
                                 
-                                <FontAwesomeIcon icon={faEllipsisH} className="icone-params-posts"/>
+                                <FontAwesomeIcon
+                                    icon={faEllipsisH}
+                                    className="icone-params-posts"
+                                    aria-label="Actions pour cette publication"
+                                    aria-haspopup="menu"
+                                />
                             </div>
 
                             <div class="post-info__message">

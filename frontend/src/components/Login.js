@@ -66,7 +66,7 @@ const Login = () => {
             
             <div class="column dark-image-background column_image-title">
                 <p class="groupomania-title">Le Réseau Social de</p>
-                <img src='..\public\logo-blanc-centre-groupomania.png' alt='logo de Groupomania'></img>
+                <img class="logo-groupomania-1-2" src='..\public\logo-blanc-centre-groupomania.png' alt='logo de Groupomania'></img>
             </div>
 
             <div class="column column_form">

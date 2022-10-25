@@ -45,6 +45,14 @@ img {
     width: 100%;
 }
 
+.logo-groupomania {
+    width: 300px;
+}
+
+.logo-groupomania-1-2 {
+    width: 500px;
+}
+
 .user-default-image {
     width: 2.1rem;
     height: 2.1rem;
@@ -312,6 +320,7 @@ li {
     top: 0px;
     right: 0px;
     padding: 16px;
+    cursor: pointer;
 }
 
 .post-info__user {
