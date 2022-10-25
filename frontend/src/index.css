@@ -304,9 +304,9 @@ li {
     width: 10%
 }
 
-/*.create-post__text {
-    width: 85%;
-}*/
+.create-post__text {
+    padding: 0;
+}
 
 .create-post__text textarea {
     background-color: #F0F2F5;
