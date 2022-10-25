@@ -60,7 +60,6 @@ const CreatePost = () => {
                                     value={message}
                                     required
                                     class="create-post__posttextarea"
-                                    placeholder="Que voulez-vous partager ?"
                                     aria-label="Un champ de texte pour créer un post"
                                 ></textarea>
                             </label>

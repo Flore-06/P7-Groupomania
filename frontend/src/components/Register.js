@@ -94,7 +94,7 @@ const Register = () => {
                 <section class="row">
                     <div class="column dark-image-background column_image-title">
                         <p class="groupomania-title">Le Réseau Social de</p>
-                        <img class="logo-groupomania-1-2" src='..\public\logo-blanc-centre-groupomania.png' alt='logo de Groupomania'></img>
+                        <img class="logo-groupomania-1-2" src='logo-blanc-centre-groupomania.png' alt='logo de Groupomania'></img>
                     </div>
 
                     <div class="column column_form">
@@ -174,7 +174,7 @@ const Register = () => {
                                 Doit correspondre au premier mot de passe.
                             </p>
 
-                            <button disabled={!validEmail || !validPwd || !validMatch ? true : false}>S'inscrire</button>
+                            <button disabled={!validEmail || !validPwd || !validMatch ? true : false} style={{margin: '20px 0px'}}>S'inscrire</button>
                         </form>
                         <p class="form-redirection">
                             Déjà inscrit ?<br />

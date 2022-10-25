@@ -66,7 +66,7 @@ const Login = () => {
             
             <div class="column dark-image-background column_image-title">
                 <p class="groupomania-title">Le Réseau Social de</p>
-                <img class="logo-groupomania-1-2" src='..\public\logo-blanc-centre-groupomania.png' alt='logo de Groupomania'></img>
+                <img class="logo-groupomania-1-2" src='logo-blanc-centre-groupomania.png' alt='logo de Groupomania'></img>
             </div>
 
             <div class="column column_form">
@@ -92,7 +92,7 @@ const Login = () => {
                         value={password}
                         required
                     />
-                    <button>Se connecter</button>
+                    <button style={{margin: '20px 0px'}}>Se connecter</button>
                 </form>
                 <p class="form-redirection">
                     Besoin de créer un compte ?<br />
