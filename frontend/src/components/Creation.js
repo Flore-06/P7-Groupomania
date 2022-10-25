@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
+import { faImage, faPaperPlane, faPlus } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import axios from '../api/axios';
 const CREATE_POST_URL = '/api/posts';
@@ -35,32 +37,63 @@ const CreatePost = () => {
 
     return (
 
-        <section class="row">
-            
-            <div class="column dark-image-background column_image-title">
-                <p class="groupomania-title">Le Réseau Social de</p>
-                <img class="logo-groupomania-1-2" src='/logo-blanc-centre-groupomania.png' alt='logo de Groupomania'></img>
-            </div>
+        <section class="posts bg-light-grey">
+                <div class="create-post post">
+                    <form onSubmit={handleSubmit}>
+                        <div class="post-info create-post__message">
+                            <div class="post-info__user">
+                                <img 
+                                    src="/default-user-icon.png"
+                                    alt="icone utilisateur par défaut"
+                                    class="user-default-image"
+                                ></img>
+                                <div class="post__name-date">
+                                    <p class="user-name">Prénom Nom</p>
+                                </div>                                
+                            </div>
 
-            <div class="column column_form">
-                <h1 class="form-title">Publier</h1>
-                <form onSubmit={handleSubmit}>
-                    <label htmlFor="message">Message :</label>
-                    <textarea
-                        id="message"
-                        placeholder="Que voulez-vous partager ?"
-                        onChange={(e) => setMessage(e.target.value)}
-                        value={message}
-                        required
-                    />
-
-                    <button>Publier</button>
-                </form>
-                
-            </div>
-            
-            
+                            <label htmlFor="message" class="create-post__text">
+                                <textarea
+                                    id="message"
+                                    placeholder="Que voulez-vous partager ?"
+                                    onChange={(e) => setMessage(e.target.value)}
+                                    value={message}
+                                    required
+                                    class="create-post__posttextarea"
+                                    placeholder="Que voulez-vous partager ?"
+                                    aria-label="Un champ de texte pour créer un post"
+                                ></textarea>
+                            </label>
+                        </div>
+                        
+                        
+                        <div class="create-post__div create-post__fileinput">
+                            <label for="myImage">
+                                <div class="icone-new-add-file">
+                                <FontAwesomeIcon icon={faPlus} className="icone-a-droite icone-new-add-file"/>
+                                <FontAwesomeIcon icon={faImage} className="icone-a-droite icone-new-add-file"/>
+                                </div>
+                                
+                                <input
+                                    type="file"
+                                    id="myImage"
+                                    class="default-css-add-file"
+                                    change="onFileChange"
+                                />
+                            </label>
+                            <button
+                                class="create-post__btn"
+                                type="submit"
+                            >
+                                Publier
+                                <FontAwesomeIcon icon={faPaperPlane} className="icone-a-droite"/>
+                            </button>
+                        </div>
+                    </form>
+                </div>
         </section>
+
+ 
 
     )
 }
