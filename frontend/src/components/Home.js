@@ -4,6 +4,8 @@ import AuthContext from "../context/AuthProvider";
 import { faRightFromBracket, faImage, faPaperPlane, faThumbsUp, faThumbsDown, faComment, faUser, faHome, faEllipsisH, faPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
+
+
 const Home = () => {
     const { setAuth } = useContext(AuthContext);
     const navigate = useNavigate();
@@ -17,20 +19,15 @@ const Home = () => {
 
     return (
         <main class="light-background">
-            <section class="bg-light-grey">
-
-                <div class="icon-bar">
+            <div class="navbar">
                     <a aria-label="Home" class="active" href="/" style={{width:'33%'}}><FontAwesomeIcon icon={faHome}/></a>
-                    <a aria-label="Administrateur" href="/editor" style={{width:'34%'}}><FontAwesomeIcon icon={faUser}/></a>
+                    <a aria-label="Administrateur" href="/admin" style={{width:'34%'}}><FontAwesomeIcon icon={faUser}/></a>
                     <a aria-label="Déconnexion" href="/" style={{width:'33%'}}><FontAwesomeIcon icon={faRightFromBracket}/></a>
-                </div>
+            </div>
 
+            <section class="bg-light-grey section-bienvenue">
                 <h1>Bienvenue sur le Réseau Social de</h1>
-                <img class="logo-groupomania" src='/logo-blanc-centre-groupomania.png' alt='logo de Groupomania'></img>
-                <br />
-                <Link to="/editor">Aller à la page d'éditeur</Link>
-                <br />
-                <Link to="/admin">Aller à la page d'administrateur</Link>
+                <img class="logo-groupomania" src='/logo-rouge-centre-groupomania.png' alt='logo de Groupomania'></img>
                 <br />
                 <div className="flexGrow">
                     <button onClick={logout}>

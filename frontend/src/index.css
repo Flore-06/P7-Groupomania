@@ -60,13 +60,17 @@ img {
 
 
 
-.icon-bar {
+.navbar {
     width: 100%; /* Full-width */
-    background-color: rgba(var(--first-color), 1); /* Dark-grey background */
+    position: fixed;
+    top: 0;
+    z-index: 999;
+    background-color: rgba(var(--first-color), 1);
     overflow: auto; /* Overflow due to float */
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 1px 7px;
   }
   
-  .icon-bar a {
+  .navbar a {
     float: left; /* Float links side by side */
     text-align: center; /* Center-align text */
     width: 20%; /* Equal width (5 icons with 20% width each = 100%) */
@@ -76,16 +80,21 @@ img {
     font-size: 36px; /* Increased font size */
   }
   
-  .icon-bar a:hover {
-    background-color: black; /* Add a hover color */
+  .navbar a:hover {
+    background-color: #3d4050; /* Add a hover color */
     color: white;
   }
   
   .active {
-    background-color: black; /* Add an active/current color */
+    background-color: #2b2c38; /* Add an active/current color */
     color: white !important;
   }
 
+  .sticky {
+    position: fixed;
+    top: 0;
+    width: 100%;
+  }
 
 
 
@@ -235,6 +244,13 @@ li {
 
 
 
+
+.section-bienvenue {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 100px 50px 0 50px;
+}
 
 
 
