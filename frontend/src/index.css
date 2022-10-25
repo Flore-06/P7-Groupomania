@@ -41,7 +41,14 @@ main {
     height: 100vh;
 }
 
+img {
+    width: 100%;
+}
 
+.user-default-image {
+    width: 2.1rem;
+    height: 2.1rem;
+}
 
 
 
@@ -272,9 +279,9 @@ li {
     width: 10%
 }
 
-.create-post__text {
+/*.create-post__text {
     width: 85%;
-}
+}*/
 
 .create-post__text textarea {
     background-color: #F0F2F5;
@@ -288,10 +295,29 @@ li {
     padding-top: 16px;
 }
 
+.default-css-add-file {
+    display: none;
+    visibility: hidden;
+}
 
+.icone-new-add-file {
+    cursor: pointer;
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+}
+
+.icone-params-posts {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    padding: 16px;
+}
 
 .post-info__user {
     display: flex;
+    align-items: center;
+    padding-bottom: 16px;
 }
 
 .post__name-date {
@@ -300,6 +326,7 @@ li {
 
 .user-name {
     font-weight: bold;
+    margin-top: -5px;
 }
 
 .published-date {
@@ -308,7 +335,7 @@ li {
 }
 
 .post-info__message {
-    padding: 16px 0 16px 0;
+    padding-bottom: 16px;
 }
 
 .texte-publi {

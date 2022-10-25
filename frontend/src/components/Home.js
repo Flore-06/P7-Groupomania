@@ -1,7 +1,7 @@
 import { useNavigate, Link } from "react-router-dom";
 import { useContext } from "react";
 import AuthContext from "../context/AuthProvider";
-import { faRightFromBracket, faImage, faPaperPlane, faThumbsUp, faThumbsDown, faComment, faUser, faHome } from "@fortawesome/free-solid-svg-icons";
+import { faRightFromBracket, faImage, faPaperPlane, faThumbsUp, faThumbsDown, faComment, faUser, faHome, faEllipsisH, faPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const Home = () => {
@@ -47,12 +47,16 @@ const Home = () => {
             <section class="posts bg-light-grey">
                 <div class="create-post post">
                     <form>
-                        <div class="create-post__div create-post__message">
-                            <div class="create-post__user-image">
+                        <div class="post-info create-post__message">
+                            <div class="post-info__user">
                                 <img 
                                     src="/default-user-icon.png"
                                     alt="icone utilisateur par défaut"
+                                    class="user-default-image"
                                 ></img>
+                                <div class="post__name-date">
+                                    <p class="user-name">Prénom Nom</p>
+                                </div>                                
                             </div>
 
                             <div class="create-post__text">
@@ -67,12 +71,16 @@ const Home = () => {
                         
                         
                         <div class="create-post__div create-post__fileinput">
-                            <label for="myImage"
-                                >Télécharger un fichier
-                                <FontAwesomeIcon icon={faImage} className="icone-a-droite"/>
+                            <label for="myImage">
+                                <div class="icone-new-add-file">
+                                <FontAwesomeIcon icon={faPlus} className="icone-a-droite icone-new-add-file"/>
+                                <FontAwesomeIcon icon={faImage} className="icone-a-droite icone-new-add-file"/>
+                                </div>
+                                
                                 <input
                                     type="file"
                                     id="myImage"
+                                    class="default-css-add-file"
                                     change="onFileChange"
                                 />
                             </label>
@@ -94,7 +102,7 @@ const Home = () => {
                         <div class="post-info">
                             <div class="post-info__user">
                                 <img 
-                                    src="../../public/default-user-image.png"
+                                    src="/default-user-icon.png"
                                     alt="icone utilisateur par défaut"
                                     class="user-default-image"
                                 ></img>
@@ -103,6 +111,7 @@ const Home = () => {
                                     <p class="published-date">Publié le 19/10/2022</p>
                                 </div>
                                 
+                                <FontAwesomeIcon icon={faEllipsisH} className="icone-params-posts"/>
                             </div>
 
                             <div class="post-info__message">
@@ -110,7 +119,7 @@ const Home = () => {
                                     Hey voici un exemple de publication !
                                 </p>
                                 <img 
-                                    src="../../public/reunion.jpg"
+                                    src="/reunion.jpg"
                                     alt="reunion Groupomania 19/10/2022"
                                     class="post-image"
                                 ></img>
@@ -173,7 +182,7 @@ const Home = () => {
                         <div class="post-info">
                             <div class="post-info__user">
                                 <img 
-                                    src="../../public/default-user-image.png"
+                                    src="/default-user-icon.png"
                                     alt="icone utilisateur par défaut"
                                     class="user-default-image"
                                 ></img>
@@ -182,6 +191,7 @@ const Home = () => {
                                     <p class="published-date">Publié le 19/10/2022</p>
                                 </div>
                                 
+                                <FontAwesomeIcon icon={faEllipsisH} className="icone-params-posts"/>
                             </div>
 
                             <div class="post-info__message">
@@ -189,7 +199,7 @@ const Home = () => {
                                     Et voilà ma deuxième publication 😀
                                 </p>
                                 <img 
-                                    src="../../public/conference.jpg"
+                                    src="/conference.jpg"
                                     alt="conference sur le marketing 20/10/2022"
                                     class="post-image"
                                 ></img>
