@@ -3,6 +3,8 @@ import { useContext } from "react";
 import AuthContext from "../context/AuthProvider";
 import { faRightFromBracket, faImage, faPaperPlane, faThumbsUp, faThumbsDown, faComment, faUser, faHome, faEllipsisH, faPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Routes, Route } from 'react-router-dom';
+import CreatePost from '../components/Creation';
 
 
 
@@ -37,6 +39,11 @@ const Home = () => {
                 </div>
             </section>
 
+            <Routes>
+                <Route path="*" element={<CreatePost />} />
+            </Routes>
+            
+            {/*
             <section class="posts bg-light-grey">
                 <div class="create-post post">
                     <form>
@@ -88,6 +95,7 @@ const Home = () => {
                     </form>
                 </div>
             </section>
+            */}
 
             <section class="posts bg-light-grey">
                 <div class="post">
