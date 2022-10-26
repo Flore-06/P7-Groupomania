@@ -30,13 +30,10 @@ const Home = () => {
                 console.log(menuRef.current);
             }
         };
-
         document.addEventListener("mousedown", handler);
-
         return() =>{
             document.removeEventListener("mousedown", handler);
         }
-
     });
 
     /* Pour se déconnecter */
@@ -47,6 +44,27 @@ const Home = () => {
         navigate('/login');
     }
 
+
+    /* Test pour vérifier le bon embriquement du code pour afficher les posts*/
+    const data =[{"name":"test1"},{"name":"test2"}];
+    const loadPosts = data.map((d) => <li key={d.name}>{d.name}</li>);
+
+
+    /*const loadPosts = async (e) => {
+        try {
+            const response = await axios.post(LOAD_POST_URL,
+                {
+                    headers: { 'Content-Type': 'application/json' },
+                    withCredentials: true
+                }
+            );
+            console.log(JSON.stringify(response?.data));
+            //console.log(JSON.stringify(response));
+        
+        } catch (err) {
+            console.log(err);
+        }
+    }*/
 
     return (
         <main class="light-background">
@@ -73,6 +91,10 @@ const Home = () => {
             </Routes>
 
             <section class="posts bg-light-grey">
+                <div>
+                    {loadPosts}
+                </div>
+
                 <div class="post">
                     <div>
                         <div class="post-info">
@@ -110,7 +132,7 @@ const Home = () => {
 
                             <div class="post-info__message">
                                 <p class="texte-publi">
-                                    Hey voici un exemple de publication !
+                                    Hey voici un modèle de publication !
                                 </p>
                                 <img 
                                     src="/reunion.jpg"
@@ -173,22 +195,6 @@ const Home = () => {
         </main>
         
     );
-
-
-    /*const loadPosts = async (e) => {
-        try {
-            const response = await axios.post(LOAD_POST_URL,
-                {
-                    headers: { 'Content-Type': 'application/json' },
-                    withCredentials: true
-                }
-            );
-            console.log(JSON.stringify(response?.data));
-            //console.log(JSON.stringify(response));
-        
-        } catch (err) {
-            console.log(err);
-        }*/
 
     
 }
