@@ -1,7 +1,6 @@
 import { useNavigate, Link } from "react-router-dom";
 import { useContext } from "react";
 
-/*Ajouté pour le dropdown menu*/
 import { useState, useEffect, useRef } from "react";
 
 import AuthContext from "../context/AuthProvider";
@@ -21,7 +20,7 @@ const Home = () => {
 
     
 
-    /*Ajouté pour le dropdown menu*/
+    /*Pour fermer le Dropdown menu*/
     const [open, setOpen] = useState(false);
     let menuRef = useRef();
     useEffect(() => {
@@ -40,27 +39,14 @@ const Home = () => {
 
     });
 
+    /* Pour se déconnecter */
     const logout = async () => {
         // if used in more components, this should be in context 
         // axios to /logout endpoint 
         setAuth({});
-        navigate('/linkpage');
+        navigate('/login');
     }
 
-    /*const loadPosts = async (e) => {
-        try {
-            const response = await axios.post(LOAD_POST_URL,
-                {
-                    headers: { 'Content-Type': 'application/json' },
-                    withCredentials: true
-                }
-            );
-            console.log(JSON.stringify(response?.data));
-            //console.log(JSON.stringify(response));
-        
-        } catch (err) {
-            console.log(err);
-        }*/
 
     return (
         <main class="light-background">
@@ -85,60 +71,6 @@ const Home = () => {
             <Routes>
                 <Route path="*" element={<CreatePost />} />
             </Routes>
-            
-            {/*
-            <section class="posts bg-light-grey">
-                <div class="create-post post">
-                    <form>
-                        <div class="post-info create-post__message">
-                            <div class="post-info__user">
-                                <img 
-                                    src="/default-user-icon.png"
-                                    alt="icone utilisateur par défaut"
-                                    class="user-default-image"
-                                ></img>
-                                <div class="post__name-date">
-                                    <p class="user-name">Prénom Nom</p>
-                                </div>                                
-                            </div>
-
-                            <div class="create-post__text">
-                                <textarea
-                                    class="create-post__posttextarea"
-                                    v-model="myText"
-                                    placeholder="Que voulez-vous partager ?"
-                                    aria-label="Un champ de texte pour créer un post"
-                                ></textarea>
-                            </div>
-                        </div>
-                        
-                        
-                        <div class="create-post__div create-post__fileinput">
-                            <label for="myImage">
-                                <div class="icone-new-add-file">
-                                <FontAwesomeIcon icon={faPlus} className="icone-a-droite icone-new-add-file"/>
-                                <FontAwesomeIcon icon={faImage} className="icone-a-droite icone-new-add-file"/>
-                                </div>
-                                
-                                <input
-                                    type="file"
-                                    id="myImage"
-                                    class="default-css-add-file"
-                                    change="onFileChange"
-                                />
-                            </label>
-                            <button
-                                class="create-post__btn"
-                                type="submit"
-                            >
-                                Publier
-                                <FontAwesomeIcon icon={faPaperPlane} className="icone-a-droite"/>
-                            </button>
-                        </div>
-                    </form>
-                </div>
-            </section>
-            */}
 
             <section class="posts bg-light-grey">
                 <div class="post">
@@ -154,17 +86,9 @@ const Home = () => {
                                     <p class="user-name">Prénom Nom</p>
                                     <p class="published-date">Publié le 19/10/2022</p>
                                 </div>
-                                
-                                {/*
-                                <FontAwesomeIcon
-                                    icon={faEllipsisH}
-                                    className="icone-params-posts"
-                                    aria-label="Actions pour cette publication"
-                                    aria-haspopup="menu"
-                                />
-                                */}
+                            
 
-                                {/*Ajouté pour le dropdown menu*/}
+                                {/*dropdown menu pour effectuer des actions sur un post*/}
                                 <div className='menu-container' ref={menuRef}>
                                     <div className='menu-trigger' onClick={()=>{setOpen(!open)}}>
                                         <FontAwesomeIcon
@@ -245,70 +169,31 @@ const Home = () => {
                         </div>
                     </div>
                 </div>
-
-
-                <div class="post">
-                    <div>
-                        <div class="post-info">
-                            <div class="post-info__user">
-                                <img 
-                                    src="/default-user-icon.png"
-                                    alt="icone utilisateur par défaut"
-                                    class="user-default-image"
-                                ></img>
-                                <div class="post__name-date">
-                                    <p class="user-name">Prénom Nom</p>
-                                    <p class="published-date">Publié le 19/10/2022</p>
-                                </div>
-                                
-                                <FontAwesomeIcon icon={faEllipsisH} className="icone-params-posts"/>
-                            </div>
-
-                            <div class="post-info__message">
-                                <p class="texte-publi">
-                                    Et voilà ma deuxième publication 😀
-                                </p>
-                                <img 
-                                    src="/conference.jpg"
-                                    alt="conference sur le marketing 20/10/2022"
-                                    class="post-image"
-                                ></img>
-
-                            </div>
-                        </div>
-                        
-                        
-                        <div class="post-likes">
-                        <FontAwesomeIcon icon={faThumbsUp}/>
-                        <FontAwesomeIcon icon={faThumbsDown} className="icone-a-droite"/>
-                        </div>
-
-                        <div class="post-advice">
-                            <div class="post-advice__buttons">
-                                <label for="myLike">
-                                    <FontAwesomeIcon icon={faThumbsUp} className="icone-a-gauche icone-contour"/>
-                                    J'aime
-                                </label>
-                                <label for="myLike">
-                                    <FontAwesomeIcon icon={faThumbsDown} className="icone-a-gauche icone-contour"/>
-                                    Je n'aime pas
-                                </label>
-                                <label for="myComment">
-                                    <FontAwesomeIcon icon={faComment} className="icone-a-gauche icone-contour"/>
-                                    Commenter
-                                </label>
-                            </div>                       
-                        
-                        </div>
-                    </div>
-                </div>
             </section>
         </main>
         
     );
+
+
+    /*const loadPosts = async (e) => {
+        try {
+            const response = await axios.post(LOAD_POST_URL,
+                {
+                    headers: { 'Content-Type': 'application/json' },
+                    withCredentials: true
+                }
+            );
+            console.log(JSON.stringify(response?.data));
+            //console.log(JSON.stringify(response));
+        
+        } catch (err) {
+            console.log(err);
+        }*/
+
+    
 }
 
-/*Ajouté pour le dropdown menu*/
+/*Création de la fonction dropdown menu*/
 function DropdownItem(props){
     return(
         <li className = 'dropdownItem'>
