@@ -1,7 +1,11 @@
 import { useNavigate, Link } from "react-router-dom";
 import { useContext } from "react";
+
+/*Ajouté pour le dropdown menu*/
+import { useState, useEffect, useRef } from "react";
+
 import AuthContext from "../context/AuthProvider";
-import { faRightFromBracket, faImage, faPaperPlane, faThumbsUp, faThumbsDown, faComment, faUser, faHome, faEllipsisH, faPlus } from "@fortawesome/free-solid-svg-icons";
+import { faRightFromBracket, faThumbsUp, faThumbsDown, faComment, faUser, faHome, faEllipsisH, faPenToSquare, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Routes, Route } from 'react-router-dom';
 import CreatePost from '../components/Creation';
@@ -11,6 +15,25 @@ import CreatePost from '../components/Creation';
 const Home = () => {
     const { setAuth } = useContext(AuthContext);
     const navigate = useNavigate();
+
+    /*Ajouté pour le dropdown menu*/
+    const [open, setOpen] = useState(false);
+    let menuRef = useRef();
+    useEffect(() => {
+        let handler = (e)=>{
+            if(!menuRef.current.contains(e.target)){
+                setOpen(false);
+                console.log(menuRef.current);
+            }
+        };
+
+        document.addEventListener("mousedown", handler);
+
+        return() =>{
+            document.removeEventListener("mousedown", handler);
+        }
+
+    });
 
     const logout = async () => {
         // if used in more components, this should be in context 
@@ -112,12 +135,33 @@ const Home = () => {
                                     <p class="published-date">Publié le 19/10/2022</p>
                                 </div>
                                 
+                                {/*
                                 <FontAwesomeIcon
                                     icon={faEllipsisH}
                                     className="icone-params-posts"
                                     aria-label="Actions pour cette publication"
                                     aria-haspopup="menu"
                                 />
+                                */}
+
+                                {/*Ajouté pour le dropdown menu*/}
+                                <div className='menu-container' ref={menuRef}>
+                                    <div className='menu-trigger' onClick={()=>{setOpen(!open)}}>
+                                        <FontAwesomeIcon
+                                            icon={faEllipsisH}
+                                            className="icone-params-posts"
+                                            aria-label="Actions pour cette publication"
+                                        />
+                                    </div>
+
+                                    <div className={`dropdown-menu ${open? 'active' : 'inactive'}`}>
+                                        <ul>
+                                            <DropdownItem icon = {faPenToSquare} text = {"Modifier le post"}/>
+                                            <DropdownItem icon = {faTrash} text = {"Supprimer le post"}/>
+                                        </ul>
+                                    </div>
+                                </div>
+
                             </div>
 
                             <div class="post-info__message">
@@ -241,7 +285,17 @@ const Home = () => {
             </section>
         </main>
         
-    )
+    );
+}
+
+/*Ajouté pour le dropdown menu*/
+function DropdownItem(props){
+    return(
+        <li className = 'dropdownItem'>
+            <icon src={props.icon}></icon>
+            <a> {props.text} </a>
+        </li>
+    );
 }
 
 export default Home
