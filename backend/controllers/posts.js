@@ -20,15 +20,14 @@ exports.getOnePost = (req, res, next) => {
 
 // Créer une post
 exports.createPost = (req, res, next) => {
-  const postObject = JSON.parse(req.body.post);
+  /*const postObject = JSON.parse(req.body.post);
   delete postObject._id;
   delete postObject._userId;
-  console.log(postObject);
+  console.log(postObject);*/
   console.log(req.body);
   const post = new Post({
-      ...postObject,
-      userId: req.auth.userId,
-      imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`,
+      message : req.body.message,
+      userId: req.body.userId,
       likes: 0,
       dislikes: 0,
       usersLiked: [' '],

@@ -8,7 +8,7 @@ const postSchema = mongoose.Schema({
   /*manufacturer: { type: String, required: true },*/
   message: { type: String, required: true },
   /*mainPepper: { type: String, required: true },*/
-  imageUrl: { type: String, required: true },
+  imageUrl: { type: String, required: false },
   /*heat: { type: Number, required: true },*/
   likes: { type: Number },
   dislikes: { type: Number },

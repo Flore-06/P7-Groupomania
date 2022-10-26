@@ -11,10 +11,15 @@ import { Routes, Route } from 'react-router-dom';
 import CreatePost from '../components/Creation';
 
 
+import axios from '../api/axios';
+const LOAD_POST_URL = '/posts';
+
 
 const Home = () => {
     const { setAuth } = useContext(AuthContext);
     const navigate = useNavigate();
+
+    
 
     /*Ajouté pour le dropdown menu*/
     const [open, setOpen] = useState(false);
@@ -41,6 +46,21 @@ const Home = () => {
         setAuth({});
         navigate('/linkpage');
     }
+
+    /*const loadPosts = async (e) => {
+        try {
+            const response = await axios.post(LOAD_POST_URL,
+                {
+                    headers: { 'Content-Type': 'application/json' },
+                    withCredentials: true
+                }
+            );
+            console.log(JSON.stringify(response?.data));
+            //console.log(JSON.stringify(response));
+        
+        } catch (err) {
+            console.log(err);
+        }*/
 
     return (
         <main class="light-background">

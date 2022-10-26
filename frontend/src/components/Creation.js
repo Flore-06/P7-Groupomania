@@ -4,7 +4,7 @@ import { faImage, faPaperPlane, faPlus } from "@fortawesome/free-solid-svg-icons
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import axios from '../api/axios';
-const CREATE_POST_URL = '/api/posts';
+const CREATE_POST_URL = '/posts';
 
 const CreatePost = () => {
     
@@ -18,8 +18,10 @@ const CreatePost = () => {
         e.preventDefault();
 
         try {
+            const userId = localStorage.getItem('userId');
+
             const response = await axios.post(CREATE_POST_URL,
-                JSON.stringify({ message }),
+                JSON.stringify({ userId, message }),
                 {
                     headers: { 'Content-Type': 'application/json' },
                     withCredentials: true

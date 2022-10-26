@@ -40,7 +40,12 @@ const Login = () => {
             );
             console.log(JSON.stringify(response?.data));
             //console.log(JSON.stringify(response));
-            const accessToken = response?.data?.accessToken;
+            const accessToken = response?.data?.token;
+            const userId = response?.data?.userId;
+
+            localStorage.setItem('token', accessToken);
+            localStorage.setItem('userId', userId);
+
             const roles = response?.data?.roles;
             setAuth({ email, password, roles, accessToken });
             setEmail('');
