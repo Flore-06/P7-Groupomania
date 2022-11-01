@@ -95,6 +95,100 @@ const Home = () => {
                     {loadPosts}
                 </div>
 
+                <p ngIf="!loading && posts.length <= 0">
+                    Aucun post publié !
+                </p>
+
+
+                <div class="post" ngIf="!loading && posts.length  > 0">
+                    <div>
+                        <div class="post-info">
+                            <div class="post-info__user">
+                                <img 
+                                    src="/default-user-icon.png"
+                                    alt="icone utilisateur par défaut"
+                                    class="user-default-image"
+                                ></img>
+                                <div class="post__name-date">
+                                    <p class="user-name">Prénom Nom {/*{ user.name, user.surname }*/}</p>
+                                    <p class="published-date">Publié le 19/10/2022</p>
+                                </div>
+                            
+
+                                {/*dropdown menu pour effectuer des actions sur un post*/}
+                                <div className='menu-container' ref={menuRef}>
+                                    <div className='menu-trigger' onClick={()=>{setOpen(!open)}}>
+                                        <FontAwesomeIcon
+                                            icon={faEllipsisH}
+                                            className="icone-params-posts"
+                                            aria-label="Actions pour cette publication"
+                                        />
+                                    </div>
+
+                                    <div className={`dropdown-menu ${open? 'active' : 'inactive'}`}>
+                                        <ul>
+                                            <DropdownItem icon = {faPenToSquare} text = {"Modifier le post"}/>
+                                            <DropdownItem icon = {faTrash} text = {"Supprimer le post"}/>
+                                        </ul>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="post-info__message">
+                                <p class="texte-publi">
+                                    {/*{ post.message }*/}
+                                </p>
+                                
+                                <img 
+                                    src="post.imageUrl"
+                                    alt="Êvènement de la publication"
+                                    class="post-image"
+                                ></img>
+
+                            </div>
+                        </div>
+                        
+                        
+                        <div class="post-likes">
+                        <FontAwesomeIcon icon={faThumbsUp}/>
+                        <FontAwesomeIcon icon={faThumbsDown} className="icone-a-droite"/>
+                        </div>
+
+                        <div class="post-advice">
+                            <div class="post-advice__buttons">
+                                <label for="myLike">
+                                    <FontAwesomeIcon icon={faThumbsUp} className="icone-a-gauche icone-contour"/>
+                                    J'aime
+                                </label>
+                                <label for="myLike">
+                                    <FontAwesomeIcon icon={faThumbsDown} className="icone-a-gauche icone-contour"/>
+                                    Je n'aime pas
+                                </label>
+                                <label for="myComment">
+                                    <FontAwesomeIcon icon={faComment} className="icone-a-gauche icone-contour"/>
+                                    Commenter
+                                </label>
+                            </div>
+
+                            <div class="post-advice__comment"  >
+                                <div class="comment-info__user">
+                                    <FontAwesomeIcon icon={faUser} className="icone-a-gauche icone-contour"/>
+                                    <div class="comment__name-date">
+                                        <p class="comment-user-name">Prénom Nom {/*{ user.name, user.surname }*/}</p>
+                                        <p class="published-date">Publié le 19/10/2022</p>
+                                    </div>
+                                </div>
+                                
+                                <p class="comment-text">Les commentaires sont ici</p>
+                            </div>                        
+                        
+                        </div>
+                    </div>
+                </div>
+
+                
+
                 <div class="post">
                     <div>
                         <div class="post-info">
