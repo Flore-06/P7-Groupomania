@@ -45,6 +45,9 @@ const Home = () => {
     }
 
 
+    /* Test pour vérifier le bon embriquement du code pour afficher les posts
+    const data =[{"name":"test1"},{"name":"test2"}];
+    const loadPosts = data.map((d) => <li key={d.name}>{d.name}</li>);*/
 
 
     const fetchPosts = async (e) => {
@@ -100,10 +103,6 @@ const Home = () => {
             </Routes>
 
             <section class="posts bg-light-grey">
-
-                {/*<Routes>
-                    <Route path="*" element={<PublishPost />} />
-    </Routes>*/}
 
                 {loadPosts.map((post) => 
 
