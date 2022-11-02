@@ -18,7 +18,7 @@ const Home = () => {
     const { setAuth } = useContext(AuthContext);
     const navigate = useNavigate();
 
-    
+    const [loadPosts, setLoadPost]=useState();
 
     /*Pour fermer le Dropdown menu*/
     const [open, setOpen] = useState(false);
@@ -45,26 +45,38 @@ const Home = () => {
     }
 
 
-    /* Test pour vérifier le bon embriquement du code pour afficher les posts*/
+    /* Test pour vérifier le bon embriquement du code pour afficher les posts
     const data =[{"name":"test1"},{"name":"test2"}];
-    const loadPosts = data.map((d) => <li key={d.name}>{d.name}</li>);
+    const loadPosts = data.map((d) => <li key={d.name}>{d.name}</li>);*/
 
 
-    /*const loadPosts = async (e) => {
+    const fetchPosts = async (e) => {
         try {
-            const response = await axios.post(LOAD_POST_URL,
+            
+            const response = await axios.get(LOAD_POST_URL,
                 {
                     headers: { 'Content-Type': 'application/json' },
                     withCredentials: true
                 }
             );
-            console.log(JSON.stringify(response?.data));
-            //console.log(JSON.stringify(response));
+
+            const posts = response.data;
+
+            setLoadPost(posts);
+            //console.log(JSON.stringify(response?.data));
+            console.log(posts);
         
         } catch (err) {
             console.log(err);
         }
-    }*/
+    }
+
+    useEffect(() => {
+        fetchPosts();
+      }, []);
+
+
+
 
     return (
         <main class="light-background">
@@ -91,200 +103,107 @@ const Home = () => {
             </Routes>
 
             <section class="posts bg-light-grey">
-                <div>
-                    {loadPosts}
-                </div>
 
-                <p ngIf="!loading && posts.length <= 0">
-                    Aucun post publié !
-                </p>
+                {loadPosts.map((post) => 
 
-
-                <div class="post" ngIf="!loading && posts.length  > 0">
-                    <div>
-                        <div class="post-info">
-                            <div class="post-info__user">
-                                <img 
-                                    src="/default-user-icon.png"
-                                    alt="icone utilisateur par défaut"
-                                    class="user-default-image"
-                                ></img>
-                                <div class="post__name-date">
-                                    <p class="user-name">Prénom Nom {/*{ user.name, user.surname }*/}</p>
-                                    <p class="published-date">Publié le 19/10/2022</p>
-                                </div>
-                            
-
-                                {/*dropdown menu pour effectuer des actions sur un post*/}
-                                <div className='menu-container' ref={menuRef}>
-                                    <div className='menu-trigger' onClick={()=>{setOpen(!open)}}>
-                                        <FontAwesomeIcon
-                                            icon={faEllipsisH}
-                                            className="icone-params-posts"
-                                            aria-label="Actions pour cette publication"
-                                        />
-                                    </div>
-
-                                    <div className={`dropdown-menu ${open? 'active' : 'inactive'}`}>
-                                        <ul>
-                                            <DropdownItem icon = {faPenToSquare} text = {"Modifier le post"}/>
-                                            <DropdownItem icon = {faTrash} text = {"Supprimer le post"}/>
-                                        </ul>
-                                    </div>
-                                </div>
-
-                            </div>
-
-                            <div class="post-info__message">
-                                <p class="texte-publi">
-                                    {/*{ post.message }*/}
-                                </p>
-                                
-                                <img 
-                                    src="post.imageUrl"
-                                    alt="Êvènement de la publication"
-                                    class="post-image"
-                                ></img>
-
-                            </div>
-                        </div>
-                        
-                        
-                        <div class="post-likes">
-                        <FontAwesomeIcon icon={faThumbsUp}/>
-                        <FontAwesomeIcon icon={faThumbsDown} className="icone-a-droite"/>
-                        </div>
-
-                        <div class="post-advice">
-                            <div class="post-advice__buttons">
-                                <label for="myLike">
-                                    <FontAwesomeIcon icon={faThumbsUp} className="icone-a-gauche icone-contour"/>
-                                    J'aime
-                                </label>
-                                <label for="myLike">
-                                    <FontAwesomeIcon icon={faThumbsDown} className="icone-a-gauche icone-contour"/>
-                                    Je n'aime pas
-                                </label>
-                                <label for="myComment">
-                                    <FontAwesomeIcon icon={faComment} className="icone-a-gauche icone-contour"/>
-                                    Commenter
-                                </label>
-                            </div>
-
-                            <div class="post-advice__comment"  >
-                                <div class="comment-info__user">
-                                    <FontAwesomeIcon icon={faUser} className="icone-a-gauche icone-contour"/>
-                                    <div class="comment__name-date">
-                                        <p class="comment-user-name">Prénom Nom {/*{ user.name, user.surname }*/}</p>
+                    <div class="post">
+                        <div>
+                            <div class="post-info">
+                                <div class="post-info__user">
+                                    <img 
+                                        src="/default-user-icon.png"
+                                        alt="icone utilisateur par défaut"
+                                        class="user-default-image"
+                                    ></img>
+                                    <div class="post__name-date">
+                                        <p class="user-name">Prénom Nom</p>
                                         <p class="published-date">Publié le 19/10/2022</p>
                                     </div>
-                                </div>
                                 
-                                <p class="comment-text">Les commentaires sont ici</p>
-                            </div>                        
-                        
-                        </div>
-                    </div>
-                </div>
 
+                                    {/*dropdown menu pour effectuer des actions sur un post*/}
+                                    <div className='menu-container' ref={menuRef}>
+                                        <div className='menu-trigger' onClick={()=>{setOpen(!open)}}>
+                                            <FontAwesomeIcon
+                                                icon={faEllipsisH}
+                                                className="icone-params-posts"
+                                                aria-label="Actions pour cette publication"
+                                            />
+                                        </div>
+
+                                        <div className={`dropdown-menu ${open? 'active' : 'inactive'}`}>
+                                            <ul>
+                                                <DropdownItem icon = {faPenToSquare} text = {"Modifier le post"}/>
+                                                <DropdownItem icon = {faTrash} text = {"Supprimer le post"}/>
+                                            </ul>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="post-info__message">
+                                    
+                                    <li class="texte-publi" key={post.message}>{post.message}</li>
+                                    <img 
+                                        src="/reunion.jpg"
+                                        alt="reunion Groupomania 19/10/2022"
+                                        class="post-image"
+                                    ></img>
+
+                                </div>
+                            </div>
+                            
+                            
+                            <div class="post-likes">
+                            <FontAwesomeIcon icon={faThumbsUp}/>
+                            <FontAwesomeIcon icon={faThumbsDown} className="icone-a-droite"/>
+                            </div>
+
+                            <div class="post-advice">
+                                <div class="post-advice__buttons">
+                                    <label for="myLike">
+                                        <FontAwesomeIcon icon={faThumbsUp} className="icone-a-gauche icone-contour"/>
+                                        J'aime
+                                    </label>
+                                    <label for="myLike">
+                                        <FontAwesomeIcon icon={faThumbsDown} className="icone-a-gauche icone-contour"/>
+                                        Je n'aime pas
+                                    </label>
+                                    <label for="myComment">
+                                        <FontAwesomeIcon icon={faComment} className="icone-a-gauche icone-contour"/>
+                                        Commenter
+                                    </label>
+                                </div>
+
+                                <div class="post-advice__comment"  >
+                                    <div class="comment-info__user">
+                                        <FontAwesomeIcon icon={faUser} className="icone-a-gauche icone-contour"/>
+                                        <div class="comment__name-date">
+                                            <p class="comment-user-name">Prénom Nom</p>
+                                            <p class="published-date">Publié le 19/10/2022</p>
+                                        </div>
+                                    </div>
+                                    
+                                    <p class="comment-text">This is my comment</p>
+                                </div>    
+                                <div class="post-advice__comment"  >
+                                    <div class="comment-info__user">
+                                        <FontAwesomeIcon icon={faUser} className="icone-a-gauche icone-contour"/>
+                                        <div class="comment__name-date">
+                                            <p class="comment-user-name">Prénom Nom</p>
+                                            <p class="published-date">Publié le 20/10/2022</p>
+                                        </div>
+                                    </div>
+                                    
+                                    <p class="comment-text">Génial !</p>
+                                </div>                         
+                            
+                            </div>
+                        </div>                      
+                    </div>
+
+                )}
                 
-
-                <div class="post">
-                    <div>
-                        <div class="post-info">
-                            <div class="post-info__user">
-                                <img 
-                                    src="/default-user-icon.png"
-                                    alt="icone utilisateur par défaut"
-                                    class="user-default-image"
-                                ></img>
-                                <div class="post__name-date">
-                                    <p class="user-name">Prénom Nom</p>
-                                    <p class="published-date">Publié le 19/10/2022</p>
-                                </div>
-                            
-
-                                {/*dropdown menu pour effectuer des actions sur un post*/}
-                                <div className='menu-container' ref={menuRef}>
-                                    <div className='menu-trigger' onClick={()=>{setOpen(!open)}}>
-                                        <FontAwesomeIcon
-                                            icon={faEllipsisH}
-                                            className="icone-params-posts"
-                                            aria-label="Actions pour cette publication"
-                                        />
-                                    </div>
-
-                                    <div className={`dropdown-menu ${open? 'active' : 'inactive'}`}>
-                                        <ul>
-                                            <DropdownItem icon = {faPenToSquare} text = {"Modifier le post"}/>
-                                            <DropdownItem icon = {faTrash} text = {"Supprimer le post"}/>
-                                        </ul>
-                                    </div>
-                                </div>
-
-                            </div>
-
-                            <div class="post-info__message">
-                                <p class="texte-publi">
-                                    Hey voici un modèle de publication !
-                                </p>
-                                <img 
-                                    src="/reunion.jpg"
-                                    alt="reunion Groupomania 19/10/2022"
-                                    class="post-image"
-                                ></img>
-
-                            </div>
-                        </div>
-                        
-                        
-                        <div class="post-likes">
-                        <FontAwesomeIcon icon={faThumbsUp}/>
-                        <FontAwesomeIcon icon={faThumbsDown} className="icone-a-droite"/>
-                        </div>
-
-                        <div class="post-advice">
-                            <div class="post-advice__buttons">
-                                <label for="myLike">
-                                    <FontAwesomeIcon icon={faThumbsUp} className="icone-a-gauche icone-contour"/>
-                                    J'aime
-                                </label>
-                                <label for="myLike">
-                                    <FontAwesomeIcon icon={faThumbsDown} className="icone-a-gauche icone-contour"/>
-                                    Je n'aime pas
-                                </label>
-                                <label for="myComment">
-                                    <FontAwesomeIcon icon={faComment} className="icone-a-gauche icone-contour"/>
-                                    Commenter
-                                </label>
-                            </div>
-
-                            <div class="post-advice__comment"  >
-                                <div class="comment-info__user">
-                                    <FontAwesomeIcon icon={faUser} className="icone-a-gauche icone-contour"/>
-                                    <div class="comment__name-date">
-                                        <p class="comment-user-name">Prénom Nom</p>
-                                        <p class="published-date">Publié le 19/10/2022</p>
-                                    </div>
-                                </div>
-                                
-                                <p class="comment-text">This is my comment</p>
-                            </div>    
-                            <div class="post-advice__comment"  >
-                                <div class="comment-info__user">
-                                    <FontAwesomeIcon icon={faUser} className="icone-a-gauche icone-contour"/>
-                                    <div class="comment__name-date">
-                                        <p class="comment-user-name">Prénom Nom</p>
-                                        <p class="published-date">Publié le 20/10/2022</p>
-                                    </div>
-                                </div>
-                                
-                                <p class="comment-text">Génial !</p>
-                            </div>                         
-                        
-                        </div>
-                    </div>
-                </div>
             </section>
         </main>
         
