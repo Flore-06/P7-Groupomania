@@ -96,7 +96,8 @@ const PublishPost = () => {
 
                             <div className="post-info__message">
                                 
-                                <li className="texte-publi" key={post.message}>{post.message}</li>
+                                {/*<li className="texte-publi" key={post.message}>{post.message}</li>*/}
+                                <p className="texte-publi">{post.message}</p>
                                 <img 
                                     src="/reunion.jpg"
                                     alt="reunion Groupomania 19/10/2022"
