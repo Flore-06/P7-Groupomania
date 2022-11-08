@@ -417,6 +417,17 @@ text-decoration: none;
     border-radius: 1rem;
     padding: 8px 10px;
     font-size: 18px;
+    border: none;
+    width: 100%;
+}
+
+.comment-textarea {
+    margin-bottom: -5px;
+}
+
+.label-comment {
+    width: 100%;
+    padding: 0;
 }
 
 

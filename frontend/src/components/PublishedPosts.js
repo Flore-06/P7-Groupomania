@@ -4,6 +4,8 @@ import { faThumbsUp, faThumbsDown, faComment, faUser, faEllipsisH, faPenToSquare
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import axios from '../api/axios';
+import { Routes, Route } from 'react-router-dom';
+import CreateComment from "./Comment";
 
 const LOAD_POST_URL = '/posts';
 
@@ -129,26 +131,27 @@ const PublishPost = () => {
                                 </label>
                             </div>
 
+                            <Routes>
+                                <Route path="*" element={<CreateComment />} />
+                            </Routes>
+
                             <div className="post-advice__comment"  >
                                 <div className="comment-info__user">
                                     <FontAwesomeIcon icon={faUser} className="icone-a-gauche icone-contour"/>
                                     <div className="comment__name-date">
                                         <p className="comment-user-name">Prénom Nom</p>
-                                        <p className="published-date">Publié le 19/10/2022</p>
                                     </div>
                                 </div>
-                                
                                 <p className="comment-text">This is my comment</p>
                             </div>    
+
                             <div className="post-advice__comment"  >
                                 <div className="comment-info__user">
                                     <FontAwesomeIcon icon={faUser} className="icone-a-gauche icone-contour"/>
                                     <div className="comment__name-date">
                                         <p className="comment-user-name">Prénom Nom</p>
-                                        <p className="published-date">Publié le 20/10/2022</p>
                                     </div>
                                 </div>
-                                
                                 <p className="comment-text">Génial !</p>
                             </div>                         
                         
