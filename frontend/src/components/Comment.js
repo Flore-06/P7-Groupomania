@@ -39,7 +39,6 @@ const CreateComment = () => {
 
         <form onSubmit={handleSubmit}>
         <div className="post-advice__comment"  >
-            <div className="comment-info__user">
                 <label htmlFor="message" className='label-comment'>
                     <textarea
                         id="message"
@@ -51,7 +50,6 @@ const CreateComment = () => {
                         aria-label="Un champ de texte pour commenter"
                     ></textarea>
                 </label>
-            </div>
         </div>
             
         </form>

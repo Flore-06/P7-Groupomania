@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from '../api/axios';
 import { Routes, Route } from 'react-router-dom';
 import CreateComment from "./Comment";
+import PublishComment from "./Comment";
 
 const LOAD_POST_URL = '/posts';
 
@@ -135,25 +136,9 @@ const PublishPost = () => {
                                 <Route path="*" element={<CreateComment />} />
                             </Routes>
 
-                            <div className="post-advice__comment"  >
-                                <div className="comment-info__user">
-                                    <FontAwesomeIcon icon={faUser} className="icone-a-gauche icone-contour"/>
-                                    <div className="comment__name-date">
-                                        <p className="comment-user-name">Prénom Nom</p>
-                                    </div>
-                                </div>
-                                <p className="comment-text">This is my comment</p>
-                            </div>    
-
-                            <div className="post-advice__comment"  >
-                                <div className="comment-info__user">
-                                    <FontAwesomeIcon icon={faUser} className="icone-a-gauche icone-contour"/>
-                                    <div className="comment__name-date">
-                                        <p className="comment-user-name">Prénom Nom</p>
-                                    </div>
-                                </div>
-                                <p className="comment-text">Génial !</p>
-                            </div>                         
+                            {/*<Routes>
+                                <Route path="*" element={<PublishComment />} />
+                            </Routes>*/}                      
                         
                         </div>
                     </div>                      

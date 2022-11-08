@@ -398,7 +398,7 @@ text-decoration: none;
 }
 
 .post-advice__comment {
-    padding: 16px 16px 0 16px;
+    padding-top: 16px;
 }
 
 .comment-info__user {
