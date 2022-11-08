@@ -11,6 +11,7 @@ import { Routes, Route } from 'react-router-dom';
 import CreatePost from './components/Creation';
 import PublishPost from './components/PublishedPosts';
 import CreateComment from './components/Comment';
+import PublishComment from './components/PublishedComments';
 
 const ROLES = {
   'User': 2001,
@@ -29,6 +30,7 @@ function App() {
         <Route path="create-post" element={<CreatePost />} />
         <Route path="publish-post" element={<PublishPost />} />
         <Route path="create-comment" element={<CreateComment />} />
+        <Route path="publish-comment" element={<PublishComment />} />
         <Route path="unauthorized" element={<Unauthorized />} />
 
         {/* we want to protect these routes */}

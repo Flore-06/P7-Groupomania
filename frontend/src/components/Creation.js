@@ -13,6 +13,7 @@ const CreatePost = () => {
     const from = location.state?.from?.pathname || "/create-post";
 
     const [message, setMessage] = useState('');
+    const [image, setImage] = useState('');
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -21,7 +22,7 @@ const CreatePost = () => {
             const userId = localStorage.getItem('userId');
 
             const response = await axios.post(CREATE_POST_URL,
-                JSON.stringify({ userId, message }),
+                JSON.stringify({ userId, message, image }),
                 {
                     headers: { 'Content-Type': 'application/json' },
                     withCredentials: true
@@ -31,6 +32,7 @@ const CreatePost = () => {
             //console.log(JSON.stringify(response));
         
             setMessage('');
+            setImage('');
             navigate(from, { replace: true });
         } catch (err) {
             console.log(err);
@@ -69,7 +71,7 @@ const CreatePost = () => {
                         
                         
                         <div className="create-post__div create-post__fileinput">
-                            <label htmlFor="myImage">
+                            <label htmlFor="image">
                                 <div className="icone-new-add-file">
                                 <FontAwesomeIcon icon={faPlus} className="icone-a-droite icone-new-add-file"/>
                                 <FontAwesomeIcon icon={faImage} className="icone-a-droite icone-new-add-file"/>
@@ -77,9 +79,10 @@ const CreatePost = () => {
                                 
                                 <input
                                     type="file"
-                                    id="myImage"
+                                    id="image"
                                     className="default-css-add-file"
                                     change="onFileChange"
+                                    onChange={(e) => setImage(e.target.value)}
                                 />
                             </label>
                             <button
