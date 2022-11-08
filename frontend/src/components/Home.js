@@ -4,21 +4,17 @@ import { useContext } from "react";
 import { useState, useEffect, useRef } from "react";
 
 import AuthContext from "../context/AuthProvider";
-import { faRightFromBracket, faThumbsUp, faThumbsDown, faComment, faUser, faHome, faEllipsisH, faPenToSquare, faTrash } from "@fortawesome/free-solid-svg-icons";
+import { faRightFromBracket, faUser, faHome } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Routes, Route } from 'react-router-dom';
 import CreatePost from '../components/Creation';
-
-
-import axios from '../api/axios';
-const LOAD_POST_URL = '/posts';
+import PublishPost from '../components/PublishedPosts';
 
 
 const Home = () => {
     const { setAuth } = useContext(AuthContext);
     const navigate = useNavigate();
 
-    const [loadPosts, setLoadPost]=useState();
 
     /*Pour fermer le Dropdown menu*/
     const [open, setOpen] = useState(false);
@@ -44,36 +40,6 @@ const Home = () => {
         navigate('/login');
     }
 
-
-    /* Test pour vérifier le bon embriquement du code pour afficher les posts
-    const data =[{"name":"test1"},{"name":"test2"}];
-    const loadPosts = data.map((d) => <li key={d.name}>{d.name}</li>);*/
-
-
-    const fetchPosts = async (e) => {
-        try {
-            
-            const response = await axios.get(LOAD_POST_URL,
-                {
-                    headers: { 'Content-Type': 'application/json' },
-                    withCredentials: true
-                }
-            );
-
-            const posts = response.data;
-
-            setLoadPost(posts);
-            //console.log(JSON.stringify(response?.data));
-            console.log(posts);
-        
-        } catch (err) {
-            console.log(err);
-        }
-    }
-
-    useEffect(() => {
-        fetchPosts();
-      }, []);
 
 
 
@@ -102,9 +68,14 @@ const Home = () => {
                 <Route path="*" element={<CreatePost />} />
             </Routes>
 
-            <section className="posts bg-light-grey">
+            
 
+            <Routes>
+                <Route path="*" element={<PublishPost />} />
+            </Routes>
         
+                {/* 
+            <section className="posts bg-light-grey">    
                 {loadPosts?.map((post) => 
 
                     <div className="post">
@@ -122,7 +93,7 @@ const Home = () => {
                                     </div>
                                 
 
-                                    {/*dropdown menu pour effectuer des actions sur un post*/}
+                                    
                                     <div className='menu-container' ref={menuRef}>
                                         <div className='menu-trigger' onClick={()=>{setOpen(!open)}}>
                                             <FontAwesomeIcon
@@ -204,23 +175,15 @@ const Home = () => {
                     </div>
 
                 )}
+            </section>    
+                */}
                 
-            </section>
+
         </main>
         
     );
 
     
-}
-
-/*Création de la fonction dropdown menu*/
-function DropdownItem(props){
-    return(
-        <li className = 'dropdownItem'>
-            {/*<icon src={props.icon}></icon>*/}
-            <a> {props.text} </a>
-        </li>
-    );
 }
 
 export default Home

@@ -9,6 +9,7 @@ import Unauthorized from './components/Unauthorized';
 import RequireAuth from './components/RequireAuth';
 import { Routes, Route } from 'react-router-dom';
 import CreatePost from './components/Creation';
+import PublishPost from './components/PublishedPosts';
 
 const ROLES = {
   'User': 2001,
@@ -25,6 +26,7 @@ function App() {
         <Route path="login" element={<Login />} />
         <Route path="register" element={<Register />} />
         <Route path="create-post" element={<CreatePost />} />
+        <Route path="publish-post" element={<PublishPost />} />
         <Route path="unauthorized" element={<Unauthorized />} />
 
         {/* we want to protect these routes */}
