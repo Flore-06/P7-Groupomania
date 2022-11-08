@@ -39,38 +39,38 @@ const CreatePost = () => {
 
     return (
 
-        <section class="posts bg-light-grey">
-                <div class="create-post post">
+        <section className="posts bg-light-grey">
+                <div className="create-post post">
                     <form onSubmit={handleSubmit}>
-                        <div class="post-info create-post__message">
-                            <div class="post-info__user">
+                        <div className="post-info create-post__message">
+                            <div className="post-info__user">
                                 <img 
                                     src="/default-user-icon.png"
                                     alt="icone utilisateur par défaut"
-                                    class="user-default-image"
+                                    className="user-default-image"
                                 ></img>
-                                <div class="post__name-date">
-                                    <p class="user-name">Prénom Nom</p>
+                                <div className="post__name-date">
+                                    <p className="user-name">Prénom Nom</p>
                                 </div>                                
                             </div>
 
-                            <label htmlFor="message" class="create-post__text">
+                            <label htmlFor="message" className="create-post__text">
                                 <textarea
                                     id="message"
                                     placeholder="Que voulez-vous partager ?"
                                     onChange={(e) => setMessage(e.target.value)}
                                     value={message}
                                     required
-                                    class="create-post__posttextarea"
+                                    className="create-post__posttextarea"
                                     aria-label="Un champ de texte pour créer un post"
                                 ></textarea>
                             </label>
                         </div>
                         
                         
-                        <div class="create-post__div create-post__fileinput">
-                            <label for="myImage">
-                                <div class="icone-new-add-file">
+                        <div className="create-post__div create-post__fileinput">
+                            <label htmlFor="myImage">
+                                <div className="icone-new-add-file">
                                 <FontAwesomeIcon icon={faPlus} className="icone-a-droite icone-new-add-file"/>
                                 <FontAwesomeIcon icon={faImage} className="icone-a-droite icone-new-add-file"/>
                                 </div>
@@ -78,12 +78,12 @@ const CreatePost = () => {
                                 <input
                                     type="file"
                                     id="myImage"
-                                    class="default-css-add-file"
+                                    className="default-css-add-file"
                                     change="onFileChange"
                                 />
                             </label>
                             <button
-                                class="create-post__btn"
+                                className="create-post__btn"
                                 type="submit"
                             >
                                 Publier

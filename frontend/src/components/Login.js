@@ -67,16 +67,16 @@ const Login = () => {
 
     return (
 
-        <section class="row">
+        <section className="row">
             
-            <div class="column dark-image-background column_image-title">
-                <p class="groupomania-title">Le Réseau Social de</p>
-                <img class="logo-groupomania-1-2" src='logo-blanc-centre-groupomania.png' alt='logo de Groupomania'></img>
+            <div className="column dark-image-background column_image-title">
+                <p className="groupomania-title">Le Réseau Social de</p>
+                <img className="logo-groupomania-1-2" src='logo-blanc-centre-groupomania.png' alt='logo de Groupomania'></img>
             </div>
 
-            <div class="column column_form">
+            <div className="column column_form">
                 <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
-                <h1 class="form-title">Connexion</h1>
+                <h1 className="form-title">Connexion</h1>
                 <form onSubmit={handleSubmit}>
                     <label htmlFor="email">Email :</label>
                     <input
@@ -99,7 +99,7 @@ const Login = () => {
                     />
                     <button style={{margin: '20px 0px'}}>Se connecter</button>
                 </form>
-                <p class="form-redirection">
+                <p className="form-redirection">
                     Besoin de créer un compte ?<br />
                     <span className="line">
                         <Link to="/register">S'inscrire</Link>

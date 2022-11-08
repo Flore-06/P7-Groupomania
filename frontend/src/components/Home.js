@@ -79,16 +79,16 @@ const Home = () => {
 
 
     return (
-        <main class="light-background">
-            <div class="navbar">
-                    <a aria-label="Home" class="active" href="/" style={{width:'33%'}}><FontAwesomeIcon icon={faHome}/></a>
+        <main className="light-background">
+            <div className="navbar">
+                    <a aria-label="Home" className="active" href="/" style={{width:'33%'}}><FontAwesomeIcon icon={faHome}/></a>
                     <a aria-label="Administrateur" href="/admin" style={{width:'34%'}}><FontAwesomeIcon icon={faUser}/></a>
                     <a aria-label="Déconnexion" href="/" style={{width:'33%'}}><FontAwesomeIcon icon={faRightFromBracket}/></a>
             </div>
 
-            <section class="bg-light-grey section-bienvenue">
+            <section className="bg-light-grey section-bienvenue">
                 <h1>Bienvenue sur le Réseau Social de</h1>
-                <img class="logo-groupomania" src='/logo-rouge-centre-groupomania.png' alt='logo de Groupomania'></img>
+                <img className="logo-groupomania" src='/logo-rouge-centre-groupomania.png' alt='logo de Groupomania'></img>
                 <br />
                 <div className="flexGrow">
                     <button onClick={logout}>
@@ -102,22 +102,23 @@ const Home = () => {
                 <Route path="*" element={<CreatePost />} />
             </Routes>
 
-            <section class="posts bg-light-grey">
+            <section className="posts bg-light-grey">
 
-                {loadPosts.map((post) => 
+        
+                {loadPosts?.map((post) => 
 
-                    <div class="post">
+                    <div className="post">
                         <div>
-                            <div class="post-info">
-                                <div class="post-info__user">
+                            <div className="post-info">
+                                <div className="post-info__user">
                                     <img 
                                         src="/default-user-icon.png"
                                         alt="icone utilisateur par défaut"
-                                        class="user-default-image"
+                                        className="user-default-image"
                                     ></img>
-                                    <div class="post__name-date">
-                                        <p class="user-name">Prénom Nom</p>
-                                        <p class="published-date">Publié le 19/10/2022</p>
+                                    <div className="post__name-date">
+                                        <p className="user-name">Prénom Nom</p>
+                                        <p className="published-date">Publié le 19/10/2022</p>
                                     </div>
                                 
 
@@ -141,61 +142,61 @@ const Home = () => {
 
                                 </div>
 
-                                <div class="post-info__message">
+                                <div className="post-info__message">
                                     
-                                    <li class="texte-publi" key={post.message}>{post.message}</li>
+                                    <li className="texte-publi" key={post.message}>{post.message}</li>
                                     <img 
                                         src="/reunion.jpg"
                                         alt="reunion Groupomania 19/10/2022"
-                                        class="post-image"
+                                        className="post-image"
                                     ></img>
 
                                 </div>
                             </div>
                             
                             
-                            <div class="post-likes">
+                            <div className="post-likes">
                             <FontAwesomeIcon icon={faThumbsUp}/>
                             <FontAwesomeIcon icon={faThumbsDown} className="icone-a-droite"/>
                             </div>
 
-                            <div class="post-advice">
-                                <div class="post-advice__buttons">
-                                    <label for="myLike">
+                            <div className="post-advice">
+                                <div className="post-advice__buttons">
+                                    <label htmlFor="myLike">
                                         <FontAwesomeIcon icon={faThumbsUp} className="icone-a-gauche icone-contour"/>
                                         J'aime
                                     </label>
-                                    <label for="myLike">
+                                    <label htmlFor="myLike">
                                         <FontAwesomeIcon icon={faThumbsDown} className="icone-a-gauche icone-contour"/>
                                         Je n'aime pas
                                     </label>
-                                    <label for="myComment">
+                                    <label htmlFor="myComment">
                                         <FontAwesomeIcon icon={faComment} className="icone-a-gauche icone-contour"/>
                                         Commenter
                                     </label>
                                 </div>
 
-                                <div class="post-advice__comment"  >
-                                    <div class="comment-info__user">
+                                <div className="post-advice__comment"  >
+                                    <div className="comment-info__user">
                                         <FontAwesomeIcon icon={faUser} className="icone-a-gauche icone-contour"/>
-                                        <div class="comment__name-date">
-                                            <p class="comment-user-name">Prénom Nom</p>
-                                            <p class="published-date">Publié le 19/10/2022</p>
+                                        <div className="comment__name-date">
+                                            <p className="comment-user-name">Prénom Nom</p>
+                                            <p className="published-date">Publié le 19/10/2022</p>
                                         </div>
                                     </div>
                                     
-                                    <p class="comment-text">This is my comment</p>
+                                    <p className="comment-text">This is my comment</p>
                                 </div>    
-                                <div class="post-advice__comment"  >
-                                    <div class="comment-info__user">
+                                <div className="post-advice__comment"  >
+                                    <div className="comment-info__user">
                                         <FontAwesomeIcon icon={faUser} className="icone-a-gauche icone-contour"/>
-                                        <div class="comment__name-date">
-                                            <p class="comment-user-name">Prénom Nom</p>
-                                            <p class="published-date">Publié le 20/10/2022</p>
+                                        <div className="comment__name-date">
+                                            <p className="comment-user-name">Prénom Nom</p>
+                                            <p className="published-date">Publié le 20/10/2022</p>
                                         </div>
                                     </div>
                                     
-                                    <p class="comment-text">Génial !</p>
+                                    <p className="comment-text">Génial !</p>
                                 </div>                         
                             
                             </div>
@@ -216,7 +217,7 @@ const Home = () => {
 function DropdownItem(props){
     return(
         <li className = 'dropdownItem'>
-            <icon src={props.icon}></icon>
+            {/*<icon src={props.icon}></icon>*/}
             <a> {props.text} </a>
         </li>
     );

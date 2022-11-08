@@ -117,22 +117,22 @@ const Register = () => {
     return (
         <>
             {success ? (
-                <section class="row">
+                <section className="row">
                     <h1>Succès !</h1>
                     <p>
                         <a href="/login">Connexion</a>
                     </p>
                 </section>
             ) : (
-                <section class="row">
-                    <div class="column dark-image-background column_image-title">
-                        <p class="groupomania-title">Le Réseau Social de</p>
-                        <img class="logo-groupomania-1-2" src='logo-blanc-centre-groupomania.png' alt='logo de Groupomania'></img>
+                <section className="row">
+                    <div className="column dark-image-background column_image-title">
+                        <p className="groupomania-title">Le Réseau Social de</p>
+                        <img className="logo-groupomania-1-2" src='logo-blanc-centre-groupomania.png' alt='logo de Groupomania'></img>
                     </div>
 
-                    <div class="column column_form">
+                    <div className="column column_form">
                         <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
-                        <h1 class="form-title">Inscription</h1>
+                        <h1 className="form-title">Inscription</h1>
                         <form onSubmit={handleSubmit}>
                             
                             <label htmlFor="name">
@@ -254,7 +254,7 @@ const Register = () => {
 
                             <button disabled={!validEmail || !validPwd || !validMatch ? true : false} style={{margin: '20px 0px'}}>S'inscrire</button>
                         </form>
-                        <p class="form-redirection">
+                        <p className="form-redirection">
                             Déjà inscrit ?<br />
                             <span className="line">
                                 <Link to="/">Connectez-vous</Link>
