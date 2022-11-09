@@ -103,7 +103,7 @@ const PublishPost = () => {
                                 <p className="texte-publi">{post.message}</p>
                                 <img 
                                     src={post.imageUrl}
-                                    alt="reunion Groupomania 19/10/2022"
+                                    alt="évènement"
                                     className="post-image"
                                 ></img>
 
@@ -118,15 +118,15 @@ const PublishPost = () => {
 
                         <div className="post-advice">
                             <div className="post-advice__buttons">
-                                <label htmlFor="myLike">
+                                <label htmlFor="myLike" className="advice-buttons">
                                     <FontAwesomeIcon icon={faThumbsUp} className="icone-a-gauche icone-contour"/>
                                     J'aime
                                 </label>
-                                <label htmlFor="myLike">
+                                <label htmlFor="myLike" className="advice-buttons">
                                     <FontAwesomeIcon icon={faThumbsDown} className="icone-a-gauche icone-contour"/>
                                     Je n'aime pas
                                 </label>
-                                <label htmlFor="myComment">
+                                <label htmlFor="myComment" className="advice-buttons">
                                     <FontAwesomeIcon icon={faComment} className="icone-a-gauche icone-contour"/>
                                     Commenter
                                 </label>

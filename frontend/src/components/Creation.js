@@ -80,7 +80,7 @@ const CreatePost = () => {
                         
                         
                         <div className="create-post__div create-post__fileinput">
-                            <label htmlFor="image">
+                            <label htmlFor="image" className='label-image-upload'>
                                 <div className="icone-new-add-file">
                                 <FontAwesomeIcon icon={faPlus} className="icone-a-droite icone-new-add-file"/>
                                 <FontAwesomeIcon icon={faImage} className="icone-a-droite icone-new-add-file"/>
