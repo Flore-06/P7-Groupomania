@@ -27,6 +27,7 @@ exports.createPost = (req, res, next) => {
   console.log(req.body);
   const post = new Post({
       message : req.body.message,
+      imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`,
       userId: req.body.userId,
       likes: 0,
       dislikes: 0,

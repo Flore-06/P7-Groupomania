@@ -364,10 +364,10 @@ text-decoration: none;
     padding-top: 16px;
 }
 
-.default-css-add-file {
+/*.default-css-add-file {
     display: none;
     visibility: hidden;
-}
+}*/
 
 .icone-new-add-file {
     cursor: pointer;

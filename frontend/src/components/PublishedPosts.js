@@ -102,7 +102,7 @@ const PublishPost = () => {
                                 {/*<li className="texte-publi" key={post.message}>{post.message}</li>*/}
                                 <p className="texte-publi">{post.message}</p>
                                 <img 
-                                    src={post.image}
+                                    src={post.imageUrl}
                                     alt="reunion Groupomania 19/10/2022"
                                     className="post-image"
                                 ></img>

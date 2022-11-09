@@ -15,17 +15,26 @@ const CreatePost = () => {
     const [message, setMessage] = useState('');
     const [image, setImage] = useState('');
 
+    const userId = localStorage.getItem('userId');
+
     const handleSubmit = async (e) => {
         e.preventDefault();
 
+        console.log(image);
+        
+        const formData = new FormData();
+        
+        formData.append("userId", JSON.stringify(userId));
+        formData.append("message", JSON.stringify(message));
+        formData.append("image", image);
+
         try {
-            const userId = localStorage.getItem('userId');
 
             const response = await axios.post(CREATE_POST_URL,
-                JSON.stringify({ userId, message, image }),
+                formData,
                 {
-                    headers: { 'Content-Type': 'application/json' },
-                    withCredentials: true
+                    headers: { "Content-Type": "multipart/form-data" },
+                    withCredentials: true,
                 }
             );
             console.log(JSON.stringify(response?.data));
@@ -82,7 +91,7 @@ const CreatePost = () => {
                                     id="image"
                                     className="default-css-add-file"
                                     change="onFileChange"
-                                    onChange={(e) => setImage(e.target.value)}
+                                    onChange={(e) => setImage(e.target.files[0])}
                                 />
                             </label>
                             <button
