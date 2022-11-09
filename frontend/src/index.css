@@ -20,6 +20,7 @@ html {
 
 body {
     min-height: 100vh;
+    min-width: fit-content;
     
 }
 
@@ -28,13 +29,19 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  min-height: 100vh; 
+  min-height: 100vh;
 }
 
 section.row {
     display: flex;
     width: 100%;
   }
+
+@media (max-width:1025px) {
+    section.row {
+        flex-direction: column;
+    }
+}
 
 main {
     width: 100%;
@@ -47,10 +54,13 @@ img {
 
 .logo-groupomania {
     width: 300px;
+    padding: 0 25px;
 }
 
 .logo-groupomania-1-2 {
     width: 500px;
+    padding: 0 25px;
+    margin-bottom: -30px;
 }
 
 .user-default-image {
@@ -117,11 +127,18 @@ img {
 .column {
     flex: 50%;
     width: 100%;
+    padding: 5rem;
     height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
   }
+
+@media (max-width:480px) {
+    .column {
+        padding: 3rem;
+    }
+} 
 
 .column_image-title {
     align-items: center;
@@ -131,9 +148,9 @@ img {
 .groupomania-title {
     font-size: 1.5rem;
     font-weight: bold;
+    text-align: center;
 }
 .column_form {
-    padding: 5rem;
     background-color: rgba(255, 255, 255, 1);
     justify-content: center;
 }
@@ -161,8 +178,11 @@ textarea {
   border-color: rgba(var(--first-color), 1);
 }
 
-h1.form-title{
+h1 {
     text-align: center;
+}
+
+h1.form-title{
     margin-bottom: 16px;
 }
 
@@ -294,6 +314,12 @@ text-decoration: none;
     animation: fadeInAnimation ease 1s;
     animation-iteration-count: 1;
     animation-fill-mode: forwards;
+}
+
+@media (max-width:1025px) {
+    .post {
+        width: 80%;
+    }
 }
 
 @keyframes fadeInAnimation {
