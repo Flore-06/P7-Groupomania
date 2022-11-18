@@ -53,12 +53,12 @@ const Register = () => {
     }, [])
 
     useEffect(() => {
-        setValidEmail(NAME_REGEX.test(email));
-    }, [email])
+        setValidName(NAME_REGEX.test(name));
+    }, [name])
 
     useEffect(() => {
-        setValidEmail(SURNAME_REGEX.test(email));
-    }, [email])
+        setValidSurname(SURNAME_REGEX.test(surname));
+    }, [surname])
 
     useEffect(() => {
         setValidEmail(EMAIL_REGEX.test(email));
@@ -76,8 +76,8 @@ const Register = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         // if button enabled with JS hack
-        const v1 = EMAIL_REGEX.test(email);
-        const v2 = EMAIL_REGEX.test(email);
+        const v1 = NAME_REGEX.test(name);
+        const v2 = SURNAME_REGEX.test(surname);
         const v3 = EMAIL_REGEX.test(email);
         const v4 = PWD_REGEX.test(password);
         if (!v1 || !v2 || !v3 || !v4) {
@@ -118,9 +118,20 @@ const Register = () => {
         <>
             {success ? (
                 <section className="row">
-                    <h1>Succès !</h1>
+                    <div className="column dark-image-background column_image-title">
+                        <p className="groupomania-title">Le Réseau Social de</p>
+                        <img className="logo-groupomania-1-2" src='logo-blanc-centre-groupomania.png' alt='logo de Groupomania'></img>
+                    </div>
+
+                    <div className="column column_form">
+                        <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
+                        <h1 className="form-title">Bravo, vous êtes inscrit !</h1>
+                        <a href="/login">
+                            <button href="/login" style={{margin: '0 auto'}, {display: 'flex'}}>Connectez-vous</button>
+                        </a>
+                    </div>
                     <p>
-                        <a href="/login">Connexion</a>
+                        <a href="/login">Connectez-vous</a>
                     </p>
                 </section>
             ) : (
@@ -146,7 +157,7 @@ const Register = () => {
                                 ref={nameRef}
                                 autoComplete="off"
                                 onChange={(e) => setName(e.target.value)}
-                                value={text}
+                                value={name}
                                 required
                                 aria-invalid={validEmail ? "false" : "true"}
                                 aria-describedby="namenote"
@@ -169,7 +180,7 @@ const Register = () => {
                                 ref={surnameRef}
                                 autoComplete="off"
                                 onChange={(e) => setSurname(e.target.value)}
-                                value={text}
+                                value={surname}
                                 required
                                 aria-invalid={validSurname ? "false" : "true"}
                                 aria-describedby="surnamenote"

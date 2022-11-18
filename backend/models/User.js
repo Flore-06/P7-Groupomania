@@ -8,6 +8,8 @@ const uniqueValidator = require('mongoose-unique-validator');
 
 // Créer un schéma Mongoose pour se connecter
 const userSchema = mongoose.Schema({
+  name: { type: String, required: true },
+  surname: { type: String, required: true },
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true }
 });

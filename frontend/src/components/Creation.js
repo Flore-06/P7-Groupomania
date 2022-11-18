@@ -3,6 +3,8 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { faImage, faPaperPlane, faPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
+import DayJS from 'react-dayjs';
+
 import axios from '../api/axios';
 const CREATE_POST_URL = '/posts';
 
@@ -16,6 +18,9 @@ const CreatePost = () => {
     const [image, setImage] = useState('');
 
     const userId = localStorage.getItem('userId');
+    let userName = JSON.parse(localStorage.getItem('userName'));
+    let userSurname = JSON.parse(localStorage.getItem('userSurname'));
+    console.log(userName);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -61,7 +66,7 @@ const CreatePost = () => {
                                     className="user-default-image"
                                 ></img>
                                 <div className="post__name-date">
-                                    <p className="user-name">Prénom Nom</p>
+                                    <p className="user-name">${userName} ${userSurname}</p>
                                 </div>                                
                             </div>
 
