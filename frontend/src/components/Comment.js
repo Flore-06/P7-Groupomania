@@ -54,11 +54,11 @@ const CreateComment = () => {
                     ></textarea>
                 </label>
                 <button
-                    className="create-post__btn"
+                    className="create-comment__btn"
                     type="submit"
                 >
-                    Publier
-                    <FontAwesomeIcon icon={faPaperPlane} className="icone-a-droite"/>
+                    {/*Publier*/}
+                    <FontAwesomeIcon icon={faPaperPlane}/>
                 </button>
         </div>
             
