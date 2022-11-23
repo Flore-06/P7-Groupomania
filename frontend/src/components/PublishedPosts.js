@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from '../api/axios';
 import { Routes, Route } from 'react-router-dom';
 import CreateComment from "./Comment";
-import PublishComment from "./Comment";
+import PublishComment from "./PublishedComments";
 
 const LOAD_POST_URL = '/posts';
 
@@ -15,6 +15,15 @@ const PublishPost = () => {
     /*const navigate = useNavigate();
     const location = useLocation();
     const from = location.state?.from?.pathname || "/publish-post";*/
+
+    /*let userNamePost = localStorage.getItem('userNamePost');
+    let userSurnamePost = localStorage.getItem('userSurnamePost');
+
+    useEffect(() => {
+
+        let nomPrenom = document.getElementById('user-name-posted').innerHTML= userNamePost + " " + userSurnamePost;
+        console.log(nomPrenom);
+    });*/
 
     const [loadPosts, setLoadPost]=useState();
     const fetchPosts = async (e) => {
@@ -72,7 +81,7 @@ const PublishPost = () => {
                                     className="user-default-image"
                                 ></img>
                                 <div className="post__name-date">
-                                    <p className="user-name">Prénom Nom {post.userName}</p>
+                                    <p className="user-name" id="user-name-posted">Prénom Nom</p>
                                     <p className="published-date">Publié le 19/10/2022</p>
                                 </div>
                             
@@ -136,9 +145,9 @@ const PublishPost = () => {
                                 <Route path="*" element={<CreateComment />} />
                             </Routes>
 
-                            {/*<Routes>
+                            <Routes>
                                 <Route path="*" element={<PublishComment />} />
-                            </Routes>*/}                      
+                            </Routes>                   
                         
                         </div>
                     </div>                      
