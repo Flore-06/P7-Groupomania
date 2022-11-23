@@ -72,7 +72,7 @@ const PublishPost = () => {
                                     className="user-default-image"
                                 ></img>
                                 <div className="post__name-date">
-                                    <p className="user-name">Prénom Nom</p>
+                                    <p className="user-name">Prénom Nom {post.userName}</p>
                                     <p className="published-date">Publié le 19/10/2022</p>
                                 </div>
                             

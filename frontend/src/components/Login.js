@@ -42,9 +42,13 @@ const Login = () => {
             //console.log(JSON.stringify(response));
             const accessToken = response?.data?.token;
             const userId = response?.data?.userId;
+            const userName = response?.data?.userName;
+            const userSurname = response?.data?.userSurname;
 
             localStorage.setItem('token', accessToken);
             localStorage.setItem('userId', userId);
+            localStorage.setItem('userName', userName);
+            localStorage.setItem('userSurname', userSurname);
 
             const roles = response?.data?.roles;
             setAuth({ email, password, roles, accessToken });

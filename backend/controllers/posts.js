@@ -4,21 +4,21 @@ const Post = require("../models/Post");
 const fs = require('fs');
 
 
-// Accéder à toutes les posts
+// Accéder à tous les posts
 exports.getAllPost = (req, res, next) => {
     Post.find()
       .then((posts) => { res.status(200).json(posts);})
       .catch((error) => res.status(400).json({ error }));
 };
 
-// Accéder à une post particulier
+// Accéder à un post particulier
 exports.getOnePost = (req, res, next) => {
     Post.findOne({ _id: req.params.id })
       .then((post) => { res.status(200).json(post);})
       .catch((error) => res.status(400).json({ error }));
 };
 
-// Créer une post
+// Créer un post
 exports.createPost = (req, res, next) => {
   /*const postObject = JSON.parse(req.body.post);
   delete postObject._id;
@@ -31,6 +31,7 @@ exports.createPost = (req, res, next) => {
       userId: req.body.userId,
       userName: req.body.userName,
       userSurname: req.body.userSurname,
+      /*publishedDate: req.body.publishedDate,*/
       likes: 0,
       dislikes: 0,
       usersLiked: [' '],

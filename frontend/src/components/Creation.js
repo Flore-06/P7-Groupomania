@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { faImage, faPaperPlane, faPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -18,9 +18,22 @@ const CreatePost = () => {
     const [image, setImage] = useState('');
 
     const userId = localStorage.getItem('userId');
-    let userName = JSON.parse(localStorage.getItem('userName'));
-    let userSurname = JSON.parse(localStorage.getItem('userSurname'));
+    /*let userName = JSON.parse(localStorage.getItem('username'));*/
+    let userName = localStorage.getItem('userName');
+    let userSurname = localStorage.getItem('userSurname');
+    console.log("est passé par là");
     console.log(userName);
+
+    useEffect(() => {
+
+        let nomPrenom = document.getElementById('user-name-create-post').innerHTML= userName + " " + userSurname;
+        console.log(nomPrenom);
+    });
+
+
+    //document.getElementById('user-name-create-post').innerHTML= userName;
+
+    /*let publishedDate = DayJS().format();*/
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -30,6 +43,9 @@ const CreatePost = () => {
         const formData = new FormData();
         
         formData.append("userId", JSON.stringify(userId));
+        formData.append("userName", JSON.stringify(userName));
+        formData.append("userSurname", JSON.stringify(userSurname));
+        /*formData.append("publishedDate", JSON.stringify(publishedDate));*/
         formData.append("message", JSON.stringify(message));
         formData.append("image", image);
 
@@ -66,7 +82,7 @@ const CreatePost = () => {
                                     className="user-default-image"
                                 ></img>
                                 <div className="post__name-date">
-                                    <p className="user-name">${userName} ${userSurname}</p>
+                                    <p className="user-name" id="user-name-create-post">Prénom Nom</p>
                                 </div>                                
                             </div>
 

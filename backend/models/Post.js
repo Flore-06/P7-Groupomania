@@ -6,6 +6,7 @@ const postSchema = mongoose.Schema({
   userId: { type: String, required: true },
   userName: { type: String, required: true },
   userSurname: { type: String, required: true },
+  /*publishedDate,*/
   message: { type: String, required: true },
   imageUrl: { type: String, required: false },
   likes: { type: Number },

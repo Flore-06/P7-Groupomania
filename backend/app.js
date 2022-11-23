@@ -18,6 +18,7 @@ require('dotenv').config();
 
 // Appel des différentes routes
 const postRoutes = require('./routes/post');
+const commentRoutes = require('./routes/comment');
 const userRoutes = require('./routes/user');
 
 /*app.use(helmet({
@@ -62,6 +63,7 @@ mongoose.connect(process.env.SECRET_DB,
 app.use(express.json());
 
 app.use('/api/posts', postRoutes);
+app.use('/api/comments', commentRoutes);
 app.use('/api/auth', userRoutes);
 app.use('/images', express.static(path.join(__dirname, 'images')));
 
