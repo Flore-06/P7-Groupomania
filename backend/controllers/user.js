@@ -33,6 +33,7 @@ exports.signup = (req, res, next) => {
         bcrypt.hash(req.body.password, 10)
       .then(hash => {
         const user = new User({
+          _id: new mongoose.Types.ObjectId(),
           name: req.body.name,
           surname: req.body.surname,
           email: req.body.email,

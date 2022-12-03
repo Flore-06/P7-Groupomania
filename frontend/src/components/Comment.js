@@ -4,10 +4,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPaperPlane } from "@fortawesome/free-solid-svg-icons";
 
 import axios from '../api/axios';
-const CREATE_COMMENT_URL = '/comment';
+const CREATE_COMMENT_URL = '/comments';
 
-const CreateComment = () => {
-    
+
+
+const CreateComment = (props) => {
+
     const navigate = useNavigate();
     const location = useLocation();
     const from = location.state?.from?.pathname || "/create-comment";
@@ -19,7 +21,8 @@ const CreateComment = () => {
 
         try {
             const userId = localStorage.getItem('userId');
-            const userPost = localStorage.getItem('userPost');
+            const userPost = props.userPost;
+
 
             const response = await axios.post(CREATE_COMMENT_URL,
                 JSON.stringify({ userId, userPost, message }),

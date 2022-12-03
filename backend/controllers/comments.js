@@ -25,8 +25,7 @@ exports.createComment = (req, res, next) => {
   const comment = new Comment({
       message : req.body.message,
       userId: req.body.userId,
-      userName: req.body.userName,
-      userSurname: req.body.userSurname,
+      userPost: req.body.userPost,
       /*publishedDate: req.body.publishedDate,*/
   });
 
