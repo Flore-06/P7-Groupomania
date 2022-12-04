@@ -6,7 +6,7 @@ const fs = require('fs');
 
 // Accéder à tous les posts
 exports.getAllPost = (req, res, next) => {
-    Post.find({}).populate('userId')
+    Post.find({}).populate('user')
       .exec(function (err, posts) {
         if (err) res.status(400).json({ err });
         console.log(posts);
@@ -35,7 +35,7 @@ exports.createPost = (req, res, next) => {
   const post = new Post({
       message : req.body.message,
       imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`,
-      userId: req.body.userId,
+      user: req.body.user,
       userName: req.body.userName,
       userSurname: req.body.userSurname,
       /*publishedDate: req.body.publishedDate,*/

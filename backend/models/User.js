@@ -1,14 +1,13 @@
 // Appele de Mongoose : 
 const mongoose = require('mongoose');
 
-
 // Appel de Mongoose uniqueValidator
 const uniqueValidator = require('mongoose-unique-validator');
 
 
 // Créer un schéma Mongoose pour se connecter
 const userSchema = mongoose.Schema({
-  _id: Types.ObjectId,
+  //_id: { type: Schema.Types.ObjectId },
   name: { type: String, required: true },
   surname: { type: String, required: true },
   email: { type: String, required: true, unique: true },
