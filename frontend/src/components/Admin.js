@@ -1,17 +1,27 @@
-import { Link } from "react-router-dom";
+import { useState, useEffect } from 'react';
 import Users from './Users';
+import { Routes, Route } from 'react-router-dom';
+import Header from '../components/Header';
+
 
 const Admin = () => {
+
+
     return (
-        <section>
-            <h1>Page administrateur</h1>
-            <br />
-            <Users />
-            <br />
-            <div className="flexGrow">
-                <Link to="/">Accueil</Link>
-            </div>
-        </section>
+        <main className="light-background">
+            <Routes>
+                <Route path="*" element={<Header/>} />
+            </Routes>
+
+            <section className="bg-light-grey section-bienvenue">
+                <h1>Page administrateur</h1>
+                <br />
+                <Users />
+            </section>
+
+        </main>
+
+
     )
 }
 

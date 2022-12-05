@@ -12,7 +12,8 @@ const CreatePost = () => {
     
     const navigate = useNavigate();
     const location = useLocation();
-    const from = location.state?.from?.pathname || "/create-post";
+    /*const from = location.state?.from?.pathname || "/create-post";*/
+    const from = location.state?.from?.pathname || "/";
 
     const [message, setMessage] = useState('');
     const [image, setImage] = useState('');
