@@ -50,19 +50,19 @@ const Home = () => {
             <div className="navbar">
                     <a aria-label="Home" className="active" href="/" style={{width:'33%'}}><FontAwesomeIcon icon={faHome}/></a>
                     <a aria-label="Administrateur" href="/admin" style={{width:'34%'}}><FontAwesomeIcon icon={faUser}/></a>
-                    <a aria-label="Déconnexion" href="/" style={{width:'33%'}}><FontAwesomeIcon icon={faRightFromBracket}/></a>
+                    <a aria-label="Déconnexion" href="/login" onClick={logout} style={{width:'33%'}}><FontAwesomeIcon icon={faRightFromBracket}/></a>
             </div>
 
             <section className="bg-light-grey section-bienvenue">
                 <h1>Bienvenue sur le Réseau Social de</h1>
                 <img className="logo-groupomania" src='/logo-rouge-centre-groupomania.png' alt='logo de Groupomania'></img>
-                <br />
+                {/*<br />
                 <div className="flexGrow">
                     <button onClick={logout}>
                         Se déconnecter
                         <FontAwesomeIcon icon={faRightFromBracket} className="icone-a-droite"/>
                     </button>
-                </div>
+    </div>*/}
             </section>
 
             <Routes>
