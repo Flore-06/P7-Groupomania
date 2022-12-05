@@ -12,7 +12,8 @@ const CreateComment = (props) => {
 
     const navigate = useNavigate();
     const location = useLocation();
-    const from = location.state?.from?.pathname || "/create-comment";
+    /*const from = location.state?.from?.pathname || "/create-comment";*/
+    const from = location.state?.from?.pathname || "/";
 
     const [message, setMessage] = useState('');
 
