@@ -45,7 +45,7 @@ const PublishComment = () => {
         <div>
             {loadComments?.map((comment) => 
 
-                <div className="post-advice__comment"  >
+                <div className="advice__comment"  >
                     <div className="comment-info__user">
                         <FontAwesomeIcon icon={faUser} className="icone-a-gauche icone-contour"/>
                         <div className="comment__name-date">
