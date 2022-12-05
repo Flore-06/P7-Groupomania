@@ -123,16 +123,13 @@ const Register = () => {
                         <img className="logo-groupomania-1-2" src='logo-blanc-centre-groupomania.png' alt='logo de Groupomania'></img>
                     </div>
 
-                    <div className="column column_form">
+                    <div className="column column_form" style={{alignItems: 'center'}}>
                         <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
                         <h1 className="form-title">Bravo, vous êtes inscrit !</h1>
                         <a href="/login">
                             <button href="/login" style={{margin: '0 auto'}, {display: 'flex'}}>Connectez-vous</button>
                         </a>
                     </div>
-                    <p>
-                        <a href="/login">Connectez-vous</a>
-                    </p>
                 </section>
             ) : (
                 <section className="row">
