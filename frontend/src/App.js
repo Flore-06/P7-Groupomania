@@ -1,6 +1,7 @@
 import Register from './components/Register';
 import Login from './components/Login';
 import Home from './components/Home';
+import Header from './components/Header';
 import Layout from './components/Layout';
 import Editor from './components/Editor';
 import Admin from './components/Admin';
@@ -27,6 +28,7 @@ function App() {
         {/* public routes */}
         <Route path="login" element={<Login />} />
         <Route path="register" element={<Register />} />
+        <Route path="header" element={<Header />} />
         <Route path="create-post" element={<CreatePost />} />
         <Route path="publish-post" element={<PublishPost />} />
         <Route path="create-comment" element={<CreateComment />} />

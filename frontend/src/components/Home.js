@@ -7,13 +7,14 @@ import AuthContext from "../context/AuthProvider";
 import { faRightFromBracket, faUser, faHome } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Routes, Route } from 'react-router-dom';
+import Header from '../components/Header';
 import CreatePost from '../components/Creation';
 import PublishPost from '../components/PublishedPosts';
 
 
 const Home = () => {
-    const { setAuth } = useContext(AuthContext);
-    const navigate = useNavigate();
+    /*const { setAuth } = useContext(AuthContext);
+    const navigate = useNavigate();*/
 
 
     /*Pour fermer le Dropdown menu*/
@@ -32,14 +33,14 @@ const Home = () => {
         }
     });
 
-    /* Pour se déconnecter */
+    /* Pour se déconnecter 
     const logout = async () => {
         // if used in more components, this should be in context 
         // axios to /logout endpoint 
         setAuth({});
         localStorage.clear();
         navigate('/login');
-    }
+    }*/
 
 
 
@@ -47,11 +48,9 @@ const Home = () => {
 
     return (
         <main className="light-background">
-            <div className="navbar">
-                    <a aria-label="Home" className="active" href="/" style={{width:'33%'}}><FontAwesomeIcon icon={faHome}/></a>
-                    <a aria-label="Administrateur" href="/admin" style={{width:'34%'}}><FontAwesomeIcon icon={faUser}/></a>
-                    <a aria-label="Déconnexion" href="/login" onClick={logout} style={{width:'33%'}}><FontAwesomeIcon icon={faRightFromBracket}/></a>
-            </div>
+            <Routes>
+                <Route path="*" element={<Header/>} />
+            </Routes>
 
             <section className="bg-light-grey section-bienvenue">
                 <h1>Bienvenue sur le Réseau Social de</h1>
