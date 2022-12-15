@@ -7,6 +7,7 @@ import axios from '../api/axios';
 import { Routes, Route } from 'react-router-dom';
 import CreateComment from "./Comment";
 import PublishComment from "./PublishedComments";
+import Rating from "./Rating";
 
 const LOAD_POST_URL = '/posts';
 
@@ -124,6 +125,10 @@ const PublishPost = () => {
                         <FontAwesomeIcon icon={faThumbsUp}/>
                         <FontAwesomeIcon icon={faThumbsDown} className="icone-a-droite"/>
                         </div>
+
+                        <Routes>
+                            <Route path="*" element={<Rating userPost={post._id} />} />
+                        </Routes>  
 
                         <div className="post-advice">
                             <div className="post-advice__buttons">
