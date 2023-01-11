@@ -3,29 +3,31 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faThumbsUp, faThumbsDown } from "@fortawesome/free-solid-svg-icons";
 import axios from '../api/axios';
 
-const LIKE_DISLIKE_URL = '/:id/like';
-
 const Rating = props => {
   
   const [isLiked, updateLike] = useState(false);
   const handleLike = async() => {
 
-    if (!isLiked) {
-      updateLike(true);
-      let like = 1;
-      
-    } else {
-      updateLike(false);
-      let like = -1;
-      
-    }
+    
 
     try {
         const userId = localStorage.getItem('userId');
         const userPost = props.userPost;
 
+        let url = "/posts/" + userPost + "/like";
+        let like = 0;
 
-        const response = await axios.post(LIKE_DISLIKE_URL,
+        if (!isLiked) {
+          updateLike(true);
+          like = 1;
+          
+        } else {
+          updateLike(false);
+          like = -1;
+          
+        };
+
+        const response = await axios.post(url,
             JSON.stringify({ userId, userPost, like }),
             {
                 headers: { 'Content-Type': 'application/json' },
@@ -35,8 +37,7 @@ const Rating = props => {
         console.log(JSON.stringify(response?.data));
         //console.log(JSON.stringify(response));
     
-        setMessage('');
-        navigate(from, { replace: true });
+
     } catch (err) {
         console.log(err);
     }

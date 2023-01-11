@@ -11,6 +11,7 @@ import Rating from "./Rating";
 
 const LOAD_POST_URL = '/posts';
 
+
 const PublishPost = () => {
 
     /*const navigate = useNavigate();
@@ -27,6 +28,8 @@ const PublishPost = () => {
     });*/
 
     const [loadPosts, setLoadPost]=useState();
+
+
     const fetchPosts = async (e) => {
         try {
             
@@ -51,6 +54,9 @@ const PublishPost = () => {
     useEffect(() => {
         fetchPosts();
       }, []);
+
+
+    
 
     /*Pour fermer le Dropdown menu*/
     const [open, setOpen] = useState(false);

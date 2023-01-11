@@ -27,6 +27,11 @@ exports.getOnePost = (req, res, next) => {
 
 // Créer un post
 exports.createPost = (req, res, next) => {
+  let image = "none";
+
+  if (req.file) {
+    image = `${req.protocol}://${req.get('host')}/images/${req.file.filename}`;
+}
   /*const postObject = JSON.parse(req.body.post);
   delete postObject._id;
   delete postObject._userId;
@@ -34,7 +39,7 @@ exports.createPost = (req, res, next) => {
   console.log(req.body);
   const post = new Post({
       message : req.body.message,
-      imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`,
+      imageUrl: image,
       user: req.body.user,
       userName: req.body.userName,
       userSurname: req.body.userSurname,
