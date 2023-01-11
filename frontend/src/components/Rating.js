@@ -19,11 +19,13 @@ const Rating = props => {
 
         if (!isLiked) {
           updateLike(true);
-          like = 1;
+          if (like === 1) {like = 0}
+          else {like = 1}
           
         } else {
           updateLike(false);
-          like = -1;
+          if (like === -1) {like = 0}
+          else {like = -1}
           
         };
 
