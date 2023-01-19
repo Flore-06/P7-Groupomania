@@ -1,3 +1,6 @@
+const mongoose = require('mongoose');
+const User = require('../models/User');
+
 // Appel du modèle du post
 const Post = require("../models/Post");
 // Appel du fs (filesystem) qui permet d'aller dans les fichiers
@@ -6,9 +9,11 @@ const fs = require('fs');
 
 // Accéder à tous les posts
 exports.getAllPost = (req, res, next) => {
-    Post.find({}).populate('user')
+  
+  Post.find({}).populate('userId')
       .exec(function (err, posts) {
         if (err) res.status(400).json({ err });
+        console.log('est passé par là');
         console.log(posts);
         res.status(200).json(posts);
       });
@@ -28,32 +33,41 @@ exports.getOnePost = (req, res, next) => {
 // Créer un post
 exports.createPost = (req, res, next) => {
   let image = "none";
+  console.log(req.body.email);
+  const user =  User.findOne({ email: req.body.email })
+  .then(user => {
+      if (!user) {
+          return res.status(401).json({ error: 'Utilisateur non trouvé !' });
+      }
+      if (req.file) {
+        image = `${req.protocol}://${req.get('host')}/images/${req.file.filename}`;
+    }
+      /*const postObject = JSON.parse(req.body.post);
+      delete postObject._id;
+      delete postObject._userId;
+      console.log(postObject);*/
+      console.log(req.body);
+      const post = new Post({
+          message : req.body.message,
+          imageUrl: image,
+          userId: user._id,
+          /*userName: req.body.userName,
+          userSurname: req.body.userSurname,
+          publishedDate: req.body.publishedDate,*/
+          likes: 0,
+          dislikes: 0,
+          usersLiked: [' '],
+          usersdisLiked: [' '],
+      });
+    
+      // Publier un nouveau post
+      post.save()
+      .then(() => { res.status(201).json({message: 'Post publié !'})})
+      .catch(error => { res.status(400).json( { error })})
+  })
+  .catch(error => res.status(500).json({ error }));
 
-  if (req.file) {
-    image = `${req.protocol}://${req.get('host')}/images/${req.file.filename}`;
-}
-  /*const postObject = JSON.parse(req.body.post);
-  delete postObject._id;
-  delete postObject._userId;
-  console.log(postObject);*/
-  console.log(req.body);
-  const post = new Post({
-      message : req.body.message,
-      imageUrl: image,
-      user: req.body.user,
-      userName: req.body.userName,
-      userSurname: req.body.userSurname,
-      /*publishedDate: req.body.publishedDate,*/
-      likes: 0,
-      dislikes: 0,
-      usersLiked: [' '],
-      usersdisLiked: [' '],
-  });
-
-  // Publier un nouveau post
-  post.save()
-  .then(() => { res.status(201).json({message: 'Post publié !'})})
-  .catch(error => { res.status(400).json( { error })})
+  
 };
 
 // Modifier un post
