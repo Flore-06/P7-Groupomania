@@ -7,20 +7,25 @@ const Post = require("../models/Post");
 const fs = require('fs');
 
 
-// Accéder à tous les posts
+// Accéder à toutes les posts
 exports.getAllPost = (req, res, next) => {
-  
-  Post.find({}).populate('userId')
-      .exec(function (err, posts) {
-        if (err) res.status(400).json({ err });
-        console.log('est passé par là');
-        console.log(posts);
-        res.status(200).json(posts);
-      });
-      /*.then((posts) => { 
-        console.log(posts);
+  User.find()
+    .then((user) => {
+      Post.find()
+        .then((posts) => {
+          res.status(200).json({user, posts});
+        })
+      })
+    .catch((error) => res.status(400).json({ error }));
+
+  /*Post.find()
+    .then((posts) => {
+      User.find()
+      .then((user) => {
         res.status(200).json(posts);})
-      .catch((error) => res.status(400).json({ error }));*/
+      })
+      res.status(200).json(posts);})
+    .catch((error) => res.status(400).json({ error }));*/
 };
 
 // Accéder à un post particulier
@@ -34,14 +39,8 @@ exports.getOnePost = (req, res, next) => {
 exports.createPost = (req, res, next) => {
   let image = "none";
   console.log(req.body.email);
-  const user =  User.findOne({ email: req.body.email })
-  .then(user => {
-      if (!user) {
-          return res.status(401).json({ error: 'Utilisateur non trouvé !' });
-      }
-      if (req.file) {
-        image = `${req.protocol}://${req.get('host')}/images/${req.file.filename}`;
-    }
+  
+  
       /*const postObject = JSON.parse(req.body.post);
       delete postObject._id;
       delete postObject._userId;
@@ -50,7 +49,7 @@ exports.createPost = (req, res, next) => {
       const post = new Post({
           message : req.body.message,
           imageUrl: image,
-          userId: user._id,
+          userId: req.body.userId,
           /*userName: req.body.userName,
           userSurname: req.body.userSurname,
           publishedDate: req.body.publishedDate,*/
@@ -64,8 +63,6 @@ exports.createPost = (req, res, next) => {
       post.save()
       .then(() => { res.status(201).json({message: 'Post publié !'})})
       .catch(error => { res.status(400).json( { error })})
-  })
-  .catch(error => res.status(500).json({ error }));
 
   
 };

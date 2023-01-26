@@ -28,7 +28,7 @@ const PublishPost = () => {
     });*/
 
     const [loadPosts, setLoadPost]=useState();
-
+    
 
     const fetchPosts = async (e) => {
         try {
@@ -40,7 +40,8 @@ const PublishPost = () => {
                 }
             );
 
-            const posts = response.data;
+            const posts = response.data.posts;
+            const user = response.data.user;
 
             setLoadPost(posts);
             //console.log(JSON.stringify(response?.data));
@@ -76,7 +77,12 @@ const PublishPost = () => {
 
     return (
         <section className="posts bg-light-grey">
-            {loadPosts?.map((post) => 
+            {loadPosts?.map((post) => {
+                for (let i=0; i<user.length; i++){
+
+                }
+            
+                
 
                 <div className="post">
                     <div>
@@ -163,7 +169,7 @@ const PublishPost = () => {
                         </div>
                     </div>                      
                 </div>
-
+            }
             )}
         </section>
 
