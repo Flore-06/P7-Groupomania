@@ -41,7 +41,6 @@ const PublishPost = () => {
             );
 
             const posts = response.data.posts;
-            const user = response.data.user;
 
             setLoadPost(posts);
             //console.log(JSON.stringify(response?.data));
@@ -77,12 +76,8 @@ const PublishPost = () => {
 
     return (
         <section className="posts bg-light-grey">
-            {loadPosts?.map((post) => {
-                for (let i=0; i<user.length; i++){
-
-                }
+            {loadPosts?.map((post) =>
             
-                
 
                 <div className="post">
                     <div>
@@ -123,11 +118,19 @@ const PublishPost = () => {
                                 
                                 {/*<li className="texte-publi" key={post.message}>{post.message}</li>*/}
                                 <p className="texte-publi">{post.message}</p>
-                                <img 
+                                
+                                
+                                {
+                                post.imageUrl !== "none" && 
+                                    <img 
                                     src={post.imageUrl}
                                     alt="évènement"
                                     className="post-image"
                                 ></img>
+                                
+                                }
+                                
+
 
                             </div>
                         </div>
@@ -169,7 +172,7 @@ const PublishPost = () => {
                         </div>
                     </div>                      
                 </div>
-            }
+            
             )}
         </section>
 

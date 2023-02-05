@@ -7,13 +7,16 @@ const Post = require("../models/Post");
 const fs = require('fs');
 
 
-// Accéder à toutes les posts
+// Accéder à tous les posts
 exports.getAllPost = (req, res, next) => {
   User.find()
     .then((user) => {
       Post.find()
         .then((posts) => {
-          res.status(200).json({user, posts});
+
+        
+        
+          res.status(200).json({posts});
         })
       })
     .catch((error) => res.status(400).json({ error }));
@@ -50,9 +53,9 @@ exports.createPost = (req, res, next) => {
           message : req.body.message,
           imageUrl: image,
           userId: req.body.userId,
-          /*userName: req.body.userName,
+          userName: req.body.userName,
           userSurname: req.body.userSurname,
-          publishedDate: req.body.publishedDate,*/
+          //publishedDate: req.body.publishedDate,
           likes: 0,
           dislikes: 0,
           usersLiked: [' '],

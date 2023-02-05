@@ -10,9 +10,9 @@ const postSchema = mongoose.Schema({
     ref: 'User'
   }],*/
   userId: { type: String, required: true },
-  /*userName: { type: String, required: true },
+  userName: { type: String, required: true },
   userSurname: { type: String, required: true },
-  publishedDate,*/
+  //publishedDate,
   message: { type: String, required: true },
   imageUrl: { type: String, required: false },
   likes: { type: Number },
