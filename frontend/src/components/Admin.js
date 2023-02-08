@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import { Routes, Route } from 'react-router-dom';
 import Header from '../components/Header';
@@ -35,6 +35,10 @@ const Admin = () => {
         }
     }
 
+    useEffect(() => {
+        fetchUsers(); 
+    }, []);
+
     const [image, setImage] = useState('');
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -55,6 +59,9 @@ const Admin = () => {
             <Routes>
                 <Route path="*" element={<Header/>} />
             </Routes>
+
+            {loadUsers?.map((admin) =>
+            
 
             <section className="bg-light-grey section-bienvenue">
                 <h1 className="form-title">Page administrateur</h1>
@@ -82,6 +89,7 @@ const Admin = () => {
                                 onChange={(e) => setImage(e.target.files[0])}
                             />
                         </label>
+                        <p className="user-name" id="user-name-posted">{admin.userName} {admin.userSurname}</p>
 
                         <div className="form-group has-feedback">
                             <label htmlFor="username">Prénom</label>
@@ -185,9 +193,10 @@ const Admin = () => {
                     </div>
 
       </form>
-
+            
                 
             </section>
+            )}
 
         </main>
 
