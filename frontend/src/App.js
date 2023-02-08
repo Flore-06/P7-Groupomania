@@ -34,6 +34,7 @@ function App() {
         <Route path="create-comment" element={<CreateComment />} />
         <Route path="publish-comment" element={<PublishComment />} />
         <Route path="unauthorized" element={<Unauthorized />} />
+        <Route path="profil-user" element={<Admin />} />
 
         {/* we want to protect these routes */}
         <Route path="/" element={<Home />} />

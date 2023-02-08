@@ -68,6 +68,27 @@ img {
     height: 2.1rem;
 }
 
+.admin-image {
+    width: 7rem;
+    height: 7rem;
+    border-radius: 100%;
+}
+
+.admin-form {
+    align-items: center;
+}
+
+.card-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
 
 
 .navbar {
