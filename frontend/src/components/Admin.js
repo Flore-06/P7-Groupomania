@@ -12,23 +12,32 @@ const LOAD_USER_URL = '/auth';
 
 const Admin = () => {
 
-    const [loadUsers, setLoadUser]=useState();
+    const [username, setUsername] = useState('');
+    const [firstname, setFirstname] = useState('');
+    const [userImg, setImgname] = useState('');
+
+    /*const handleChange(event) => {
+        setUsername(event.currentTarget.value);
+    };*/
+
     const fetchUsers = async (e) => {
         try {
             const userId = localStorage.getItem('userId');
             const url = LOAD_USER_URL + '/' + userId;
-            const response = await axios.get(LOAD_USER_URL,
+            const response = await axios.get(url,
                 {
                     headers: { 'Content-Type': 'application/json' },
                     withCredentials: true
                 }
             );
 
-            const users = response.data.users;
+            const user = response.data;
 
-            setLoadUser(users);
             //console.log(JSON.stringify(response?.data));
-            console.log(users);
+            console.log(user);
+            setUsername(user.surname);
+            setFirstname(user.name);
+            setImgname(user.image);
         
         } catch (err) {
             console.log(err);
@@ -60,7 +69,7 @@ const Admin = () => {
                 <Route path="*" element={<Header/>} />
             </Routes>
 
-            {loadUsers?.map((admin) =>
+            
             
 
             <section className="bg-light-grey section-bienvenue">
@@ -82,6 +91,7 @@ const Admin = () => {
                             </div>
                             
                             <input
+                                value={userImg}
                                 type="file"
                                 id="image"
                                 className="default-css-add-file"
@@ -89,12 +99,12 @@ const Admin = () => {
                                 onChange={(e) => setImage(e.target.files[0])}
                             />
                         </label>
-                        <p className="user-name" id="user-name-posted">{admin.userName} {admin.userSurname}</p>
+                        <p className="user-name" id="user-name-posted">{firstname} {username}</p>
 
                         <div className="form-group has-feedback">
                             <label htmlFor="username">Prénom</label>
                             <input
-                            //value={values.first_name}
+                            value={firstname}
                             type="text"
                             /*className={
                                 errors.first_name && touched.first_name
@@ -115,7 +125,7 @@ const Admin = () => {
                             <label htmlFor="last_name">Nom</label>
                             <input
                             //onChange={handleChange}
-                            //value={values.last_name}
+                            value={username}
                             type="text"
                             /*className={
                                 errors.last_name && touched.last_name
@@ -196,7 +206,7 @@ const Admin = () => {
             
                 
             </section>
-            )}
+            
 
         </main>
 
