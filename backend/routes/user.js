@@ -7,6 +7,9 @@ const auth = require('../middleware/auth');
 // Appel du routeur
 const router = express.Router();
 
+// Appel muter pour l'ajout d'images
+const multer = require('../middleware/multer-config');
+
 // Import de la logique des routes
 const userCtrl = require('../controllers/user');
 
@@ -14,6 +17,7 @@ const userCtrl = require('../controllers/user');
 router.post('/signup', userCtrl.signup);
 router.post('/login', userCtrl.login);
 router.get('/:id', /*auth,*/ userCtrl.getOneUser);
+router.post('/infos/:id', multer, userCtrl.modifyUser );
 
 // Exporter le routeur
 module.exports = router;

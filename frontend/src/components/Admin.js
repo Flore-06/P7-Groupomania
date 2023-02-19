@@ -9,6 +9,7 @@ import axios from '../api/axios';
 
 //const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
 const LOAD_USER_URL = '/auth';
+const ADMIN_UPDATE_USER_INFOS_URL = '/auth/infos';
 
 const Admin = () => {
 
@@ -52,14 +53,38 @@ const Admin = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
     
+        const userId = localStorage.getItem('userId');
+        const url = ADMIN_UPDATE_USER_INFOS_URL + '/' + userId;
         const formData = new FormData();
+    
+        
             
-            //formData.append("userId", JSON.stringify(userId));
-            //formData.append("userName", JSON.stringify(userName));
-            //formData.append("userSurname", JSON.stringify(userSurname));
-            /*formData.append("publishedDate", JSON.stringify(publishedDate));*/
-            //formData.append("message", JSON.stringify(message));
+            formData.append("userId", JSON.stringify(userId));
+            formData.append("userName", JSON.stringify(firstname));
+            formData.append("userSurname", JSON.stringify(username));
             formData.append("image", image);
+
+            console.log(Object.fromEntries(formData));
+
+            
+
+            try {
+
+                const response = await axios.post(url,
+                    formData,
+                    {
+                        headers: { "Content-Type": "multipart/form-data" },
+                        
+                        withCredentials: true,
+                    }
+                );
+                console.log(JSON.stringify(response?.data));
+                //console.log(JSON.stringify(response));
+            
+                
+            } catch (err) {
+                console.log(err);
+            }
     }
 
 
@@ -104,7 +129,7 @@ const Admin = () => {
                         <div className="form-group has-feedback">
                             <label htmlFor="username">Prénom</label>
                             <input
-                            value={firstname}
+                            value={firstname || ''}
                             type="text"
                             /*className={
                                 errors.first_name && touched.first_name
@@ -113,6 +138,7 @@ const Admin = () => {
                             }*/
                             id="prenom"
                             placeholder="Changez ici le prénom"
+                            onChange={(e) => setFirstname(e.target.value)}
                             />
                             {/*errors.first_name && touched.first_name ? (
                             <small id="passwordHelp" class="text-danger">
@@ -125,7 +151,7 @@ const Admin = () => {
                             <label htmlFor="last_name">Nom</label>
                             <input
                             //onChange={handleChange}
-                            value={username}
+                            value={username || ''}
                             type="text"
                             /*className={
                                 errors.last_name && touched.last_name
@@ -134,6 +160,7 @@ const Admin = () => {
                             }*/
                             id="nom"
                             placeholder="Changez ici le nom"
+                            onChange={(e) => setUsername(e.target.value)}
                             />
                             {/*errors.last_name && touched.last_name ? (
                             <small id="passwordHelp" class="text-danger">

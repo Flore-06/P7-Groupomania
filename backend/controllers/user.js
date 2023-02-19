@@ -91,3 +91,31 @@ exports.getOneUser = (req, res, next) => {
       .then((user) => { res.status(200).json(user);})
       .catch((error) => res.status(400).json({ error }));
 };
+
+ // Mettre à jour un user particulier
+ exports.modifyUser = (req, res, next) => {
+    const name = req.body.userName;
+    const surname = req.body.userSurname;
+    console.log(name);
+    console.log(surname);
+    console.log(req.body);
+    
+
+
+    User.findOne({ _id: req.params.id })
+    
+      .then((user) => { 
+        if (user._id!= req.auth.userId) {
+            res.status(401).json({ message : 'Not authorized'});
+        } 
+
+        // Si id est le même : peut modifier
+        else {
+            console.log("est passé par là");
+            User.updateOne({ _id: req.params.id}, {$set: {name: name}})
+            .then(() => res.status(200).json({message : 'User modifié !'}))
+            .catch(error => res.status(401).json({ error }));
+        }
+    })
+      .catch((error) => res.status(400).json({ error }));
+};
