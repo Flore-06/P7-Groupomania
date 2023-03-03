@@ -36,6 +36,7 @@ exports.signup = (req, res, next) => {
           //_id: new mongoose.Types.ObjectId(),
           name: req.body.name,
           surname: req.body.surname,
+          imageUrl: `${req.protocol}://${req.get('host')}/images/default-user-icon.png`,
           email: req.body.email,
           password: hash
         });
@@ -96,26 +97,29 @@ exports.getOneUser = (req, res, next) => {
  exports.modifyUser = (req, res, next) => {
     const name = req.body.userName;
     const surname = req.body.userSurname;
+    const imageUrl = `${req.protocol}://${req.get('host')}/images/${req.file.filename}`;
     console.log(name);
     console.log(surname);
-    console.log(req.body);
+    console.log(imageUrl);
     
 
 
     User.findOne({ _id: req.params.id })
     
       .then((user) => { 
-        if (user._id!= req.auth.userId) {
+        console.log("est passé par ici");
+        console.log(user._id);
+        /*if (user._id!= req.auth.userId) {
             res.status(401).json({ message : 'Not authorized'});
-        } 
+        } */
 
         // Si id est le même : peut modifier
-        else {
+        //else {
             console.log("est passé par là");
-            User.updateOne({ _id: req.params.id}, {$set: {name: name}})
+            User.updateOne({ _id: req.params.id}, {$set: {name: name, surname: surname, imageUrl: imageUrl}})
             .then(() => res.status(200).json({message : 'User modifié !'}))
             .catch(error => res.status(401).json({ error }));
-        }
+        //}
     })
       .catch((error) => res.status(400).json({ error }));
 };
