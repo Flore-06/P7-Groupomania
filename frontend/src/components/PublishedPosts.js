@@ -136,10 +136,10 @@ const PublishPost = () => {
                         </div>
                         
                         
-                        <div className="post-likes">
+                        {/*<div className="post-likes">
                         <FontAwesomeIcon icon={faThumbsUp}/>
                         <FontAwesomeIcon icon={faThumbsDown} className="icone-a-droite"/>
-                        </div>
+                            </div>*/}
 
                         <Routes>
                             <Route path="*" element={<Rating userPost={post._id} />} />
