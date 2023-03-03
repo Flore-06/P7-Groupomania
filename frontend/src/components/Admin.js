@@ -16,10 +16,10 @@ const Admin = () => {
     const [username, setUsername] = useState('');
     const [firstname, setFirstname] = useState('');
     const [userImg, setImgname] = useState('');
+    
+    // CE QUE J'AI VOULU METTRE
+    //const [userImg, setImgadmin] = useState('');
 
-    /*const handleChange(event) => {
-        setUsername(event.currentTarget.value);
-    };*/
 
     const fetchUsers = async (e) => {
         try {
@@ -34,11 +34,13 @@ const Admin = () => {
 
             const user = response.data;
 
-            //console.log(JSON.stringify(response?.data));
             console.log(user);
             setUsername(user.surname);
             setFirstname(user.name);
             setImgname(user.image);
+
+            // CE QUE J'AI VOULU METTRE
+            //setImgadmin(user.imageUrl);
         
         } catch (err) {
             console.log(err);
@@ -49,7 +51,9 @@ const Admin = () => {
         fetchUsers(); 
     }, []);
 
+    // CE QUE J'AI VOULU RETIRER
     const [image, setImage] = useState('');
+
     const handleSubmit = async (e) => {
         e.preventDefault();
     
@@ -63,6 +67,10 @@ const Admin = () => {
             formData.append("userName", JSON.stringify(firstname));
             formData.append("userSurname", JSON.stringify(username));
             formData.append("image", image);
+            
+            // Ci-dessous "image" correspond à quoi ? puisque dans mon controller user.js la personne ne donne pas de photo, c'est une photo par défaut qui est mise
+            // CE QUE J'AI VOULU METTRE
+            //formData.append("image", userImg);
 
             console.log(Object.fromEntries(formData));
 
@@ -79,7 +87,6 @@ const Admin = () => {
                     }
                 );
                 console.log(JSON.stringify(response?.data));
-                //console.log(JSON.stringify(response));
             
                 
             } catch (err) {
@@ -104,6 +111,16 @@ const Admin = () => {
                     
                     <div className="card-body">
                     <input type="hidden" name="id" /*value={values._id}*/ />
+                        {/*
+                        // CE QUE J'AI VOULU METTRE
+                            userImg !== "none" && 
+                                <img 
+                                src={userImg}
+                                alt="admin"
+                                className="admin-image"
+                            ></img>     
+    */}
+
                         <img 
                             src="/default-user-icon.png"
                             alt="icone admin"
@@ -122,6 +139,9 @@ const Admin = () => {
                                 className="default-css-add-file"
                                 change="onFileChange"
                                 onChange={(e) => setImage(e.target.files[0])}
+
+                                // CE QUE J'AI VOULU METTRE
+                                //onChange={(e) => setImgadmin(e.target.files[0])}
                             />
                         </label>
                         <p className="user-name" id="user-name-posted">{firstname} {username}</p>
