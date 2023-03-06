@@ -13,12 +13,13 @@ const ADMIN_UPDATE_USER_INFOS_URL = '/auth/infos';
 
 const Admin = () => {
 
+    const [loadUser, setLoadUser] = useState('');
     const [username, setUsername] = useState('');
     const [firstname, setFirstname] = useState('');
-    const [userImg, setImgname] = useState('');
+    //const [userImg, setImgname] = useState('');
     
     // CE QUE J'AI VOULU METTRE
-    //const [userImg, setImgadmin] = useState('');
+    const [userImg, setImgadmin] = useState('');
 
 
     const fetchUsers = async (e) => {
@@ -35,12 +36,16 @@ const Admin = () => {
             const user = response.data;
 
             console.log(user);
-            setUsername(user.surname);
-            setFirstname(user.name);
-            setImgname(user.image);
+            setLoadUser(user);
 
+            //setUsername(user.surname);
+            //setFirstname(user.name);
+            //setImgname(user.image);
+
+            //const URL = window.URL || window.webkitURL;
+            //const blobUrl = URL.createObjectURL(user.imageUrl);
             // CE QUE J'AI VOULU METTRE
-            //setImgadmin(user.imageUrl);
+            //setImgadmin(blobUrl);
         
         } catch (err) {
             console.log(err);
@@ -52,7 +57,7 @@ const Admin = () => {
     }, []);
 
     // CE QUE J'AI VOULU RETIRER
-    const [image, setImage] = useState('');
+    //const [image, setImage] = useState('');
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -66,11 +71,11 @@ const Admin = () => {
             formData.append("userId", JSON.stringify(userId));
             formData.append("userName", JSON.stringify(firstname));
             formData.append("userSurname", JSON.stringify(username));
-            formData.append("image", image);
+            //formData.append("image", image);
             
             // Ci-dessous "image" correspond à quoi ? puisque dans mon controller user.js la personne ne donne pas de photo, c'est une photo par défaut qui est mise
             // CE QUE J'AI VOULU METTRE
-            //formData.append("image", userImg);
+            formData.append("image", userImg);
 
             console.log(Object.fromEntries(formData));
 
@@ -97,6 +102,7 @@ const Admin = () => {
 
     return (
         <main className="light-background">
+            
             <Routes>
                 <Route path="*" element={<Header/>} />
             </Routes>
@@ -105,21 +111,23 @@ const Admin = () => {
             
 
             <section className="bg-light-grey section-bienvenue">
+            
                 <h1 className="form-title">Page administrateur</h1>
                 
                 <form onSubmit={handleSubmit} className="admin-form">
-                    
+                {loadUser?.map((user) =>
                     <div className="card-body">
                     <input type="hidden" name="id" /*value={values._id}*/ />
-                        {/*
-                        // CE QUE J'AI VOULU METTRE
-                            userImg !== "none" && 
+                        
+                        {
+                            user.userImg !== "none" && 
                                 <img 
-                                src={userImg}
+                                src={user.userImg}
                                 alt="admin"
                                 className="admin-image"
-                            ></img>     
-    */}
+                            ></img> 
+                        }    
+    
 
                         <img 
                             src="/default-user-icon.png"
@@ -133,23 +141,23 @@ const Admin = () => {
                             </div>
                             
                             <input
-                                value={userImg}
+                                value={user.userImg}
                                 type="file"
                                 id="image"
                                 className="default-css-add-file"
                                 change="onFileChange"
-                                onChange={(e) => setImage(e.target.files[0])}
+                                //onChange={(e) => setImage(e.target.files[0])}
 
                                 // CE QUE J'AI VOULU METTRE
-                                //onChange={(e) => setImgadmin(e.target.files[0])}
+                                onChange={(e) => setImgadmin(e.target.files[0])}
                             />
                         </label>
-                        <p className="user-name" id="user-name-posted">{firstname} {username}</p>
+                        <p className="user-name" id="user-name-posted">{user.firstname} {user.username}</p>
 
                         <div className="form-group has-feedback">
                             <label htmlFor="username">Prénom</label>
                             <input
-                            value={firstname || ''}
+                            value={user.firstname || ''}
                             type="text"
                             /*className={
                                 errors.first_name && touched.first_name
@@ -171,7 +179,7 @@ const Admin = () => {
                             <label htmlFor="last_name">Nom</label>
                             <input
                             //onChange={handleChange}
-                            value={username || ''}
+                            value={user.username || ''}
                             type="text"
                             /*className={
                                 errors.last_name && touched.last_name
@@ -236,7 +244,7 @@ const Admin = () => {
                                             Doit correspondre au premier mot de passe.
                     </p>*/}
                     
-                    {}
+                    
 
                     <div className="card-footer">
                     <button
@@ -248,13 +256,14 @@ const Admin = () => {
                         Mettre à jour
                     </button>
                     </div>
-
-      </form>
+                    
+                )}
+                </form>
             
-                
+            
             </section>
             
-
+                
         </main>
 
 
