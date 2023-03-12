@@ -13,13 +13,13 @@ const ADMIN_UPDATE_USER_INFOS_URL = '/auth/infos';
 
 const Admin = () => {
 
-    const [loadUser, setLoadUser] = useState('');
     const [username, setUsername] = useState('');
     const [firstname, setFirstname] = useState('');
-    //const [userImg, setImgname] = useState('');
+    const [userImg, setImgname] = useState('');
+    const [userImageFile, setImageFile] = useState('');
     
     // CE QUE J'AI VOULU METTRE
-    const [userImg, setImgadmin] = useState('');
+    //const [userImg, setImgadmin] = useState('');
 
 
     const fetchUsers = async (e) => {
@@ -36,16 +36,12 @@ const Admin = () => {
             const user = response.data;
 
             console.log(user);
-            setLoadUser(user);
+            setUsername(user.surname);
+            setFirstname(user.name);
+            setImgname(user.imageUrl);
 
-            //setUsername(user.surname);
-            //setFirstname(user.name);
-            //setImgname(user.image);
-
-            //const URL = window.URL || window.webkitURL;
-            //const blobUrl = URL.createObjectURL(user.imageUrl);
             // CE QUE J'AI VOULU METTRE
-            //setImgadmin(blobUrl);
+            //setImgadmin(user.imageUrl);
         
         } catch (err) {
             console.log(err);
@@ -57,7 +53,7 @@ const Admin = () => {
     }, []);
 
     // CE QUE J'AI VOULU RETIRER
-    //const [image, setImage] = useState('');
+    const [image, setImage] = useState('');
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -71,11 +67,11 @@ const Admin = () => {
             formData.append("userId", JSON.stringify(userId));
             formData.append("userName", JSON.stringify(firstname));
             formData.append("userSurname", JSON.stringify(username));
-            //formData.append("image", image);
+            formData.append("image", userImageFile);
             
             // Ci-dessous "image" correspond à quoi ? puisque dans mon controller user.js la personne ne donne pas de photo, c'est une photo par défaut qui est mise
             // CE QUE J'AI VOULU METTRE
-            formData.append("image", userImg);
+            //formData.append("image", userImg);
 
             console.log(Object.fromEntries(formData));
 
@@ -92,17 +88,23 @@ const Admin = () => {
                     }
                 );
                 console.log(JSON.stringify(response?.data));
+                console.log(userImg);
             
+                // Redirect to confirmation page
+                window.location.href = '/confirmation';
                 
             } catch (err) {
                 console.log(err);
             }
     }
 
+    function handleImageChange(event) {
+        setImageFile(event.target.files[0]);
+      }
+
 
     return (
         <main className="light-background">
-            
             <Routes>
                 <Route path="*" element={<Header/>} />
             </Routes>
@@ -111,26 +113,24 @@ const Admin = () => {
             
 
             <section className="bg-light-grey section-bienvenue">
-            
                 <h1 className="form-title">Page administrateur</h1>
                 
                 <form onSubmit={handleSubmit} className="admin-form">
-                {loadUser?.map((user) =>
+                    
                     <div className="card-body">
                     <input type="hidden" name="id" /*value={values._id}*/ />
-                        
-                        {
-                            user.userImg !== "none" && 
+                        {/*
+                        // CE QUE J'AI VOULU METTRE
+                            userImg !== "none" && 
                                 <img 
-                                src={user.userImg}
+                                src={userImg}
                                 alt="admin"
                                 className="admin-image"
-                            ></img> 
-                        }    
-    
+                            ></img>     
+    */}
 
                         <img 
-                            src="/default-user-icon.png"
+                            src={userImg}
                             alt="icone admin"
                             className="admin-image"
                         ></img>
@@ -141,23 +141,23 @@ const Admin = () => {
                             </div>
                             
                             <input
-                                value={user.userImg}
+                    
                                 type="file"
                                 id="image"
                                 className="default-css-add-file"
                                 change="onFileChange"
-                                //onChange={(e) => setImage(e.target.files[0])}
+                                onChange={handleImageChange}
 
                                 // CE QUE J'AI VOULU METTRE
-                                onChange={(e) => setImgadmin(e.target.files[0])}
+                                //onChange={(e) => setImgadmin(e.target.files[0])}
                             />
                         </label>
-                        <p className="user-name" id="user-name-posted">{user.firstname} {user.username}</p>
+                        <p className="user-name" id="user-name-posted">{firstname} {username}</p>
 
                         <div className="form-group has-feedback">
                             <label htmlFor="username">Prénom</label>
                             <input
-                            value={user.firstname || ''}
+                            value={firstname || ''}
                             type="text"
                             /*className={
                                 errors.first_name && touched.first_name
@@ -179,7 +179,7 @@ const Admin = () => {
                             <label htmlFor="last_name">Nom</label>
                             <input
                             //onChange={handleChange}
-                            value={user.username || ''}
+                            value={username || ''}
                             type="text"
                             /*className={
                                 errors.last_name && touched.last_name
@@ -244,7 +244,7 @@ const Admin = () => {
                                             Doit correspondre au premier mot de passe.
                     </p>*/}
                     
-                    
+                    {}
 
                     <div className="card-footer">
                     <button
@@ -256,14 +256,13 @@ const Admin = () => {
                         Mettre à jour
                     </button>
                     </div>
-                    
-                )}
-                </form>
-            
-            
-            </section>
+
+      </form>
             
                 
+            </section>
+            
+
         </main>
 
 
