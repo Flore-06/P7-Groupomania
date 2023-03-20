@@ -10,6 +10,7 @@ import axios from '../api/axios';
 //const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
 const LOAD_USER_URL = '/auth';
 const ADMIN_UPDATE_USER_INFOS_URL = '/auth/infos';
+const ADMIN_UPDATE_USER_PASSWORD_URL = '/auth/password';
 
 const Admin = () => {
 
@@ -17,6 +18,7 @@ const Admin = () => {
     const [firstname, setFirstname] = useState('');
     const [userImg, setImgname] = useState('');
     const [userImageFile, setImageFile] = useState('');
+    const [messagePassword, setMessagePassword] = useState('');
     
     // CE QUE J'AI VOULU METTRE
     //const [userImg, setImgadmin] = useState('');
@@ -39,6 +41,7 @@ const Admin = () => {
             setUsername(user.surname);
             setFirstname(user.name);
             setImgname(user.imageUrl);
+
 
             // CE QUE J'AI VOULU METTRE
             //setImgadmin(user.imageUrl);
@@ -101,6 +104,36 @@ const Admin = () => {
     function handleImageChange(event) {
         setImageFile(event.target.files[0]);
       }
+
+    const [password, setPassword] = useState('');
+    const [passwordconfirmation, setPasswordConfirmation] = useState('');
+    const  handleSubmitPassword = async (e) => {
+        e.preventDefault();
+    
+        const userId = localStorage.getItem('userId');
+        const url = ADMIN_UPDATE_USER_PASSWORD_URL + '/' + userId;
+
+            
+
+            try {
+
+                const response = await axios.post(url,
+                    JSON.stringify({ password, passwordconfirmation }),
+                    {
+                        headers: { 'Content-Type': 'application/json' },
+                        withCredentials: true
+                    }
+                );
+                console.log(JSON.stringify(response?.data));
+                setMessagePassword(response?.data.message);
+                setPassword("");
+                setPasswordConfirmation("");
+            
+                
+            } catch (err) {
+                console.log(err);
+            }
+    }
 
 
     return (
@@ -198,54 +231,6 @@ const Admin = () => {
                         </div>
                     
                     </div>
-
-                    {/*<label htmlFor="password">
-                                            Mot de passe :
-                                            <FontAwesomeIcon icon={faCheck} className={validPwd ? "valid" : "hide"} />
-                                            <FontAwesomeIcon icon={faTimes} className={validPwd || !password ? "hide" : "invalid"} />
-                                        </label>
-                                        <input
-                                            type="password"
-                                            id="password"
-                                            onChange={(e) => setPwd(e.target.value)}
-                                            value={password}
-                                            required
-                                            aria-invalid={validPwd ? "false" : "true"}
-                                            aria-describedby="pwdnote"
-                                            onFocus={() => setPwdFocus(true)}
-                                            onBlur={() => setPwdFocus(false)}
-                                        />
-                                        <p id="pwdnote" className={pwdFocus && !validPwd ? "instructions" : "offscreen"}>
-                                            <FontAwesomeIcon icon={faInfoCircle} />
-                                            8 à 24 caractères<br />
-                                            Doit contenir au moins une lettre majuscule et minuscule, un nombre et un caractère spécial.<br />
-                                            Caractères spéciaux autorisés: <span aria-label="exclamation mark">!</span> <span aria-label="at symbol">@</span> <span aria-label="hashtag">#</span> <span aria-label="dollar sign">$</span> <span aria-label="percent">%</span>
-                                        </p>
-
-
-                                        <label htmlFor="confirm_pwd">
-                                            Confirmez le mot de passe :
-                                            <FontAwesomeIcon icon={faCheck} className={validMatch && matchPwd ? "valid" : "hide"} />
-                                            <FontAwesomeIcon icon={faTimes} className={validMatch || !matchPwd ? "hide" : "invalid"} />
-                                        </label>
-                                        <input
-                                            type="password"
-                                            id="confirm_pwd"
-                                            onChange={(e) => setMatchPwd(e.target.value)}
-                                            value={matchPwd}
-                                            required
-                                            aria-invalid={validMatch ? "false" : "true"}
-                                            aria-describedby="confirmnote"
-                                            onFocus={() => setMatchFocus(true)}
-                                            onBlur={() => setMatchFocus(false)}
-                                        />
-                                        <p id="confirmnote" className={matchFocus && !validMatch ? "instructions" : "offscreen"}>
-                                            <FontAwesomeIcon icon={faInfoCircle} />
-                                            Doit correspondre au premier mot de passe.
-                    </p>*/}
-                    
-                    {}
-
                     <div className="card-footer">
                     <button
                         style={{margin: '20px 0px'}}
@@ -254,6 +239,67 @@ const Admin = () => {
                         className="btn btn-block btn-primary"
                     >
                         Mettre à jour
+                    </button>
+                    </div>
+                    </form>
+
+                    <form onSubmit={handleSubmitPassword} className="admin-form">
+
+                    <label htmlFor="password">
+                                            Mot de passe :
+                                            {/*<FontAwesomeIcon icon={faCheck} className={validPwd ? "valid" : "hide"} />
+                                            <FontAwesomeIcon icon={faTimes} className={validPwd || !password ? "hide" : "invalid"} />*/}
+                                        </label>
+                                        <input
+                                            type="password"
+                                            id="password"
+                                            onChange={(e) => setPassword(e.target.value)}
+                                            value={password}
+                                            required
+                                            
+                    
+                                        />
+
+                                        {/*<p id="pwdnote" className={pwdFocus && !validPwd ? "instructions" : "offscreen"}>
+                                            <FontAwesomeIcon icon={faInfoCircle} />
+                                            8 à 24 caractères<br />
+                                            Doit contenir au moins une lettre majuscule et minuscule, un nombre et un caractère spécial.<br />
+                                            Caractères spéciaux autorisés: <span aria-label="exclamation mark">!</span> <span aria-label="at symbol">@</span> <span aria-label="hashtag">#</span> <span aria-label="dollar sign">$</span> <span aria-label="percent">%</span>
+                        </p>*/}
+
+
+                                        <label htmlFor="confirm_pwd">
+                                            Confirmez le mot de passe :
+                                            {/*<FontAwesomeIcon icon={faCheck} className={validMatch && matchPwd ? "valid" : "hide"} />
+                                            <FontAwesomeIcon icon={faTimes} className={validMatch || !matchPwd ? "hide" : "invalid"} />*/}
+                                        </label>
+                                        <input
+                                            type="password"
+                                            id="confirm_pwd"
+                                            onChange={(e) => setPasswordConfirmation(e.target.value)}
+                                            value = {passwordconfirmation}
+                                            required
+                                            aria-describedby="confirmnote"
+                                
+                                        />
+                                        {/*<p id="confirmnote" className={matchFocus && !validMatch ? "instructions" : "offscreen"}>
+                                            <FontAwesomeIcon icon={faInfoCircle} />
+                                            Doit correspondre au premier mot de passe.
+                    </p>*/}
+                    
+                    
+                    <p>
+                        {messagePassword}
+                    </p>
+
+                    <div className="card-footer">
+                    <button
+                        style={{margin: '20px 0px'}}
+                        type="submit"
+                        //disabled={isSubmitting}
+                        className="btn btn-block btn-primary"
+                    >
+                        Mettre à jour le mot de passe
                     </button>
                     </div>
 

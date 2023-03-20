@@ -123,3 +123,52 @@ exports.getOneUser = (req, res, next) => {
     })
       .catch((error) => res.status(400).json({ error }));
 };
+
+// Mettre à jour Mot de passe
+exports.modifyPassword = (req, res, next) => {
+    let password = req.body.password;
+    console.log(password);
+    let passwordconfirmation = req.body.passwordconfirmation;
+    console.log(passwordconfirmation);
+    
+    let retour = "";
+    let message = "";
+    if (password != passwordconfirmation) {
+        retour = "pasok";
+        message = "erreur, les mots de passes ne correspondent pas"
+        return res.status(200).json({message : message, password : password})
+    }
+    else {
+        retour = "ok";
+        message = "mot de passe modifié"
+
+        User.findOne({ _id: req.params.id })
+    
+      .then((user) => { 
+        console.log("est passé par ici");
+        console.log(user._id);
+        /*if (user._id!= req.auth.userId) {
+            res.status(401).json({ message : 'Not authorized'});
+        } */
+
+        // Si id est le même : peut modifier
+        //else {
+            console.log("est passé par là");
+            bcrypt.hash(req.body.password, 10)
+            .then(hash => {
+                User.updateOne({ _id: req.params.id}, {$set: {password: hash}})
+            .then(() => res.status(200).json({message : message, password : password}))
+            .catch(error => res.status(401).json({ error }));
+              })
+              .catch(error => res.status(500).json({ error }));
+            
+        //}
+        })
+        .catch((error) => res.status(400).json({ error }));
+    }
+    
+
+    
+
+
+}

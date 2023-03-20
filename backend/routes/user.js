@@ -18,6 +18,7 @@ router.post('/signup', userCtrl.signup);
 router.post('/login', userCtrl.login);
 router.get('/:id', /*auth,*/ userCtrl.getOneUser);
 router.post('/infos/:id', multer, userCtrl.modifyUser );
+router.post('/password/:id', multer, userCtrl.modifyPassword );
 
 // Exporter le routeur
 module.exports = router;
