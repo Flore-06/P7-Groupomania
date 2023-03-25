@@ -14,6 +14,8 @@ var passwordValidator = require('password-validator');
 
 // Enregistrer de nouveaux utilisateurs
 exports.signup = (req, res, next) => {
+    console.log(req.body.name);
+    console.log(req.body.surname);
     // Create a schema
     var schema = new passwordValidator();
 
@@ -26,7 +28,7 @@ exports.signup = (req, res, next) => {
     .has().digits(2)                                // Must have at least 2 digits
     .has().not().spaces()                           // Should not have spaces
     .is().not().oneOf(['Passw0rd', 'Password123']); // Blacklist these values
-
+    
 
     // Inscription faite si propriétés respectées
     if (schema.validate(req.body.password) == true) {
@@ -96,11 +98,26 @@ exports.getOneUser = (req, res, next) => {
  // Mettre à jour un user particulier
  exports.modifyUser = (req, res, next) => {
     const name = req.body.userName;
+    name.replace(/"/g, '');
     const surname = req.body.userSurname;
-    const imageUrl = `${req.protocol}://${req.get('host')}/images/${req.file.filename}`;
+    surname.replace(/"/g, '');
+    
     console.log(name);
     console.log(surname);
-    console.log(imageUrl);
+    
+    let obj;
+
+    if (req.file === undefined) {
+        obj = {name: name, surname: surname};
+        console.log("est passé par là");
+    }
+
+    else {
+        const imageUrl = `${req.protocol}://${req.get('host')}/images/${req.file.filename}`;
+        console.log(imageUrl);
+        obj = {name: name, surname: surname, imageUrl: imageUrl};
+        console.log("est passé par ici");
+    }
     
 
 
@@ -116,7 +133,7 @@ exports.getOneUser = (req, res, next) => {
         // Si id est le même : peut modifier
         //else {
             console.log("est passé par là");
-            User.updateOne({ _id: req.params.id}, {$set: {name: name, surname: surname, imageUrl: imageUrl}})
+            User.updateOne({ _id: req.params.id}, {$set: obj})
             .then(() => res.status(200).json({message : 'User modifié !'}))
             .catch(error => res.status(401).json({ error }));
         //}

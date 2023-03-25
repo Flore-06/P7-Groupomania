@@ -20,8 +20,6 @@ const Admin = () => {
     const [userImageFile, setImageFile] = useState('');
     const [messagePassword, setMessagePassword] = useState('');
     
-    // CE QUE J'AI VOULU METTRE
-    //const [userImg, setImgadmin] = useState('');
 
 
     const fetchUsers = async (e) => {
@@ -38,13 +36,11 @@ const Admin = () => {
             const user = response.data;
 
             console.log(user);
-            setUsername(user.surname);
-            setFirstname(user.name);
+            setUsername(user.surname.replace(/"/g, ''));
+            setFirstname(user.name.replace(/"/g, ''));
             setImgname(user.imageUrl);
 
 
-            // CE QUE J'AI VOULU METTRE
-            //setImgadmin(user.imageUrl);
         
         } catch (err) {
             console.log(err);
@@ -56,7 +52,7 @@ const Admin = () => {
     }, []);
 
     // CE QUE J'AI VOULU RETIRER
-    const [image, setImage] = useState('');
+    //const [image, setImage] = useState('');
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -72,9 +68,6 @@ const Admin = () => {
             formData.append("userSurname", JSON.stringify(username));
             formData.append("image", userImageFile);
             
-            // Ci-dessous "image" correspond à quoi ? puisque dans mon controller user.js la personne ne donne pas de photo, c'est une photo par défaut qui est mise
-            // CE QUE J'AI VOULU METTRE
-            //formData.append("image", userImg);
 
             console.log(Object.fromEntries(formData));
 

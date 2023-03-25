@@ -40,17 +40,26 @@ exports.getOnePost = (req, res, next) => {
 
 // Créer un post
 exports.createPost = (req, res, next) => {
-  let image = "none";
-  console.log(req.body.email);
-  
-  
-      /*const postObject = JSON.parse(req.body.post);
-      delete postObject._id;
-      delete postObject._userId;
-      console.log(postObject);*/
-      console.log(req.body);
-      const post = new Post({
-          message : req.body.message,
+  let obj;
+
+    if (req.file === undefined) {
+        obj = {message : req.body.message,
+          
+          userId: req.body.userId,
+          userName: req.body.userName,
+          userSurname: req.body.userSurname,
+          //publishedDate: req.body.publishedDate,
+          likes: 0,
+          dislikes: 0,
+          usersLiked: [' '],
+          usersdisLiked: [' '],};
+        console.log("est passé par là");
+    }
+
+    else {
+        const imageUrl = `${req.protocol}://${req.get('host')}/images/${req.file.filename}`;
+        console.log(imageUrl);
+        obj = {message : req.body.message,
           imageUrl: image,
           userId: req.body.userId,
           userName: req.body.userName,
@@ -59,8 +68,19 @@ exports.createPost = (req, res, next) => {
           likes: 0,
           dislikes: 0,
           usersLiked: [' '],
-          usersdisLiked: [' '],
-      });
+          usersdisLiked: [' '],};
+        console.log("est passé par ici");
+    }
+
+  console.log(req.body.email);
+  
+  
+      /*const postObject = JSON.parse(req.body.post);
+      delete postObject._id;
+      delete postObject._userId;
+      console.log(postObject);*/
+      console.log(req.body);
+      const post = new Post(obj);
     
       // Publier un nouveau post
       post.save()
