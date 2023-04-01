@@ -87,7 +87,7 @@ const Admin = () => {
                 console.log(userImg);
             
                 // Redirect to confirmation page
-                window.location.href = '/confirmation';
+                window.location.href = '/confirmation-modification-profil';
                 
             } catch (err) {
                 console.log(err);
@@ -131,9 +131,9 @@ const Admin = () => {
 
     return (
         <main className="light-background">
-            <Routes>
+            {/*<Routes>
                 <Route path="*" element={<Header/>} />
-            </Routes>
+    </Routes>*/}
 
             
             

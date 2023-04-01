@@ -7,9 +7,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import axios from '../api/axios';
 const CREATE_POST_URL = '/posts';
+const LOAD_USER_URL = '/auth';
 
 const CreatePost = () => {
     
+    
+
     const navigate = useNavigate();
     const location = useLocation();
     /*const from = location.state?.from?.pathname || "/create-post";*/
@@ -17,13 +20,40 @@ const CreatePost = () => {
 
     const [message, setMessage] = useState('');
     const [image, setImage] = useState('');
-
+    
+    const [userName, setUsername] = useState('');
+    const [userSurname, setFirstname] = useState('');
+    const [userImg, setImgname] = useState('');
     const userId = localStorage.getItem('userId');
-    //let userImg  = localStorage.getItem('userImg');
-    let userName = localStorage.getItem('userName');
-    let userSurname = localStorage.getItem('userSurname');
-    console.log("est passé par là");
-    console.log(userName);
+
+    const fetchUsers = async (e) => {
+        try {
+            
+            const url = LOAD_USER_URL + '/' + userId;
+            const response = await axios.get(url,
+                {
+                    headers: { 'Content-Type': 'application/json' },
+                    withCredentials: true
+                }
+            );
+
+            const user = response.data;
+
+            console.log(user);
+            setUsername(user.surname.replace(/"/g, ''));
+            setFirstname(user.name.replace(/"/g, ''));
+            setImgname(user.imageUrl);
+
+
+        
+        } catch (err) {
+            console.log(err);
+        }
+    }
+
+    useEffect(() => {
+        fetchUsers(); 
+    }, []);
 
     useEffect(() => {
 
@@ -78,13 +108,14 @@ const CreatePost = () => {
                     <form onSubmit={handleSubmit}>
                         <div className="post-info create-post__message">
                             <div className="post-info__user">
-                                <img 
-                                    src="/default-user-icon.png"
-                                    alt="icone utilisateur par défaut"
-                                    className="user-default-image"
-                                ></img>
+                            <img 
+                            src={userImg}
+                            alt="icone admin"
+                            className="user-default-image"
+                        ></img>
+                        
                                 <div className="post__name-date">
-                                    <p className="user-name" id="user-name-create-post">Prénom Nom</p>
+                                    <p className="user-name" id="user-name-create-post"></p>
                                 </div>                                
                             </div>
 

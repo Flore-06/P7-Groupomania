@@ -5,6 +5,8 @@ import Header from './components/Header';
 import Layout from './components/Layout';
 import Editor from './components/Editor';
 import Admin from './components/Admin';
+import Profil from './pages/Profil';
+import Profilajour from './components/ConfirmationModifProfil';
 import Missing from './components/Missing';
 import Unauthorized from './components/Unauthorized';
 import RequireAuth from './components/RequireAuth';
@@ -34,7 +36,9 @@ function App() {
         <Route path="create-comment" element={<CreateComment />} />
         <Route path="publish-comment" element={<PublishComment />} />
         <Route path="unauthorized" element={<Unauthorized />} />
-        <Route path="profil-user" element={<Admin />} />
+        
+        <Route path="profil-user" element={<Profil />} />
+        <Route path="confirmation-modification-profil" element={<Profilajour />} />
 
         {/* we want to protect these routes */}
         <Route path="/" element={<Home />} />

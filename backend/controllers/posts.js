@@ -21,14 +21,6 @@ exports.getAllPost = (req, res, next) => {
       })
     .catch((error) => res.status(400).json({ error }));
 
-  /*Post.find()
-    .then((posts) => {
-      User.find()
-      .then((user) => {
-        res.status(200).json(posts);})
-      })
-      res.status(200).json(posts);})
-    .catch((error) => res.status(400).json({ error }));*/
 };
 
 // Accéder à un post particulier
@@ -40,14 +32,21 @@ exports.getOnePost = (req, res, next) => {
 
 // Créer un post
 exports.createPost = (req, res, next) => {
+  const message = req.body.message;
+  message.replace(/"/g, '');
+  const name = req.body.userName;
+  name.replace(/"/g, '');
+  const surname = req.body.userSurname;
+  surname.replace(/"/g, '');
+  
   let obj;
 
     if (req.file === undefined) {
-        obj = {message : req.body.message,
-          
+        obj = {
+          message : req.body.message,
           userId: req.body.userId,
-          userName: req.body.userName,
-          userSurname: req.body.userSurname,
+          userName: name,
+          userSurname: surname,
           //publishedDate: req.body.publishedDate,
           likes: 0,
           dislikes: 0,
