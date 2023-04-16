@@ -22,7 +22,7 @@ const CreatePost = () => {
     const [image, setImage] = useState('');
     
     const [userName, setUsername] = useState('');
-    const [userSurname, setFirstname] = useState('');
+    const [userSurname, setUsersurname] = useState('');
     const [userImg, setImgname] = useState('');
     const userId = localStorage.getItem('userId');
 
@@ -40,8 +40,8 @@ const CreatePost = () => {
             const user = response.data;
 
             console.log(user);
-            setUsername(user.surname.replace(/"/g, ''));
-            setFirstname(user.name.replace(/"/g, ''));
+            setUsername(user.name.replace(/"/g, ''));
+            setUsersurname(user.surname.replace(/"/g, ''));
             setImgname(user.imageUrl);
 
 
@@ -59,6 +59,7 @@ const CreatePost = () => {
 
         let nomPrenom = document.getElementById('user-name-create-post').innerHTML= userName + " " + userSurname;
         console.log(nomPrenom);
+        console.log(userName);
     });
 
 
