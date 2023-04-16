@@ -5,13 +5,13 @@ const { Schema } = mongoose;
 
 // Créer un schéma de données avec les informations nécessaires pour chaque post
 const postSchema = mongoose.Schema({
-  /*user: [{
+  user: [{
     type: Schema.Types.ObjectId,
     ref: 'User'
-  }],*/
-  userId: { type: String, required: true },
-  userName: { type: String, required: true },
-  userSurname: { type: String, required: true },
+  }],
+  //userId: { type: String, required: true },
+  //userName: { type: String, required: true },
+  //userSurname: { type: String, required: true },
   //publishedDate,
   message: { type: String, required: true },
   imageUrl: { type: String, required: false },

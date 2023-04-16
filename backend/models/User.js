@@ -12,7 +12,11 @@ const userSchema = mongoose.Schema({
   surname: { type: String, required: true },
   imageUrl: {type: String, required: false},
   email: { type: String, required: true, unique: true },
-  password: { type: String, required: true }
+  password: { type: String, required: true },
+  posts: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Post'
+  }]
 });
 
 // Appliquer l'uniqueValidator au userSchema

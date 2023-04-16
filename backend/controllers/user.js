@@ -102,6 +102,7 @@ exports.getOneUser = (req, res, next) => {
     const surname = req.body.userSurname;
     surname.replace(/"/g, '');
     
+    console.log(req.params.id);
     console.log(name);
     console.log(surname);
     

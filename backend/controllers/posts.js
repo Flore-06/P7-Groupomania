@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const {ObjectId} = require('mongodb');
 const User = require('../models/User');
 
 // Appel du modèle du post
@@ -38,15 +39,22 @@ exports.createPost = (req, res, next) => {
   name.replace(/"/g, '');
   const surname = req.body.userSurname;
   surname.replace(/"/g, '');
+  const userid = req.body.userId.replace(/"/g, '');
   
   let obj;
+
+  console.log("---"+req.body.userId+"---");
+  console.log(userid);
+
+  
+  const objectId = new ObjectId(userid); 
 
     if (req.file === undefined) {
         obj = {
           message : req.body.message,
-          userId: req.body.userId,
-          userName: name,
-          userSurname: surname,
+          user: objectId,
+          //userName: name,
+          //userSurname: surname,
           //publishedDate: req.body.publishedDate,
           likes: 0,
           dislikes: 0,
@@ -60,9 +68,9 @@ exports.createPost = (req, res, next) => {
         console.log(imageUrl);
         obj = {message : req.body.message,
           imageUrl: image,
-          userId: req.body.userId,
-          userName: req.body.userName,
-          userSurname: req.body.userSurname,
+          user: objectId,
+          //userName: req.body.userName,
+          //userSurname: req.body.userSurname,
           //publishedDate: req.body.publishedDate,
           likes: 0,
           dislikes: 0,
@@ -70,23 +78,41 @@ exports.createPost = (req, res, next) => {
           usersdisLiked: [' '],};
         console.log("est passé par ici");
     }
-
-  console.log(req.body.email);
   
   
       /*const postObject = JSON.parse(req.body.post);
       delete postObject._id;
       delete postObject._userId;
       console.log(postObject);*/
+      console.log(req.params.id);
       console.log(req.body);
+      
       const post = new Post(obj);
     
       // Publier un nouveau post
       post.save()
-      .then(() => { res.status(201).json({message: 'Post publié !'})})
-      .catch(error => { res.status(400).json( { error })})
+      .then(post => { 
+        // Ajouter l'identifiant du nouveau post au champ posts de l'utilisateur
+        return User.findOneAndUpdate({ _id: objectId }, { $push: { posts: post._id } });
+          
+        })
+      .then((user) => {
+        const response = User.findOne({ _id: user._id }).populate('posts').exec((err, user) => {
+          if (!user)
+          res.status(400).json( { error })
+          else {
+            console.log(response);
+            res.status(201).json({message: response})
+          }
+        })
+          
+      })
+    
+      .catch(error => { res.status(400).json( { error })});
+      
+    
+      
 
-  
 };
 
 // Modifier un post
