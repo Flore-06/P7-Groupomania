@@ -2,7 +2,7 @@ import Register from './components/Register';
 import Login from './pages/Login';
 import Home from './pages/Home';
 import Header from './components/Header';
-import Layout from './components/Layout';
+
 import Editor from './components/Editor';
 import Admin from './components/Admin';
 import Profil from './pages/Profil';
@@ -26,7 +26,7 @@ function App() {
 
   return (
     <Routes>
-      <Route path="/" element={<Layout />}>
+      
         {/* public routes */}
         <Route path="login" element={<Login />} />
         <Route path="register" element={<Register />} />
@@ -58,7 +58,7 @@ function App() {
 
         {/* catch all */}
         <Route path="*" element={<Missing />} />
-      </Route>
+      
     </Routes>
   );
 }
