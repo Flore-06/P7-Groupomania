@@ -1,5 +1,5 @@
 import Register from './components/Register';
-import Login from './components/Login';
+import Login from './pages/Login';
 import Home from './pages/Home';
 import Header from './components/Header';
 import Layout from './components/Layout';
@@ -7,7 +7,7 @@ import Editor from './components/Editor';
 import Admin from './components/Admin';
 import Profil from './pages/Profil';
 import Profilajour from './components/ConfirmationModifProfil';
-import Missing from './components/Missing';
+import Missing from './pages/Missing';
 import Unauthorized from './components/Unauthorized';
 import RequireAuth from './components/RequireAuth';
 import { Routes, Route } from 'react-router-dom';
