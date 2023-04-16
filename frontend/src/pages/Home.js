@@ -31,29 +31,24 @@ const Home = () => {
 
 
     return (
-        <main className="light-background">
-            <Routes>
-                <Route path="*" element={<Header/>} />
-            </Routes>
-
-            <section className="bg-light-grey section-bienvenue">
-                <h1>Bienvenue sur le Réseau Social de</h1>
-                <img className="logo-groupomania" src='/logo-rouge-centre-groupomania.png' alt='logo de Groupomania'></img>
-            </section>
-
-            <Routes>
-                <Route path="*" element={<CreatePost />} />
-            </Routes>
-
-            
-
-            <Routes>
-                <Route path="*" element={<PublishPost />} />
-            </Routes>
+        <>
+            <Header/>
         
-                
+            <main className="light-background">
 
-        </main>
+                <section className="bg-light-grey section-bienvenue">
+                    <h1>Bienvenue sur le Réseau Social de</h1>
+                    <img className="logo-groupomania" src='/logo-rouge-centre-groupomania.png' alt='logo de Groupomania'></img>
+                </section>
+
+                <CreatePost />
+
+                <PublishPost />
+            
+                    
+
+            </main>
+        </>
         
     );
 
