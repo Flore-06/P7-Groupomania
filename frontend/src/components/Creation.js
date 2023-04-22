@@ -65,7 +65,7 @@ const CreatePost = () => {
 
     //document.getElementById('user-name-create-post').innerHTML= userName;
 
-    /*let publishedDate = DayJS().format();*/
+    
 
     const handleSubmit = async (e) => {
         e.preventDefault();

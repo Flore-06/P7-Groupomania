@@ -10,16 +10,13 @@ const fs = require('fs');
 
 // Accéder à tous les posts
 exports.getAllPost = (req, res, next) => {
-  User.find()
-    .then((user) => {
-      Post.find()
+  
+  Post.find().sort({ publishedDate: -1 }).populate('user')
         .then((posts) => {
-
-        
         
           res.status(200).json({posts});
         })
-      })
+      
     .catch((error) => res.status(400).json({ error }));
 
 };
@@ -61,6 +58,7 @@ exports.createPost = (req, res, next) => {
           usersLiked: [' '],
           usersdisLiked: [' '],};
         console.log("est passé par là");
+        console.log(objectId);
     }
 
     else {
@@ -96,22 +94,16 @@ exports.createPost = (req, res, next) => {
         return User.findOneAndUpdate({ _id: objectId }, { $push: { posts: post._id } });
           
         })
-      .then((user) => {
-        const response = User.findOne({ _id: user._id }).populate('posts').exec((err, user) => {
-          if (!user)
-          res.status(400).json( { error })
-          else {
-            console.log(response);
-            res.status(201).json({message: response})
-          }
-        })
-          
+      .then(() => {
+        Post.find().sort({ createdAt: -1 }).populate('user')
+                  
+       .then((userPost) => res.status(200).json(userPost))
+        .catch(error => res.status(401).json({ error }));
       })
     
-      .catch(error => { res.status(400).json( { error })});
       
-    
-      
+      .catch(err => { res.status(400).json( { err })});
+        
 
 };
 
