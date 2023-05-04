@@ -3,7 +3,7 @@ import { faCheck, faTimes, faInfoCircle } from "@fortawesome/free-solid-svg-icon
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from '../api/axios';
 import { Link } from "react-router-dom";
-import { text } from "@fortawesome/fontawesome-svg-core";
+//import { text } from "@fortawesome/fontawesome-svg-core";
 
 const NAME_REGEX = /^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$/u;
 const SURNAME_REGEX = /^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$/u;

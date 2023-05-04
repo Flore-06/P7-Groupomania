@@ -87,13 +87,13 @@ const PublishPost = () => {
                         <div className="post-info">
                             <div className="post-info__user">
                                 <img 
-                                    src="/default-user-icon.png"
-                                    alt="icone utilisateur par défaut"
+                                    src={post.user[0].imageUrl}
+                                    alt="icone utilisateur"
                                     className="user-default-image"
                                 ></img>
                                 <div className="post__name-date">
                                     <p className="user-name" id="user-name-posted">{post.user[0].name} {post.user[0].surname}</p>
-                                    <p className="published-date">Publié le 19/10/2022</p>
+                                    <p className="published-date">Publié le {new Date(post.publishedDate).toLocaleDateString("fr")} {new Date(post.publishedDate).getUTCHours()}</p>
                                 </div>
                             
 

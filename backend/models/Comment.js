@@ -3,8 +3,15 @@ const mongoose = require('mongoose');
 
 // Créer un schéma de données avec les informations nécessaires pour chaque comment
 const commentSchema = mongoose.Schema({
-  userId: { type: String, required: true },
-  userPost: { type: String, required: true },
+  post: [{
+    type: mongoose.Types.ObjectId,
+    ref: 'Post'
+  }],
+  user: [{
+    type: mongoose.Types.ObjectId,
+    ref: 'User'
+  }],
+  publishedDate: { type : Date, default: Date.now },
   message: { type: String, required: true },
 });
 
