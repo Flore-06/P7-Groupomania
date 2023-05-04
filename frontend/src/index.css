@@ -66,6 +66,7 @@ img {
 .user-default-image {
     width: 2.1rem;
     height: 2.1rem;
+    border-radius: 1rem;
 }
 
 .admin-image {
