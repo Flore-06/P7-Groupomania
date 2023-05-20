@@ -11,7 +11,14 @@ const fs = require('fs');
 // Accéder à tous les posts
 exports.getAllPost = (req, res, next) => {
   
-  Post.find().sort({ publishedDate: -1 }).populate('user')
+  /* Trier les posts du plus récent au moins récent */
+  Post.find().sort({ publishedDate: -1 }).populate('user').populate({
+    path: 'comments', // Récupérer les commentaires liés aux posts
+    populate: {
+      path: 'user', // Récupérer les utilisateurs liés aux commentaires
+      model: 'User'
+    }
+  })
         .then((posts) => {
         
           res.status(200).json({posts});
@@ -31,24 +38,29 @@ exports.getOnePost = (req, res, next) => {
 // Créer un post
 exports.createPost = (req, res, next) => {
   const message = req.body.message;
-  message.replace(/"/g, '');
+  message.replace(/["']/g, "");
   const name = req.body.userName;
-  name.replace(/"/g, '');
+  /*name.replace(/"/g, '');*/
   const surname = req.body.userSurname;
-  surname.replace(/"/g, '');
+  /*surname.replace(/"/g, '');*/
   const userid = req.body.userId.replace(/"/g, '');
   
   let obj;
 
   console.log("---"+req.body.userId+"---");
   console.log(userid);
+  console.log("est passé par ici");
+  console.log(message);
+  console.log(req.body.message);
+  console.log(name);
+  console.log(surname);
 
   
   const objectId = new ObjectId(userid); 
 
     if (req.file === undefined) {
         obj = {
-          message : req.body.message,
+          message : message,
           user: objectId,
           //userName: name,
           //userSurname: surname,
@@ -62,9 +74,9 @@ exports.createPost = (req, res, next) => {
     }
 
     else {
-        const imageUrl = `${req.protocol}://${req.get('host')}/images/${req.file.filename}`;
-        console.log(imageUrl);
-        obj = {message : req.body.message,
+        const image = `${req.protocol}://${req.get('host')}/images/${req.file.filename}`;
+        
+        obj = {message : message,
           imageUrl: image,
           user: objectId,
           //userName: req.body.userName,

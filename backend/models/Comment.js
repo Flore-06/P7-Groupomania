@@ -1,14 +1,15 @@
 // Appel de Mongoose : permet de créer un schéma de données
 const mongoose = require('mongoose');
+const { Schema } = mongoose;
 
 // Créer un schéma de données avec les informations nécessaires pour chaque comment
 const commentSchema = mongoose.Schema({
   post: [{
-    type: mongoose.Types.ObjectId,
+    type: Schema.Types.ObjectId,
     ref: 'Post'
   }],
   user: [{
-    type: mongoose.Types.ObjectId,
+    type: Schema.Types.ObjectId,
     ref: 'User'
   }],
   publishedDate: { type : Date, default: Date.now },
