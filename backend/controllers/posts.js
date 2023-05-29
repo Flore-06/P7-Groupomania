@@ -12,19 +12,25 @@ const fs = require('fs');
 exports.getAllPost = (req, res, next) => {
   
   /* Trier les posts du plus récent au moins récent */
-  Post.find().sort({ publishedDate: -1 }).populate('user').populate({
-    path: 'comments', // Récupérer les commentaires liés aux posts
-    populate: {
-      path: 'user', // Récupérer les utilisateurs liés aux commentaires
-      model: 'User'
-    }
-  })
+  Post.find().sort({ publishedDate: -1 })
+.populate('user') // Récupérer les utilisateurs liés aux posts
+.populate({
+  path: 'comments', // Récupérer les commentaires liés aux posts
+  populate: {
+    path: 'user', // Récupérer les utilisateurs liés aux commentaires
+    model: 'User'
+  }
+})
         .then((posts) => {
         
           res.status(200).json({posts});
         })
       
     .catch((error) => res.status(400).json({ error }));
+
+    // Récupérer tous les posts avec les utilisateurs et les commentaires associés
+
+
 
 };
 

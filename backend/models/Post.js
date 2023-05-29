@@ -10,7 +10,7 @@ const postSchema = mongoose.Schema({
     ref: 'User'
   }],
   comments: [{
-    type: mongoose.Schema.Types.ObjectId,
+    type: Schema.Types.ObjectId,
     ref: 'Comment'
   }],
   //userId: { type: String, required: true },

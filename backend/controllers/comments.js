@@ -1,4 +1,7 @@
+const mongoose = require('mongoose');
 const {ObjectId} = require('mongodb');
+const User = require('../models/User');
+const Post = require('../models/Post')
 
 // Appel du modèle du comment
 const Comment = require("../models/Comment");
@@ -47,13 +50,27 @@ exports.createComment = (req, res, next) => {
 
   // Publier un nouveau comment
   comment.save()
-  .then(comment => { 
+  .then(comment => {
     // Ajouter l'identifiant du nouveau post au champ posts de l'utilisateur
-    console.log("console.log comment._id");
-    console.log(comment._id);
+    
     //User.findOneAndUpdate({ _id: userobjectId }, { $push: { comments: comment._id } });
-    Post.findOneAndUpdate({ _id: postobjectId }, { $push: { comments: comment._id } });
+    Post.findOneAndUpdate({ _id: postobjectId}, { $push: { comments: comment._id } })
+    .exec(function (err, post) {
+      if (err) {
+        console.error(err);
+        return;
+      }
+      User.findOneAndUpdate({ _id: userobjectId}, { $push: { comments: comment._id } })
+
+    .exec(function (err, post) {
+      if (err) {
+        console.error(err);
+        return;
+      }
+    res.status(201).json({message: 'Commentaire publié !'})
     })
-  .then(() => { res.status(201).json({message: 'Commentaire publié !'})})
-  .catch(error => { res.status(400).json( { error })})
+
+  })
+    })
+  
 };
