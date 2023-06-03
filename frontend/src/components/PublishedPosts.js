@@ -14,25 +14,7 @@ const LOAD_POST_URL = '/posts';
 
 const PublishPost = () => {
 
-    /*const navigate = useNavigate();
-    const location = useLocation();
-    const from = location.state?.from?.pathname || "/publish-post";*/
-
-    /*let userNamePost = localStorage.getItem('userNamePost');
-    let userSurnamePost = localStorage.getItem('userSurnamePost');
-
-    useEffect(() => {
-
-        let nomPrenom = document.getElementById('user-name-posted').innerHTML= userNamePost + " " + userSurnamePost;
-        console.log(nomPrenom);
-    });*/
-
-    
-    //let publishedDate = DayJS().format();
-
     const [loadPosts, setLoadPost]=useState();
-    
-
     const fetchPosts = async (e) => {
         try {
             
@@ -168,9 +150,28 @@ const PublishPost = () => {
                                 <Route path="*" element={<CreateComment userPost={post._id} />} />
                             </Routes>
 
-                            <Routes>
-                                <Route path="*" element={<PublishComment />} />
-                            </Routes>                   
+            
+                            
+                                
+                            {/*post.comments?.map((comment) => (
+                                <Routes>
+                                <Route path="*" element={<PublishComment comment={comment} />} />
+                                </Routes>   
+                            ))*/}
+                                
+                            {post.comments.length > 0 ? (
+                                post.comments.map((comment) => (
+                                    <Routes>
+                                    <Route path="*" element={<PublishComment comment={comment} />} />
+                                    </Routes>
+                                ))
+                            ) : (
+                                <p>No comments.</p>
+                            )}
+
+                            
+                            
+                                            
                         
                         </div>
                     </div>                      

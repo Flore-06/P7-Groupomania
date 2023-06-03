@@ -43,12 +43,13 @@ exports.getOnePost = (req, res, next) => {
 
 // Créer un post
 exports.createPost = (req, res, next) => {
+
   const message = req.body.message;
-  message.replace(/["']/g, "");
+  //message.replace(/["']/g, "");
   const name = req.body.userName;
-  /*name.replace(/"/g, '');*/
+  //name.replace(/"/g, '');
   const surname = req.body.userSurname;
-  /*surname.replace(/"/g, '');*/
+  //surname.replace(/"/g, '');
   const userid = req.body.userId.replace(/"/g, '');
   
   let obj;
@@ -66,7 +67,7 @@ exports.createPost = (req, res, next) => {
 
     if (req.file === undefined) {
         obj = {
-          message : message,
+          message : req.body.message,
           user: objectId,
           //userName: name,
           //userSurname: surname,
@@ -75,14 +76,14 @@ exports.createPost = (req, res, next) => {
           dislikes: 0,
           usersLiked: [' '],
           usersdisLiked: [' '],};
-        console.log("est passé par là");
+        console.log("console.log objectId");
         console.log(objectId);
     }
 
     else {
         const image = `${req.protocol}://${req.get('host')}/images/${req.file.filename}`;
         
-        obj = {message : message,
+        obj = {message : req.body.message,
           imageUrl: image,
           user: objectId,
           //userName: req.body.userName,

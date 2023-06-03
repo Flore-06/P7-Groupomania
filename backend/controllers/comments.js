@@ -42,6 +42,8 @@ exports.createComment = (req, res, next) => {
 
 
   console.log(req.body);
+  console.log("req.body.message");
+  console.log(req.body.message);
   const comment = new Comment({
       message : req.body.message,
       user: userobjectId,
