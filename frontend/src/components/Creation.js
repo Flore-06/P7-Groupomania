@@ -96,7 +96,7 @@ const CreatePost = () => {
         
             setMessage('');
             setImage('');
-            navigate(from, { replace: true });
+            window.location.reload(false);
         } catch (err) {
             console.log(err);
         }

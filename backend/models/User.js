@@ -8,6 +8,7 @@ const uniqueValidator = require('mongoose-unique-validator');
 // Créer un schéma Mongoose pour se connecter
 const userSchema = mongoose.Schema({
   //_id: { type: Schema.Types.ObjectId },
+  isAdmin: { type: Number, required: true, default:0 },
   name: { type: String, required: true },
   surname: { type: String, required: true },
   imageUrl: {type: String, required: false},

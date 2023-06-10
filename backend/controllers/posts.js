@@ -68,6 +68,7 @@ exports.createPost = (req, res, next) => {
     if (req.file === undefined) {
         obj = {
           message : req.body.message,
+          imageUrl: "none",
           user: objectId,
           //userName: name,
           //userSurname: surname,
