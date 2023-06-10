@@ -69,6 +69,12 @@ img {
     border-radius: 1rem;
 }
 
+.user-comment-image {
+    width: 1.3rem;
+    height: 1.3rem;
+    border-radius: 1rem;
+}
+
 .admin-image {
     width: 7rem;
     height: 7rem;
@@ -510,6 +516,7 @@ text-decoration: none;
 .comment-user-name {
     font-weight: bold;
     font-size: 18px;
+    margin-left: 10px;
 }
 
 .comment-text {

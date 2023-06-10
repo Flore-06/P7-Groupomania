@@ -14,7 +14,7 @@ const PublishComment = (comment) => {
                         <img 
                             src={comment.comment.user[0].imageUrl}
                             alt="icone utilisateur"
-                            className="icone-a-gauche icone-contour"
+                            className="user-comment-image"
                         ></img>
 
                         <div className="comment__name-date">
