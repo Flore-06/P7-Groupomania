@@ -1,6 +1,9 @@
 import { useState, useEffect, useRef } from "react";
+import ReactDOM from 'react-dom';
+import Modal from 'react-modal';
+
 /*import { useNavigate, useLocation } from 'react-router-dom';*/
-import { faThumbsUp, faThumbsDown, faComment } from "@fortawesome/free-solid-svg-icons";
+import { faThumbsUp, faThumbsDown, faComment, faEllipsisH, faPenToSquare, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import axios from '../api/axios';
@@ -8,10 +11,22 @@ import { Routes, Route } from 'react-router-dom';
 import CreateComment from "./Comment";
 import PublishComment from "./PublishedComments";
 import Rating from "./Rating";
-import DropdownMenuPost from "./DropdownMenuPost";
+
 
 const LOAD_POST_URL = '/posts';
 
+const customStyles = {
+    content: {
+      top: '50%',
+      left: '50%',
+      right: 'auto',
+      bottom: 'auto',
+      marginRight: '-50%',
+      transform: 'translate(-50%, -50%)',
+    },
+  };
+// Make sure to bind modal to your appElement (https://reactcommunity.org/react-modal/accessibility/)
+Modal.setAppElement('body');
 
 const PublishPost = () => {
 
@@ -44,7 +59,54 @@ const PublishPost = () => {
 
     
 
-    
+    /*Pour fermer le Dropdown menu*/
+    const [open, setOpen] = useState(false);
+    let menuRef = useRef();
+    useEffect(() => {
+        let handler = (e)=>{
+            if(!menuRef.current.contains(e.target)){
+                setOpen(false);
+                console.log(menuRef.current);
+            }
+        };
+        document.addEventListener("mousedown", handler);
+        return() =>{
+            document.removeEventListener("mousedown", handler);
+        }
+    });
+
+
+
+    const [modalIsOpen, setIsOpenModal] = useState(false);
+
+    function openModal(idPost) {
+        try {
+            const url = LOAD_POST_URL + "/" + idPost;
+            const response = await axios.get(url,
+                {
+                    headers: { 'Content-Type': 'application/json' },
+                    withCredentials: true
+                }
+            );
+
+            const posts = response.data.posts;
+        
+        } catch (err) {
+            console.log(err);
+        }
+        setIsOpenModal(true);
+    }
+
+    /*function afterOpenModal() {
+        // references are now sync'd and can be accessed.
+        subtitle.style.color = '#f00';
+    }*/
+
+    function closeModal() {
+        setIsOpenModal(false);
+    }
+
+
 
     return (
         <section className="posts bg-light-grey">
@@ -65,8 +127,25 @@ const PublishPost = () => {
                                     <p className="published-date">Publié le {new Date(post.publishedDate).toLocaleDateString("fr")} {new Date(post.publishedDate).getUTCHours()}</p>
                                 </div>
                             
-                                {<DropdownMenuPost userPost={post._id} />}
-                                
+
+                                {/*dropdown menu pour effectuer des actions sur un post*/}
+                                <div className='menu-container' ref={menuRef}>
+                                    <div className='menu-trigger' onClick={()=>{setOpen(!open)}}>
+                                        <FontAwesomeIcon
+                                            icon={faEllipsisH}
+                                            className="icone-params-posts"
+                                            aria-label="Actions pour cette publication"
+                                        />
+                                    </div>
+
+                                    <div className={`dropdown-menu ${open? 'active' : 'inactive'}`}>
+                                        <ul>
+                                            {/*<DropdownItem icon = {faPenToSquare} text = {"Modifier le post"} onClick={openModal}/>*/}
+                                            <button key={post._id} onClick={() => openModal(post._id)}>Open Modal</button>
+                                            <DropdownItem icon = {faTrash} text = {"Supprimer le post"}/>
+                                        </ul>
+                                    </div>
+                                </div>
 
                             </div>
 
@@ -149,11 +228,41 @@ const PublishPost = () => {
                 </div>
             
             )}
+
+        <Modal
+            isOpen={modalIsOpen}
+            //onAfterOpen={afterOpenModal}
+            onRequestClose={closeModal}
+            style={customStyles}
+            contentLabel="Example Modal"
+        >
+            {/*<h2 ref={(_subtitle) => (subtitle = _subtitle)}>Hello</h2>*/}
+            <button onClick={closeModal}>close</button>
+            <div>I am a modal</div>
+            <form>
+            <input />
+            <button>tab navigation</button>
+            <button>stays</button>
+            <button>inside</button>
+            <button>the modal</button>
+            </form>
+        </Modal>
+
         </section>
+
+        
 
     )
 }
 
-
+/*Création de la fonction dropdown menu*/
+function DropdownItem(props){
+    return(
+        <li className = 'dropdownItem'>
+            {/*<icon src={props.icon}></icon>*/}
+            <a href="#"> {props.text} </a>
+        </li>
+    );
+}
 
 export default PublishPost
