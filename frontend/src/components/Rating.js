@@ -72,7 +72,7 @@ const Rating = props => {
             />
         </button>
       </div>
-      <p>You {isLiked ? "liked" : "disliked"} </p>
+      <p>Vous {isLiked ? "aimez" : "n'aimez pas"} ce post</p>
 
       <hr />
     </div>

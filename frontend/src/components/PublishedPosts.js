@@ -166,7 +166,7 @@ const PublishPost = () => {
                                     </Routes>
                                 ))
                             ) : (
-                                <p>No comments.</p>
+                                <p>Pas de commentaire.</p>
                             )}
 
                             
