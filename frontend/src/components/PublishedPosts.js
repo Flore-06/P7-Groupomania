@@ -18,6 +18,7 @@ const UPDATE_POST_URL = '/posts';
 
 const customStyles = {
     content: {
+      width: '55%',
       top: '50%',
       left: '50%',
       right: 'auto',
@@ -289,22 +290,26 @@ const PublishPost = () => {
             //onAfterOpen={afterOpenModal}
             onRequestClose={closeModal}
             style={customStyles}
+            //className="modal-modifier-post"
             contentLabel="Example Modal"
         >
             {/*<h2 ref={(_subtitle) => (subtitle = _subtitle)}>Hello</h2>*/}
-            <button onClick={closeModal}>close</button>
-            <div>I am a modal</div>
+            <div>Vous pouvez modifier ci-dessous</div>
             <form onSubmit={handleSubmit}>
                 <textarea
+                className="input-post-modifier"
                     id="message"
                     onChange={(e) => setTextModal(e.target.value)}
                     value={textModal}>
                 </textarea>
-
-                <button className="create-post__btn" type="submit">
-                    Publier
-                    <FontAwesomeIcon icon={faPaperPlane} className="icone-a-droite"/>
-                </button>
+                <div className="boutons-annuler-modifier-post">
+                    <button onClick={closeModal}>Annuler</button>
+                    <button className="create-post__btn" type="submit">
+                        Enregistrer mes modifications
+                        {/*<FontAwesomeIcon icon={faPaperPlane} className="icone-a-droite"/>*/}
+                    </button>
+                </div>
+                
             
             </form>
         </Modal>
