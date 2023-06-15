@@ -36,8 +36,11 @@ exports.getAllPost = (req, res, next) => {
 
 // Accéder à un post particulier
 exports.getOnePost = (req, res, next) => {
+  console.log("est passé par lààà");
     Post.findOne({ _id: req.params.id })
-      .then((post) => { res.status(200).json(post);})
+      .then((post) => { 
+        console.log(post);
+        res.status(200).json(post);})
       .catch((error) => res.status(400).json({ error }));
 };
 
@@ -129,24 +132,27 @@ exports.createPost = (req, res, next) => {
 
 // Modifier un post
 exports.modifyPost = (req, res, next) => {
-  const postObject = req.file ? {
+  /*const postObject = req.file ? {
       ...JSON.parse(req.body.post),
       imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
   } : { ...req.body };
 
-  delete postObject._userId;
+  delete postObject._userId;*/
   Post.findOne({_id: req.params.id})
       .then((post) => {
           // N'est pas autorisé à modifier si id du user est différent de celui qui a créé le post
-          if (post.userId != req.auth.userId) {
+          /*if (post.userId != req.auth.userId) {
               res.status(401).json({ message : 'Not authorized'});
-          } 
+          } */
           // Si id est le même : peut modifier
-          else {
-              Post.updateOne({ _id: req.params.id}, { ...postObject, _id: req.params.id})
-              .then(() => res.status(200).json({message : 'Post modifié !'}))
+          //else {
+              Post.updateOne({ _id: req.params.id}, {
+                $set: {
+                    message: req.body.message,
+                }})
+              .then(() => {console.log('est passééé');console.log(req.body.message);res.status(200).json({message : 'Post modifié !'})})
               .catch(error => res.status(401).json({ error }));
-          }
+          //}
       })
       .catch((error) => {
           res.status(400).json({ error });
@@ -158,18 +164,18 @@ exports.deletePost = (req, res, next) => {
   Post.findOne({ _id: req.params.id})
       .then(post => {
           // N'est pas autorisé à supprimer si id du user est différent de celui qui a créé le post
-          if (post.userId != req.auth.userId) {
+          /*if (post.userId != req.auth.userId) {
               res.status(401).json({message: 'Not authorized'});
-          } 
+          } */
           // Si id est le même : peut supprimer
-          else {
+          //else {
               const filename = post.imageUrl.split('/images/')[1];
               fs.unlink(`images/${filename}`, () => {
                   Post.deleteOne({_id: req.params.id})
                       .then(() => { res.status(200).json({message: 'Post supprimé !'})})
                       .catch(error => res.status(401).json({ error }));
               });
-          }
+          //}
       })
       .catch( error => {
           res.status(500).json({ error });

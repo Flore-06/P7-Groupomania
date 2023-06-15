@@ -601,12 +601,35 @@ text-decoration: none;
     transition: 500ms ease;
   }
     
+  
+
+  .option-post{
+    display: flex;
+    background-color: white;
+    color: rgba(var(--first-color), 1);
+    font-family: 'Lato', sans-serif;
+    font-weight: bold;
+    font-size: 16px;
+    padding: 10px;
+    /*border-top: 1px solid rgba(0, 0, 0, 0.05);*/
+    z-index: 1;
+    border-radius: 8px;
+    border: none;
+    width: 100%;
+    transition: none;
+  }
+  .option-post:hover {
+    background-color: #F0F2F5;
+    color: black;
+    border-radius: 8px;
+    transform: none;
+  }
+
   .dropdown-menu ul li{
     padding: 10px  0;
     /*border-top: 1px solid rgba(0, 0, 0, 0.05);*/
     z-index: 1;
   }
-
   .dropdown-menu ul li:hover {
     background-color: #F0F2F5;
     border-radius: 8px;

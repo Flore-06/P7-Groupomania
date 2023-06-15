@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import Modal from 'react-modal';
 
 /*import { useNavigate, useLocation } from 'react-router-dom';*/
-import { faThumbsUp, faThumbsDown, faComment, faEllipsisH, faPenToSquare, faTrash } from "@fortawesome/free-solid-svg-icons";
+import { faThumbsUp, faThumbsDown, faComment, faEllipsisH, faPenToSquare, faTrash, faPaperPlane} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import axios from '../api/axios';
@@ -14,6 +14,7 @@ import Rating from "./Rating";
 
 
 const LOAD_POST_URL = '/posts';
+const UPDATE_POST_URL = '/posts';
 
 const customStyles = {
     content: {
@@ -27,6 +28,11 @@ const customStyles = {
   };
 // Make sure to bind modal to your appElement (https://reactcommunity.org/react-modal/accessibility/)
 Modal.setAppElement('body');
+
+
+
+
+
 
 const PublishPost = () => {
 
@@ -78,8 +84,12 @@ const PublishPost = () => {
 
 
     const [modalIsOpen, setIsOpenModal] = useState(false);
+    
+    const [textModal, setTextModal ] = useState("");
+    const [idPostModal, setIdPostModal ] = useState("");
 
-    function openModal(idPost) {
+    const openModal = async (idPost) => {
+        console.log("est passé par iciii")
         try {
             const url = LOAD_POST_URL + "/" + idPost;
             const response = await axios.get(url,
@@ -89,12 +99,32 @@ const PublishPost = () => {
                 }
             );
 
-            const posts = response.data.posts;
+            const post = response.data;
+            console.log(post);
+
+            setTextModal(post.message);
+            setIdPostModal(post._id);
         
         } catch (err) {
             console.log(err);
         }
         setIsOpenModal(true);
+    }
+
+    const deletePost = async (idPost) => {
+        
+        try {
+            const url = LOAD_POST_URL + "/" + idPost;
+            await axios.delete(url,
+                {
+                    headers: { 'Content-Type': 'application/json' },
+                    withCredentials: true
+                }
+            );
+            window.location.reload(false);
+        } catch (err) {
+            console.log(err);
+        }
     }
 
     /*function afterOpenModal() {
@@ -106,6 +136,32 @@ const PublishPost = () => {
         setIsOpenModal(false);
     }
 
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        
+        const formData = new FormData();
+        
+        formData.append("message", JSON.stringify(textModal));
+        
+    
+        try {
+            const url = UPDATE_POST_URL + "/" +idPostModal;
+            await axios.put(url,
+                formData,
+                {
+                    headers: { "Content-Type": "multipart/form-data" },
+                    withCredentials: true,
+                }
+            );
+        
+            setTextModal('');
+            setIdPostModal('');
+            window.location.reload(false);
+        } catch (err) {
+            console.log(err);
+        }
+    }
 
 
     return (
@@ -140,9 +196,8 @@ const PublishPost = () => {
 
                                     <div className={`dropdown-menu ${open? 'active' : 'inactive'}`}>
                                         <ul>
-                                            {/*<DropdownItem icon = {faPenToSquare} text = {"Modifier le post"} onClick={openModal}/>*/}
-                                            <button key={post._id} onClick={() => openModal(post._id)}>Open Modal</button>
-                                            <DropdownItem icon = {faTrash} text = {"Supprimer le post"}/>
+                                            <button className="option-post" key={post._id} onClick={() => openModal(post._id)}>Modifier le post</button>
+                                            <button className="option-post" key={post._id} onClick={() => deletePost(post._id)}>Supprimer le post</button>
                                         </ul>
                                     </div>
                                 </div>
@@ -239,12 +294,18 @@ const PublishPost = () => {
             {/*<h2 ref={(_subtitle) => (subtitle = _subtitle)}>Hello</h2>*/}
             <button onClick={closeModal}>close</button>
             <div>I am a modal</div>
-            <form>
-            <input />
-            <button>tab navigation</button>
-            <button>stays</button>
-            <button>inside</button>
-            <button>the modal</button>
+            <form onSubmit={handleSubmit}>
+                <textarea
+                    id="message"
+                    onChange={(e) => setTextModal(e.target.value)}
+                    value={textModal}>
+                </textarea>
+
+                <button className="create-post__btn" type="submit">
+                    Publier
+                    <FontAwesomeIcon icon={faPaperPlane} className="icone-a-droite"/>
+                </button>
+            
             </form>
         </Modal>
 
