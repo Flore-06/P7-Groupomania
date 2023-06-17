@@ -1,4 +1,4 @@
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { NavLink } from "react-router-dom";
 
@@ -27,12 +27,6 @@ const Header = () => {
                 <NavLink to="/"><FontAwesomeIcon icon={faHome}/></NavLink>
                 <NavLink to="/profil-user" style={{width:'34%'}}><FontAwesomeIcon icon={faUser}/></NavLink>
                 <NavLink to="/login" onClick={logout}><FontAwesomeIcon icon={faRightFromBracket}/></NavLink>
-
-                {/*
-                <a aria-label="Home" className="active" href="/" style={{width:'33%'}}><FontAwesomeIcon icon={faHome}/></a>
-                <a aria-label="Administrateur" href="/profil-user" style={{width:'34%'}}><FontAwesomeIcon icon={faUser}/></a>
-                <a aria-label="Déconnexion" href="/login" onClick={logout} style={{width:'33%'}}><FontAwesomeIcon icon={faRightFromBracket}/></a>
-                */}
         </div>
 
         

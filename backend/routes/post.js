@@ -14,7 +14,7 @@ const multer = require('../middleware/multer-config');
 const postsCtrl = require('../controllers/posts');
 
 // Intercepter les différentes requêtes
-router.get('/', /*auth,*/ postsCtrl.getAllPost);
+router.get('/', auth, postsCtrl.getAllPost);
 router.post('/', /*auth,*/ multer, postsCtrl.createPost);
 router.get('/:id', /*auth,*/ postsCtrl.getOnePost);
 router.put('/:id', /*auth,*/ multer, postsCtrl.modifyPost);

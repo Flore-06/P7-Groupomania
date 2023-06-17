@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import Modal from 'react-modal';
 
 /*import { useNavigate, useLocation } from 'react-router-dom';*/
-import { faThumbsUp, faThumbsDown, faComment, faEllipsisH, faPenToSquare, faTrash, faPaperPlane} from "@fortawesome/free-solid-svg-icons";
+import { faThumbsUp, faThumbsDown, faComment, faEllipsisH} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import axios from '../api/axios';
@@ -15,6 +15,7 @@ import Rating from "./Rating";
 
 const LOAD_POST_URL = '/posts';
 const UPDATE_POST_URL = '/posts';
+const LOAD_USER_URL = '/auth';
 
 const customStyles = {
     content: {
@@ -32,10 +33,43 @@ Modal.setAppElement('body');
 
 
 
-
-
-
 const PublishPost = () => {
+
+    
+
+    const [userId, setUserId] = useState("");
+    const [token, setToken] = useState("");
+    useEffect(() => {
+
+    const id = localStorage.getItem('userId');
+    const token = localStorage.getItem('token');
+    setToken(token);
+
+    if (id) {
+    setUserId(id);
+    getOneUser();
+    }
+    }, []);
+
+    const [user, setUser] = useState("");
+
+    const getOneUser = async (e) => {
+        try {
+            const userId = localStorage.getItem('userId');
+            const url = LOAD_USER_URL + '/' + userId;
+            const response = await axios.get(url,
+                {
+                    headers: { 'Content-Type': 'application/json' },
+                    withCredentials: true
+                }
+            );
+
+            const user = response.data;
+            setUser(user);
+        } catch (err) {
+            console.log(err);
+        }
+    }
 
     const [loadPosts, setLoadPost]=useState();
     const fetchPosts = async (e) => {
@@ -43,18 +77,17 @@ const PublishPost = () => {
             
             const response = await axios.get(LOAD_POST_URL,
                 {
-                    headers: { 'Content-Type': 'application/json' },
+                    headers: {"Authorization" : `Bearer ${token}`} ,
                     withCredentials: true
                 }
             );
 
             const posts = response.data.posts;
-
             setLoadPost(posts);
-            //console.log(JSON.stringify(response?.data));
             console.log(posts);
+        } 
         
-        } catch (err) {
+        catch (err) {
             console.log(err);
         }
     }
@@ -76,21 +109,20 @@ const PublishPost = () => {
                 console.log(menuRef.current);
             }
         };
+
         document.addEventListener("mousedown", handler);
+        
         return() =>{
             document.removeEventListener("mousedown", handler);
         }
     });
 
-
-
     const [modalIsOpen, setIsOpenModal] = useState(false);
-    
     const [textModal, setTextModal ] = useState("");
     const [idPostModal, setIdPostModal ] = useState("");
 
     const openModal = async (idPost) => {
-        console.log("est passé par iciii")
+
         try {
             const url = LOAD_POST_URL + "/" + idPost;
             const response = await axios.get(url,
@@ -105,10 +137,12 @@ const PublishPost = () => {
 
             setTextModal(post.message);
             setIdPostModal(post._id);
+        } 
         
-        } catch (err) {
+        catch (err) {
             console.log(err);
         }
+
         setIsOpenModal(true);
     }
 
@@ -123,28 +157,23 @@ const PublishPost = () => {
                 }
             );
             window.location.reload(false);
-        } catch (err) {
+        }
+        
+        catch (err) {
             console.log(err);
         }
     }
 
-    /*function afterOpenModal() {
-        // references are now sync'd and can be accessed.
-        subtitle.style.color = '#f00';
-    }*/
 
     function closeModal() {
         setIsOpenModal(false);
     }
 
-
     const handleSubmit = async (e) => {
         e.preventDefault();
         
         const formData = new FormData();
-        
         formData.append("message", JSON.stringify(textModal));
-        
     
         try {
             const url = UPDATE_POST_URL + "/" +idPostModal;
@@ -186,51 +215,44 @@ const PublishPost = () => {
                             
 
                                 {/*dropdown menu pour effectuer des actions sur un post*/}
-                                <div className='menu-container' ref={menuRef}>
-                                    <div className='menu-trigger' onClick={()=>{setOpen(!open)}}>
-                                        <FontAwesomeIcon
-                                            icon={faEllipsisH}
-                                            className="icone-params-posts"
-                                            aria-label="Actions pour cette publication"
-                                        />
+                                { user.isAdmin === 1 || post.user[0]._id === userId ? (
+                                    
+                                    <div className='menu-container' ref={menuRef}>
+                                        <div className='menu-trigger' key={post._id} onClick={()=>{setOpen(!open)}}>
+                                            <FontAwesomeIcon
+                                                icon={faEllipsisH}
+                                                className="icone-params-posts"
+                                                aria-label="Actions pour cette publication"
+                                            />
+                                        </div>
+
+                                        <div className={`dropdown-menu ${open? 'active' : 'inactive'}`}>
+                                            <ul>
+                                                <button className="option-post" key={post._id} onClick={() => openModal(post._id)}>Modifier le post</button>
+                                                <button className="option-post" key={post._id} onClick={() => deletePost(post._id)}>Supprimer le post</button>
+                                            </ul>
+                                        </div>
                                     </div>
 
-                                    <div className={`dropdown-menu ${open? 'active' : 'inactive'}`}>
-                                        <ul>
-                                            <button className="option-post" key={post._id} onClick={() => openModal(post._id)}>Modifier le post</button>
-                                            <button className="option-post" key={post._id} onClick={() => deletePost(post._id)}>Supprimer le post</button>
-                                        </ul>
-                                    </div>
-                                </div>
+
+                                ) : null}
+
+                                
 
                             </div>
 
                             <div className="post-info__message">
-                                
-                                {/*<li className="texte-publi" key={post.message}>{post.message}</li>*/}
                                 <p className="texte-publi">{post.message}</p>
-                                
-                                
                                 {
                                 post.imageUrl !== "none" && 
                                     <img 
                                     src={post.imageUrl}
                                     alt="évènement"
                                     className="post-image"
-                                ></img>
-                                
+                                    ></img>
                                 }
-                                
-
-
                             </div>
                         </div>
-                        
-                        
-                        {/*<div className="post-likes">
-                        <FontAwesomeIcon icon={faThumbsUp}/>
-                        <FontAwesomeIcon icon={faThumbsDown} className="icone-a-droite"/>
-                            </div>*/}
 
                         <Routes>
                             <Route path="*" element={<Rating userPost={post._id} />} />
@@ -256,28 +278,18 @@ const PublishPost = () => {
                                 <Route path="*" element={<CreateComment userPost={post._id} />} />
                             </Routes>
 
-            
-                            
-                                
-                            {/*post.comments?.map((comment) => (
-                                <Routes>
-                                <Route path="*" element={<PublishComment comment={comment} />} />
-                                </Routes>   
-                            ))*/}
                                 
                             {post.comments.length > 0 ? (
                                 post.comments.map((comment) => (
                                     <Routes>
-                                    <Route path="*" element={<PublishComment comment={comment} />} />
+                                        <Route path="*" element={<PublishComment comment={comment} />} />
                                     </Routes>
                                 ))
                             ) : (
                                 <p className="message-aucun-com">Aucun commentaire à afficher.</p>
                             )}
 
-                            
-                            
-                                            
+                                        
                         
                         </div>
                     </div>                      
@@ -293,7 +305,6 @@ const PublishPost = () => {
             //className="modal-modifier-post"
             contentLabel="Example Modal"
         >
-            {/*<h2 ref={(_subtitle) => (subtitle = _subtitle)}>Hello</h2>*/}
             <div>Vous pouvez modifier ci-dessous</div>
             <form onSubmit={handleSubmit}>
                 <textarea
@@ -306,29 +317,13 @@ const PublishPost = () => {
                     <button onClick={closeModal}>Annuler</button>
                     <button className="create-post__btn" type="submit">
                         Enregistrer mes modifications
-                        {/*<FontAwesomeIcon icon={faPaperPlane} className="icone-a-droite"/>*/}
                     </button>
                 </div>
-                
-            
             </form>
         </Modal>
 
         </section>
-
-        
-
     )
-}
-
-/*Création de la fonction dropdown menu*/
-function DropdownItem(props){
-    return(
-        <li className = 'dropdownItem'>
-            {/*<icon src={props.icon}></icon>*/}
-            <a href="#"> {props.text} </a>
-        </li>
-    );
 }
 
 export default PublishPost

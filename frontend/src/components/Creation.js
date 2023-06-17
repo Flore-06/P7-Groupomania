@@ -2,25 +2,19 @@ import { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { faImage, faPaperPlane, faPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
-//import DayJS from 'react-dayjs';
-
 import axios from '../api/axios';
+
 const CREATE_POST_URL = '/posts';
 const LOAD_USER_URL = '/auth';
 
 const CreatePost = () => {
-    
-    
 
     const navigate = useNavigate();
     const location = useLocation();
-    /*const from = location.state?.from?.pathname || "/create-post";*/
     const from = location.state?.from?.pathname || "/";
 
     const [message, setMessage] = useState('');
     const [image, setImage] = useState('');
-    
     const [userName, setUsername] = useState('');
     const [userSurname, setUsersurname] = useState('');
     const [userImg, setImgname] = useState('');
@@ -38,8 +32,8 @@ const CreatePost = () => {
             );
 
             const user = response.data;
-
             console.log(user);
+
             setUsername(user.name.replace(/"/g, ''));
             setUsersurname(user.surname.replace(/"/g, ''));
             setImgname(user.imageUrl);
@@ -61,24 +55,16 @@ const CreatePost = () => {
         console.log(nomPrenom);
         console.log(userName);
     });
-
-
-    //document.getElementById('user-name-create-post').innerHTML= userName;
-
     
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
-        console.log(image);
         
         const formData = new FormData();
         
         formData.append("userId", JSON.stringify(userId));
-        //formData.append("userImg", userImageFile);
         formData.append("userName", JSON.stringify(userName));
         formData.append("userSurname", JSON.stringify(userSurname));
-        /*formData.append("publishedDate", JSON.stringify(publishedDate));*/
         formData.append("message", JSON.stringify(message));
         formData.append("image", image);
 
@@ -92,7 +78,6 @@ const CreatePost = () => {
                 }
             );
             console.log(JSON.stringify(response?.data));
-            //console.log(JSON.stringify(response));
         
             setMessage('');
             setImage('');

@@ -21,30 +21,31 @@ const Rating = props => {
           updateLike(true);
           if (like === 1) {like = 0}
           else {like = 1}
-          
-        } else {
+        }
+        
+        else {
           updateLike(false);
           if (like === -1) {like = 0}
           else {like = -1}
-          
         };
 
         const response = await axios.post(url,
             JSON.stringify({ userId, userPost, like }),
             {
-                headers: { 'Content-Type': 'application/json' },
-                withCredentials: true
+              headers: { 'Content-Type': 'application/json' },
+              withCredentials: true
             }
         );
         console.log(JSON.stringify(response?.data));
-        //console.log(JSON.stringify(response));
+    } 
     
-
-    } catch (err) {
+    catch (err) {
         console.log(err);
     }
 
   };
+
+  
   return (
     <div>
       <div

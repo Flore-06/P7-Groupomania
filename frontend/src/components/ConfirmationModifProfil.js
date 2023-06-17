@@ -4,11 +4,10 @@ import Header from '../components/Header';
 import { NavLink } from "react-router-dom";
 
 const Profilajour = () => {
+    
     const navigate = useNavigate();
-
     const goBack = () => navigate(-1);
     
-
     return (
         <main className="light-background">
             <Routes>
@@ -19,11 +18,10 @@ const Profilajour = () => {
                 <h1>Profil à jour</h1>
                 <br />
                 <p>Vos modifications ont été enregistrées !</p>
-                {/*<div className="flexGrow">
-                    <button onClick={goBack}>Revenir à la page Admin</button>
-                    
-    </div>*/}
-    <NavLink className="bouton-retour-page" to="/profil-user">                        <li>Retour à la page Profil</li>                    </NavLink>
+                
+                <NavLink className="bouton-retour-page" to="/profil-user">                        
+                    <li>Retour à la page Profil</li>                    
+                </NavLink>
             </section>
         </main>
     )

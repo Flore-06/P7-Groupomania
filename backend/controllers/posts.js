@@ -73,9 +73,6 @@ exports.createPost = (req, res, next) => {
           message : req.body.message,
           imageUrl: "none",
           user: objectId,
-          //userName: name,
-          //userSurname: surname,
-          //publishedDate: req.body.publishedDate,
           likes: 0,
           dislikes: 0,
           usersLiked: [' '],
@@ -90,9 +87,6 @@ exports.createPost = (req, res, next) => {
         obj = {message : req.body.message,
           imageUrl: image,
           user: objectId,
-          //userName: req.body.userName,
-          //userSurname: req.body.userSurname,
-          //publishedDate: req.body.publishedDate,
           likes: 0,
           dislikes: 0,
           usersLiked: [' '],
@@ -100,11 +94,6 @@ exports.createPost = (req, res, next) => {
         console.log("est passé par ici");
     }
   
-  
-      /*const postObject = JSON.parse(req.body.post);
-      delete postObject._id;
-      delete postObject._userId;
-      console.log(postObject);*/
       console.log(req.params.id);
       console.log(req.body);
       
@@ -118,13 +107,10 @@ exports.createPost = (req, res, next) => {
           
         })
       .then(() => {
-        Post.find().sort({ createdAt: -1 }).populate('user')
-                  
-       .then((userPost) => res.status(200).json(userPost))
+        Post.find().sort({ createdAt: -1 }).populate('user')       
+        .then((userPost) => res.status(200).json(userPost))
         .catch(error => res.status(401).json({ error }));
       })
-    
-      
       .catch(err => { res.status(400).json( { err })});
         
 
@@ -132,27 +118,18 @@ exports.createPost = (req, res, next) => {
 
 // Modifier un post
 exports.modifyPost = (req, res, next) => {
-  /*const postObject = req.file ? {
-      ...JSON.parse(req.body.post),
-      imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
-  } : { ...req.body };
 
-  delete postObject._userId;*/
   Post.findOne({_id: req.params.id})
       .then((post) => {
           // N'est pas autorisé à modifier si id du user est différent de celui qui a créé le post
-          /*if (post.userId != req.auth.userId) {
-              res.status(401).json({ message : 'Not authorized'});
-          } */
-          // Si id est le même : peut modifier
-          //else {
-              Post.updateOne({ _id: req.params.id}, {
-                $set: {
-                    message: req.body.message,
-                }})
-              .then(() => {console.log('est passééé');console.log(req.body.message);res.status(200).json({message : 'Post modifié !'})})
-              .catch(error => res.status(401).json({ error }));
-          //}
+          
+          Post.updateOne({ _id: req.params.id}, {
+            $set: {
+                message: req.body.message,
+            }})
+          .then(() => {console.log('est passééé');console.log(req.body.message);res.status(200).json({message : 'Post modifié !'})})
+          .catch(error => res.status(401).json({ error }));
+    
       })
       .catch((error) => {
           res.status(400).json({ error });
@@ -164,18 +141,14 @@ exports.deletePost = (req, res, next) => {
   Post.findOne({ _id: req.params.id})
       .then(post => {
           // N'est pas autorisé à supprimer si id du user est différent de celui qui a créé le post
-          /*if (post.userId != req.auth.userId) {
-              res.status(401).json({message: 'Not authorized'});
-          } */
-          // Si id est le même : peut supprimer
-          //else {
-              const filename = post.imageUrl.split('/images/')[1];
-              fs.unlink(`images/${filename}`, () => {
-                  Post.deleteOne({_id: req.params.id})
-                      .then(() => { res.status(200).json({message: 'Post supprimé !'})})
-                      .catch(error => res.status(401).json({ error }));
-              });
-          //}
+          
+          const filename = post.imageUrl.split('/images/')[1];
+          fs.unlink(`images/${filename}`, () => {
+              Post.deleteOne({_id: req.params.id})
+                  .then(() => { res.status(200).json({message: 'Post supprimé !'})})
+                  .catch(error => res.status(401).json({ error }));
+          });
+          
       })
       .catch( error => {
           res.status(500).json({ error });

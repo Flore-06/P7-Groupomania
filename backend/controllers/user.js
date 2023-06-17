@@ -35,7 +35,6 @@ exports.signup = (req, res, next) => {
         bcrypt.hash(req.body.password, 10)
       .then(hash => {
         const user = new User({
-          //_id: new mongoose.Types.ObjectId(),
           name: req.body.name,
           surname: req.body.surname,
           imageUrl: `${req.protocol}://${req.get('host')}/images/default-user-icon.png`,
@@ -127,17 +126,13 @@ exports.getOneUser = (req, res, next) => {
       .then((user) => { 
         console.log("est passé par ici");
         console.log(user._id);
-        /*if (user._id!= req.auth.userId) {
-            res.status(401).json({ message : 'Not authorized'});
-        } */
 
         // Si id est le même : peut modifier
-        //else {
-            console.log("est passé par là");
-            User.updateOne({ _id: req.params.id}, {$set: obj})
-            .then(() => res.status(200).json({message : 'User modifié !'}))
-            .catch(error => res.status(401).json({ error }));
-        //}
+        console.log("est passé par là");
+        User.updateOne({ _id: req.params.id}, {$set: obj})
+        .then(() => res.status(200).json({message : 'User modifié !'}))
+        .catch(error => res.status(401).json({ error }));
+        
     })
       .catch((error) => res.status(400).json({ error }));
 };
@@ -165,12 +160,8 @@ exports.modifyPassword = (req, res, next) => {
       .then((user) => { 
         console.log("est passé par ici");
         console.log(user._id);
-        /*if (user._id!= req.auth.userId) {
-            res.status(401).json({ message : 'Not authorized'});
-        } */
 
         // Si id est le même : peut modifier
-        //else {
             console.log("est passé par là");
             bcrypt.hash(req.body.password, 10)
             .then(hash => {
@@ -178,15 +169,8 @@ exports.modifyPassword = (req, res, next) => {
             .then(() => res.status(200).json({message : message, password : password}))
             .catch(error => res.status(401).json({ error }));
               })
-              .catch(error => res.status(500).json({ error }));
-            
-        //}
+            .catch(error => res.status(500).json({ error }));
         })
         .catch((error) => res.status(400).json({ error }));
     }
-    
-
-    
-
-
 }

@@ -99,32 +99,32 @@ img {
 
 
 .navbar {
-    width: 100%; /* Full-width */
+    width: 100%;
     position: fixed;
     top: 0;
     z-index: 999;
     background-color: rgba(var(--first-color), 1);
-    overflow: auto; /* Overflow due to float */
+    overflow: auto;
     box-shadow: rgba(0, 0, 0, 0.3) 0px 1px 7px;
   }
   
   .navbar a {
-    float: left; /* Float links side by side */
-    text-align: center; /* Center-align text */
-    width: 33%; /* Equal width (5 icons with 20% width each = 100%) */
-    padding: 12px 0; /* Some top and bottom padding */
-    transition: all 0.3s ease; /* Add transition for hover effects */
-    color: white !important; /* White text color */
-    font-size: 36px; /* Increased font size */
+    float: left;
+    text-align: center;
+    width: 33%;
+    padding: 12px 0;
+    transition: all 0.3s ease;
+    color: white !important;
+    font-size: 36px;
   }
   
   .navbar a:hover {
-    background-color: #3d4050; /* Add a hover color */
+    background-color: #3d4050;
     color: white;
   }
   
   .navbar .active {
-    background-color: #2b2c38; /* Add an active/current color */
+    background-color: #2b2c38;
     color: white !important;
   }
 
@@ -140,10 +140,6 @@ img {
 .bg-light-grey {
     background-color: #F0F2F5;
 }
-
-/*.light-background {
-    background-color: white;
-}*/
 
 .dark-image-background {
     color: white;
@@ -186,9 +182,6 @@ img {
 form {
     display: flex;
     flex-direction: column;
-    /*justify-content: space-evenly;
-    flex-grow: 1;
-    /*padding-bottom: 1rem;*/
 }
 
 a, a:visited {
@@ -246,6 +239,11 @@ ul{
   
 a {
 text-decoration: none;
+}
+
+.bouton-connectez-vous{
+    margin: 0 auto;
+    display: flex;
 }
 
 .instructions {
@@ -330,9 +328,6 @@ text-decoration: none;
 }
 
 .post {
-    /*display: flex;
-    align-items: center;
-    justify-content: center;*/
     width: 55%;
     margin:  0 50px 50px 50px;
     background-color: white;
@@ -413,11 +408,6 @@ text-decoration: none;
     border-top: solid 1px grey;
     padding-top: 16px;
 }
-
-/*.default-css-add-file {
-    display: none;
-    visibility: hidden;
-}*/
 
 .icone-new-add-file {
     cursor: pointer;
@@ -583,7 +573,6 @@ text-decoration: none;
     position: absolute;
     top: -10px;
     right: 10px;
-    /*box-shadow: rgba(0, 0, 0, 0.3) 0px 1px 7px;*/
     z-index: 0;
   }
   
@@ -600,8 +589,6 @@ text-decoration: none;
     transform: translateY(-20px);
     transition: 500ms ease;
   }
-    
-  
 
   .option-post{
     display: flex;
@@ -611,7 +598,6 @@ text-decoration: none;
     font-weight: bold;
     font-size: 16px;
     padding: 10px;
-    /*border-top: 1px solid rgba(0, 0, 0, 0.05);*/
     z-index: 1;
     border-radius: 8px;
     border: none;
@@ -624,16 +610,6 @@ text-decoration: none;
     border-radius: 8px;
     transform: none;
   }
-
-  /*.modal-modifier-post {
-    width: 55%;
-    top: 50%;
-    left: 50%;
-    right: auto;
-    bottom: auto;
-    margin-right: -50%;
-    transform: translate(-50%, -50%);
-  }*/
 
   .input-post-modifier {
     background-color: #F0F2F5;

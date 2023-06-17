@@ -12,7 +12,6 @@ const CreateComment = (props) => {
 
     const navigate = useNavigate();
     const location = useLocation();
-    /*const from = location.state?.from?.pathname || "/create-comment";*/
     const from = location.state?.from?.pathname || "/";
 
     const [message, setMessage] = useState('');
@@ -24,7 +23,6 @@ const CreateComment = (props) => {
             const userId = localStorage.getItem('userId');
             const userPost = props.userPost;
 
-
             const response = await axios.post(CREATE_COMMENT_URL,
                 JSON.stringify({ userId, userPost, message }),
                 {
@@ -33,7 +31,6 @@ const CreateComment = (props) => {
                 }
             );
             console.log(JSON.stringify(response?.data));
-            //console.log(JSON.stringify(response));
         
             setMessage('');
             navigate(from, { replace: true });
