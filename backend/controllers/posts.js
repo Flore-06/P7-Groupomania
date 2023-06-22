@@ -10,7 +10,7 @@ const fs = require('fs');
 
 // Accéder à tous les posts
 exports.getAllPost = (req, res, next) => {
-  
+
   /* Trier les posts du plus récent au moins récent */
   Post.find().sort({ publishedDate: -1 })
 .populate('user') // Récupérer les utilisateurs liés aux posts

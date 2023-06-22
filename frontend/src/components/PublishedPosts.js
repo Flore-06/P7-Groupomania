@@ -40,15 +40,18 @@ const PublishPost = () => {
     const [userId, setUserId] = useState("");
     const [token, setToken] = useState("");
     useEffect(() => {
-
+   
     const id = localStorage.getItem('userId');
-    const token = localStorage.getItem('token');
-    setToken(token);
+    const tokenLocalStorage = localStorage.getItem('token');
+    
+    setToken(tokenLocalStorage);
+    
 
     if (id) {
     setUserId(id);
     getOneUser();
     }
+    fetchPosts();
     }, []);
 
     const [user, setUser] = useState("");
@@ -73,8 +76,10 @@ const PublishPost = () => {
 
     const [loadPosts, setLoadPost]=useState();
     const fetchPosts = async (e) => {
+        const token = localStorage.getItem('token');
+        setToken(token);
+
         try {
-            
             const response = await axios.get(LOAD_POST_URL,
                 {
                     headers: {"Authorization" : `Bearer ${token}`} ,
@@ -91,10 +96,6 @@ const PublishPost = () => {
             console.log(err);
         }
     }
-
-    useEffect(() => {
-        fetchPosts();
-      }, []);
 
 
     

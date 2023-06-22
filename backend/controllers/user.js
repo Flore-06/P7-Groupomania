@@ -174,3 +174,22 @@ exports.modifyPassword = (req, res, next) => {
         .catch((error) => res.status(400).json({ error }));
     }
 }
+
+
+// Supprimer un user
+exports.deleteUser = (req, res, next) => {
+    User.findOne({ _id: req.params.id})
+        .then(user => {
+            // N'est pas autorisé à supprimer si id du user est différent de celui qui a créé le post
+            
+            
+                User.deleteOne({_id: req.params.id})
+                    .then(() => { res.status(200).json({message: 'User supprimé !'})})
+                    .catch(error => res.status(401).json({ error }));
+            
+            
+        })
+        .catch( error => {
+            res.status(500).json({ error });
+        });
+  };

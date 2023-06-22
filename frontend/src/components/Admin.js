@@ -4,6 +4,7 @@ import { faPlus, faImage } from "@fortawesome/free-solid-svg-icons";
 import axios from '../api/axios';
 
 const LOAD_USER_URL = '/auth';
+const DELETE_USER_URL = '/auth/delete';
 const ADMIN_UPDATE_USER_INFOS_URL = '/auth/infos';
 const ADMIN_UPDATE_USER_PASSWORD_URL = '/auth/password';
 
@@ -105,6 +106,26 @@ const Admin = () => {
         }
     }
 
+    const deleteUser = async () => {
+
+        try {
+            const userId = localStorage.getItem('userId');
+            const url = DELETE_USER_URL + "/" + userId;
+            const response = await axios.get(url,
+                {
+                    headers: { 'Content-Type': 'application/json' },
+                    withCredentials: true
+                }
+            );
+
+            // Redirect to login page
+            window.location.href = '/login';
+        } 
+        
+        catch (err) {
+            console.log(err);
+        }
+    }
 
     return (
         <main className="light-background"> 
@@ -239,6 +260,16 @@ const Admin = () => {
                     </div>
 
                 </form>  
+
+                <button
+                        style={{margin: '20px 0px'}}
+                        type="submit"
+                        //disabled={isSubmitting}
+                        onClick={() => deleteUser()}
+                        className="btn btn-block btn-primary"
+                    >
+                        Supprimer mon compte
+                    </button>
 
             </section>
 

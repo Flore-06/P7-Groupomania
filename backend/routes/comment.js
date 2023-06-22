@@ -11,9 +11,9 @@ const auth = require('../middleware/auth');
 const commentsCtrl = require('../controllers/comments');
 
 // Intercepter les différentes requêtes
-router.get('/', /*auth,*/ commentsCtrl.getAllComment);
-router.post('/', /*auth,*/ commentsCtrl.createComment);
-router.get('/:id', /*auth,*/ commentsCtrl.getOneComment);
+router.get('/', auth, commentsCtrl.getAllComment);
+router.post('/', auth, commentsCtrl.createComment);
+router.get('/:id', auth, commentsCtrl.getOneComment);
 //router.put('/:id', /*auth,*/ commentsCtrl.modifyComment);
 //router.delete('/:id', /*auth,*/ commentsCtrl.deleteComment);
 
