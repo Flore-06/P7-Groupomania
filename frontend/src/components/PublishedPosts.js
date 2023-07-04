@@ -126,7 +126,7 @@ const PublishPost = () => {
 
         try {
             const url = LOAD_POST_URL + "/" + idPost;
-            const response = await axios.get(url,
+            const response = await axios.post(url,
                 {
                     headers: { 'Content-Type': 'application/json' },
                     withCredentials: true
@@ -148,12 +148,13 @@ const PublishPost = () => {
     }
 
     const deletePost = async (idPost) => {
+        const token = localStorage.getItem('token');
         
         try {
             const url = LOAD_POST_URL + "/" + idPost;
             await axios.delete(url,
                 {
-                    headers: { 'Content-Type': 'application/json' },
+                    headers: {"Authorization" : `Bearer ${token}`} ,
                     withCredentials: true
                 }
             );

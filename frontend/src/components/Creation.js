@@ -21,12 +21,13 @@ const CreatePost = () => {
     const userId = localStorage.getItem('userId');
 
     const fetchUsers = async (e) => {
+        const token = localStorage.getItem('token');
         try {
             
             const url = LOAD_USER_URL + '/' + userId;
             const response = await axios.get(url,
                 {
-                    headers: { 'Content-Type': 'application/json' },
+                    headers: {"Authorization" : `Bearer ${token}`} ,
                     withCredentials: true
                 }
             );
@@ -68,12 +69,13 @@ const CreatePost = () => {
         formData.append("message", JSON.stringify(message));
         formData.append("image", image);
 
+        const token = localStorage.getItem('token');
         try {
 
             const response = await axios.post(CREATE_POST_URL,
                 formData,
                 {
-                    headers: { "Content-Type": "multipart/form-data" },
+                    headers: {"Authorization" : `Bearer ${token}`} ,
                     withCredentials: true,
                 }
             );

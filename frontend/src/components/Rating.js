@@ -9,7 +9,7 @@ const Rating = props => {
   const handleLike = async() => {
 
     
-
+    const token = localStorage.getItem('token');
     try {
         const userId = localStorage.getItem('userId');
         const userPost = props.userPost;
@@ -32,7 +32,7 @@ const Rating = props => {
         const response = await axios.post(url,
             JSON.stringify({ userId, userPost, like }),
             {
-              headers: { 'Content-Type': 'application/json' },
+              headers: {"Authorization" : `Bearer ${token}`, 'Content-Type': 'application/json'} ,
               withCredentials: true
             }
         );

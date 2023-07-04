@@ -108,16 +108,18 @@ const Admin = () => {
 
     const deleteUser = async () => {
 
+        const token = localStorage.getItem('token');
         try {
             const userId = localStorage.getItem('userId');
             const url = DELETE_USER_URL + "/" + userId;
-            const response = await axios.get(url,
+            await axios.post(url,
                 {
-                    headers: { 'Content-Type': 'application/json' },
+                    headers: {"Authorization" : `Bearer ${token}`, 'Content-Type': 'application/json'} ,
                     withCredentials: true
                 }
             );
 
+            localStorage.clear();
             // Redirect to login page
             window.location.href = '/login';
         } 

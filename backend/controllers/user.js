@@ -10,6 +10,9 @@ const User = require('../models/User');
 // Appel du passwordValidator : demande des mots de passe complexes
 var passwordValidator = require('password-validator');
 
+const Post = require('../models/Post');
+const Comment = require('../models/Comment');
+
 
 
 // Enregistrer de nouveaux utilisateurs
@@ -96,10 +99,9 @@ exports.getOneUser = (req, res, next) => {
 
  // Mettre à jour un user particulier
  exports.modifyUser = (req, res, next) => {
-    const name = req.body.userName;
-    name.replace(/"/g, '');
-    const surname = req.body.userSurname;
-    surname.replace(/"/g, '');
+    const name = req.body.userName.slice(1,-1);
+    const surname = req.body.userSurname.slice(1,-1);
+    
     
     console.log(req.params.id);
     console.log(name);
@@ -178,12 +180,15 @@ exports.modifyPassword = (req, res, next) => {
 
 // Supprimer un user
 exports.deleteUser = (req, res, next) => {
+    const userId = req.params.id;
     User.findOne({ _id: req.params.id})
         .then(user => {
             // N'est pas autorisé à supprimer si id du user est différent de celui qui a créé le post
             
             
                 User.deleteOne({_id: req.params.id})
+                    .then(() => Post.deleteMany({ userId}))
+                    .then(() => Comment.deleteMany({ userId}))
                     .then(() => { res.status(200).json({message: 'User supprimé !'})})
                     .catch(error => res.status(401).json({ error }));
             

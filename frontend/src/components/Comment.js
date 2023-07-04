@@ -19,6 +19,7 @@ const CreateComment = (props) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
+        const token = localStorage.getItem('token');
         try {
             const userId = localStorage.getItem('userId');
             const userPost = props.userPost;
@@ -26,7 +27,7 @@ const CreateComment = (props) => {
             const response = await axios.post(CREATE_COMMENT_URL,
                 JSON.stringify({ userId, userPost, message }),
                 {
-                    headers: { 'Content-Type': 'application/json' },
+                    headers: {"Authorization" : `Bearer ${token}`, 'Content-Type': 'application/json'} ,
                     withCredentials: true
                 }
             );

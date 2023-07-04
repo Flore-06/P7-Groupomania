@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const {ObjectId} = require('mongodb');
 const User = require('../models/User');
+const Comment = require('../models/Comment');
 
 // Appel du modèle du post
 const Post = require("../models/Post");
@@ -47,11 +48,11 @@ exports.getOnePost = (req, res, next) => {
 // Créer un post
 exports.createPost = (req, res, next) => {
 
-  const message = req.body.message;
+  const message = req.body.message.slice(1,-1);
   //message.replace(/["']/g, "");
-  const name = req.body.userName;
+  const name = req.body.userName.slice(1,-1);
   //name.replace(/"/g, '');
-  const surname = req.body.userSurname;
+  const surname = req.body.userSurname.slice(1,-1);
   //surname.replace(/"/g, '');
   const userid = req.body.userId.replace(/"/g, '');
   
@@ -70,7 +71,7 @@ exports.createPost = (req, res, next) => {
 
     if (req.file === undefined) {
         obj = {
-          message : req.body.message,
+          message : message,
           imageUrl: "none",
           user: objectId,
           likes: 0,
@@ -84,7 +85,7 @@ exports.createPost = (req, res, next) => {
     else {
         const image = `${req.protocol}://${req.get('host')}/images/${req.file.filename}`;
         
-        obj = {message : req.body.message,
+        obj = {message : message,
           imageUrl: image,
           user: objectId,
           likes: 0,
@@ -138,6 +139,7 @@ exports.modifyPost = (req, res, next) => {
 
 // Supprimer un post
 exports.deletePost = (req, res, next) => {
+  const postId = req.params.id;
   Post.findOne({ _id: req.params.id})
       .then(post => {
           // N'est pas autorisé à supprimer si id du user est différent de celui qui a créé le post
@@ -145,6 +147,7 @@ exports.deletePost = (req, res, next) => {
           const filename = post.imageUrl.split('/images/')[1];
           fs.unlink(`images/${filename}`, () => {
               Post.deleteOne({_id: req.params.id})
+                  .then(() => Comment.deleteMany({ postId}))
                   .then(() => { res.status(200).json({message: 'Post supprimé !'})})
                   .catch(error => res.status(401).json({ error }));
           });
