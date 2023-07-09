@@ -35,6 +35,7 @@ const CreateComment = (props) => {
         
             setMessage('');
             navigate(from, { replace: true });
+            window.location.reload(false);
         } catch (err) {
             console.log(err);
         }

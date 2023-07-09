@@ -147,7 +147,7 @@ exports.deletePost = (req, res, next) => {
           const filename = post.imageUrl.split('/images/')[1];
           fs.unlink(`images/${filename}`, () => {
               Post.deleteOne({_id: req.params.id})
-                  .then(() => Comment.deleteMany({ postId}))
+                  .then(() => Comment.deleteMany({ post: postId}))
                   .then(() => { res.status(200).json({message: 'Post supprimé !'})})
                   .catch(error => res.status(401).json({ error }));
           });
