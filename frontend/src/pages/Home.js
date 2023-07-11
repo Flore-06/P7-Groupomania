@@ -1,4 +1,5 @@
 import Header from '../components/Header';
+
 import CreatePost from '../components/Creation';
 import PublishPost from '../components/PublishedPosts';
 

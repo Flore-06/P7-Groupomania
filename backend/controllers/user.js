@@ -188,15 +188,12 @@ exports.deleteUser = (req, res, next) => {
         const deleteUser = User.findByIdAndDelete(userId);
         
         Promise.all([deleteComments, deletePosts, deleteUser])
-        .then(() => {
-            console.log('Suppression en cascade réussie.');
-        })
+        .then(() => { res.status(200).json({message: 'User supprimé !'})})
+        
         .catch(error => {
             console.error('Une erreur s\'est produite :', error);
         });
 
-
-        
 
 
   };

@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus, faImage } from "@fortawesome/free-solid-svg-icons";
 import axios from '../api/axios';
@@ -9,6 +10,8 @@ const ADMIN_UPDATE_USER_INFOS_URL = '/auth/infos';
 const ADMIN_UPDATE_USER_PASSWORD_URL = '/auth/password';
 
 const Admin = () => {
+
+    const navigate = useNavigate();
 
     const [username, setUsername] = useState('');
     const [firstname, setFirstname] = useState('');
@@ -117,11 +120,17 @@ const Admin = () => {
                     headers: {"Authorization" : `Bearer ${token}`, 'Content-Type': 'application/json'} ,
                     withCredentials: true
                 }
-            );
+            )
+            .then(() => {
+                
+                localStorage.clear();
+                // Redirect to login page
+                //window.location.href = '/login';
+                navigate('/login');
+            });
+    
 
-            localStorage.clear();
-            // Redirect to login page
-            window.location.href = '/login';
+            
         } 
         
         catch (err) {
