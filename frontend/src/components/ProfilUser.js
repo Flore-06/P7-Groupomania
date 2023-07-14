@@ -9,7 +9,7 @@ const DELETE_USER_URL = '/auth/delete';
 const ADMIN_UPDATE_USER_INFOS_URL = '/auth/infos';
 const ADMIN_UPDATE_USER_PASSWORD_URL = '/auth/password';
 
-const Admin = () => {
+const ProfilUser = () => {
 
     const navigate = useNavigate();
 
@@ -142,12 +142,12 @@ const Admin = () => {
         <main className="light-background"> 
 
             <section className="bg-light-grey section-bienvenue">
-                <h1 className="form-title">Page administrateur</h1>
+                <h1 className="form-title">Page de profil</h1>
                 
                 <form onSubmit={handleSubmit} className="admin-form">
                     
-                    <div className="card-body">
-                    <input type="hidden" name="id" /*value={values._id}*/ />
+                    <div className="user-info">
+                        <input type="hidden" name="id" />
 
                         <img 
                             src={userImg}
@@ -170,6 +170,10 @@ const Admin = () => {
                         </label>
                         <p className="user-name" id="user-name-posted">{firstname} {username}</p>
 
+                    </div>
+
+                    
+                    <div className="user-modify-info">
                         <div className="form-group has-feedback">
                             <label htmlFor="username">Prénom</label>
                             <input
@@ -179,11 +183,6 @@ const Admin = () => {
                             placeholder="Changez ici le prénom"
                             onChange={(e) => setFirstname(e.target.value)}
                             />
-                            {/*errors.first_name && touched.first_name ? (
-                            <small id="passwordHelp" class="text-danger">
-                                {errors.first_name}
-                            </small>
-                            ) : null*/}
                         </div>
 
                         <div className="form-group has-feedback">
@@ -195,75 +194,52 @@ const Admin = () => {
                             placeholder="Changez ici le nom"
                             onChange={(e) => setUsername(e.target.value)}
                             />
-                            {/*errors.last_name && touched.last_name ? (
-                            <small id="passwordHelp" class="text-danger">
-                                {errors.last_name}
-                            </small>
-                            ) : null*/}
                         </div>
-                    
+
+                        <button
+                            style={{margin: '20px 0px'}}
+                            type="submit"
+                            className="btn btn-block btn-primary"
+                        >
+                            Mettre à jour
+                        </button>
                     </div>
-                    <div className="card-footer">
-                    <button
-                        style={{margin: '20px 0px'}}
-                        type="submit"
-                        //disabled={isSubmitting}
-                        className="btn btn-block btn-primary"
-                    >
-                        Mettre à jour
-                    </button>
-                    </div>
-                    </form>
+                </form>
 
-                    <form onSubmit={handleSubmitPassword} className="admin-form">
-
-                        <label htmlFor="password">
-                            Mot de passe :
-                            {/*<FontAwesomeIcon icon={faCheck} className={validPwd ? "valid" : "hide"} />
-                            <FontAwesomeIcon icon={faTimes} className={validPwd || !password ? "hide" : "invalid"} />*/}
-                        </label>
-                        
-                        <input
-                            type="password"
-                            id="password"
-                            onChange={(e) => setPassword(e.target.value)}
-                            value={password}
-                            required
-                        />
-                        {/*<p id="pwdnote" className={pwdFocus && !validPwd ? "instructions" : "offscreen"}>
-                            <FontAwesomeIcon icon={faInfoCircle} />
-                            8 à 24 caractères<br />
-                            Doit contenir au moins une lettre majuscule et minuscule, un nombre et un caractère spécial.<br />
-                            Caractères spéciaux autorisés: <span aria-label="exclamation mark">!</span> <span aria-label="at symbol">@</span> <span aria-label="hashtag">#</span> <span aria-label="dollar sign">$</span> <span aria-label="percent">%</span>
-                        </p>*/}
-
-                        <label htmlFor="confirm_pwd">
-                            Confirmez le mot de passe :
-                            {/*<FontAwesomeIcon icon={faCheck} className={validMatch && matchPwd ? "valid" : "hide"} />
-                            <FontAwesomeIcon icon={faTimes} className={validMatch || !matchPwd ? "hide" : "invalid"} />*/}
-                        </label>
-                        <input
-                            type="password"
-                            id="confirm_pwd"
-                            onChange={(e) => setPasswordConfirmation(e.target.value)}
-                            value = {passwordconfirmation}
-                            required
-                            aria-describedby="confirmnote"
-                        />
-                        {/*<p id="confirmnote" className={matchFocus && !validMatch ? "instructions" : "offscreen"}>
-                            <FontAwesomeIcon icon={faInfoCircle} />
-                            Doit correspondre au premier mot de passe.
-                        </p>*/}
+                <form onSubmit={handleSubmitPassword} className="admin-form">
+    
+                    <label htmlFor="password">
+                        Mot de passe :
+                    </label>
                     
+                    <input
+                        type="password"
+                        id="password"
+                        onChange={(e) => setPassword(e.target.value)}
+                        value={password}
+                        required
+                    />
+
+                    <label htmlFor="confirm_pwd">
+                        Confirmez le mot de passe :
+                    </label>
+                    <input
+                        type="password"
+                        id="confirm_pwd"
+                        onChange={(e) => setPasswordConfirmation(e.target.value)}
+                        value = {passwordconfirmation}
+                        required
+                        aria-describedby="confirmnote"
+                    />
+                
                     <p>
                         {messagePassword}
                     </p>
 
-                    <div className="card-footer">
+                    <div className="user-modify-info">
                         <button
                             style={{margin: '20px 0px'}}
                             type="submit"
-                            //disabled={isSubmitting}
                             className="btn btn-block btn-primary"
                         >
                             Mettre à jour le mot de passe
@@ -277,7 +253,7 @@ const Admin = () => {
                         type="submit"
                         //disabled={isSubmitting}
                         onClick={() => deleteUser()}
-                        className="btn btn-block btn-primary"
+                        className="btn btn-block btn-primary btn-supprimer"
                     >
                         Supprimer mon compte
                     </button>
@@ -290,4 +266,4 @@ const Admin = () => {
     )
 }
 
-export default Admin
+export default ProfilUser

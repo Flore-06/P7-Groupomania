@@ -85,10 +85,15 @@ img {
     align-items: center;
 }
 
-.card-body {
+.user-info, .user-modify-info {
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+.btn-supprimer {
+    background-color: rgba(var(--second-color), 1);
+    border-color: rgba(var(--second-color), 1);
 }
 
 .form-group {

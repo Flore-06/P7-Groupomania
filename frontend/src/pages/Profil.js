@@ -1,6 +1,6 @@
 import React from "react";
 import Header from '../components/Header';
-import Admin from '../components/Admin';
+import ProfilUser from '../components/ProfilUser';
 
 const Profil = () => {
     return (
@@ -8,7 +8,7 @@ const Profil = () => {
             <Header/>
         
             <main className="light-background">
-                <Admin />
+                <ProfilUser />
             </main>
         </>
     );
