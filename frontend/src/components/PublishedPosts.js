@@ -1,15 +1,11 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import axios from '../api/axios';
 import Modal from 'react-modal';
 
-
 import Post from "./Post";
-
-
 
 const LOAD_POST_URL = '/posts';
 
-// Make sure to bind modal to your appElement (https://reactcommunity.org/react-modal/accessibility/)
 Modal.setAppElement('body');
 
 

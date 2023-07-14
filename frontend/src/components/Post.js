@@ -2,12 +2,11 @@ import { useState,useEffect} from "react";
 import axios from '../api/axios';
 import { Routes, Route } from 'react-router-dom';
 
-/*import { useNavigate, useLocation } from 'react-router-dom';*/
-
-
 import CreateComment from "./Comment";
 import PublishComment from "./PublishedComments";
 import DropdownMenu from "./DropdownMenu";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faThumbsUp, faThumbsDown } from "@fortawesome/free-solid-svg-icons";
 
 const LOAD_USER_URL = '/auth';
 
@@ -102,10 +101,10 @@ const Post = ({ post }) => {
     };
   
     return (
-      <div>
+      
 
 
-<div className="post">
+                  <div className="post">
                     <div>
                         <div className="post-info">
                             <div className="post-info__user">
@@ -147,10 +146,15 @@ const Post = ({ post }) => {
                         <div className="post-advice">
 
                         <div className="post-advice__buttons">
-                            <p>Likes: {likes}</p>
-                            <p>Dislikes: {dislikes}</p>
-                            <button onClick={handleLike}>{liked ? 'Unlike' : 'Like'}</button>
-                            <button onClick={handleDislike}>{disliked ? 'Undislike' : 'Dislike'}</button>
+                            <div class="like-dislike">
+                              <p><FontAwesomeIcon icon={faThumbsUp}/> : {likes}</p>
+                              <p><FontAwesomeIcon icon={faThumbsDown}/> :  {dislikes}</p>
+                            </div>
+
+                            <div class="like-dislike">
+                              <button onClick={handleLike}>{liked ? 'Unlike' : 'Like'}</button>
+                              <button onClick={handleDislike}>{disliked ? 'Undislike' : 'Dislike'}</button>
+                            </div>
                         </div>
 
                             <Routes>
@@ -174,7 +178,7 @@ const Post = ({ post }) => {
 
 
         
-      </div>
+      
     );
   };
 

@@ -472,7 +472,14 @@ text-decoration: none;
     border-top: solid 1px grey;
     border-bottom: solid 1px grey;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+}
+
+.like-dislike {
+    display: flex;
+    gap: 20px;
 }
 
 .post-advice__comment {
