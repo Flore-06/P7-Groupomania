@@ -1,70 +1,49 @@
-# Getting Started with Create React App
+# Groupomania - Réseau social d'entreprise
+Vous êtes développeur depuis plus d'un an chez CONNECT-E, une petite agence web
+regroupant une douzaine d'employés.
+Votre directrice, Stéphanie, vient de signer un nouveau contrat avec Groupomania, un groupe spécialisé dans la grande distribution, et l'un des plus fidèles clients de l'agence.
+Le projet consiste à construire un réseau social interne pour les employés de Groupomania. Le but de cet outil est de faciliter les interactions entre collègues.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Table des matières
+- Fonctionnalités
+- Installation
+- Configuration
+- Utilisation
+- Contribuer
+- Licence
 
-## Available Scripts
+## Fonctionnalités
+- Interface de connexion et de création de compte
+- Page d'accueil permettant de publier des posts et d'accéder au fil d'actualité
+- Possibilité de commenter et liker un post
+- Possibilité de modifier ou supprimer son post
+- Possibilité de modifier ses informations de compte
+- Possibilité de supprimer son compte
 
-In the project directory, you can run:
+## Installer le Backend
+1. Dans le terminal du backend, installer les dépendances
+     ```
+     npm install
+     ```
+2. Configurer les variables d'environnement
+    Modifier le fichier .env avec vos informations
+3. Créer la base de données avec MongoDB
+4. Lancer le serveur avec :
+    ```
+    nodemon server
+    ```
+5. Se connecter avec le compte Admin
+    Identifiant `administrateur@gmail.com` 
+    Mot de passe `Admin@1234`
 
-### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## Installer le Frontend
+1. Dans le terminal du frontend, installer les dépendances
+     ```
+     npm install
+     ```
+2. Configurer les variables d'environnement
+    Modifier le fichier .env avec vos informations
+4. Lancer le serveur avec :
+    ```
+    npm start
+    ```
