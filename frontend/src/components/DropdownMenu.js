@@ -1,7 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import Modal from 'react-modal';
 import axios from '../api/axios';
-import { Routes, Route } from 'react-router-dom';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEllipsisH} from "@fortawesome/free-solid-svg-icons";
 
@@ -24,8 +23,8 @@ const customStyles = {
 // Make sure to bind modal to your appElement (https://reactcommunity.org/react-modal/accessibility/)
 Modal.setAppElement('body');
 
-const DropdownMenu = (idPost) => {
-
+const DropdownMenu = (post) => {
+    
     /*Pour fermer le Dropdown menu*/
     const [open, setOpen] = useState(false);
     let menuRef = useRef();
@@ -51,10 +50,14 @@ const DropdownMenu = (idPost) => {
     const openModal = async (idPost) => {
 
         try {
+
+            const token = localStorage.getItem('token');
+
             const url = LOAD_POST_URL + "/" + idPost;
-            const response = await axios.post(url,
+            
+            const response = await axios.get(url,
                 {
-                    headers: { 'Content-Type': 'application/json' },
+                    headers: {"Authorization" : `Bearer ${token}`} ,
                     withCredentials: true
                 }
             );
@@ -100,6 +103,8 @@ const DropdownMenu = (idPost) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         
+        const token = localStorage.getItem('token');
+        
         const formData = new FormData();
         formData.append("message", JSON.stringify(textModal));
     
@@ -108,7 +113,7 @@ const DropdownMenu = (idPost) => {
             await axios.put(url,
                 formData,
                 {
-                    headers: { "Content-Type": "multipart/form-data" },
+                    headers: {"Authorization" : `Bearer ${token}`} ,
                     withCredentials: true,
                 }
             );
@@ -125,7 +130,7 @@ const DropdownMenu = (idPost) => {
     return (
         <div>
             <div className='menu-container' ref={menuRef}>
-                <div className='menu-trigger' key={post._id} onClick={()=>{setOpen(!open)}}>
+                <div className='menu-trigger'  onClick={()=>{setOpen(!open)}}>
                     <FontAwesomeIcon
                         icon={faEllipsisH}
                         className="icone-params-posts"
@@ -135,8 +140,8 @@ const DropdownMenu = (idPost) => {
 
                 <div className={`dropdown-menu ${open? 'active' : 'inactive'}`}>
                     <ul>
-                        <button className="option-post" key={post._id} onClick={() => openModal(post._id)}>Modifier le post</button>
-                        <button className="option-post" key={post._id} onClick={() => deletePost(post._id)}>Supprimer le post</button>
+                        <button className="option-post" onClick={() => openModal(post.idPost)}>Modifier le post</button>
+                        <button className="option-post" onClick={() => deletePost(post.idPost)}>Supprimer le post</button>
                     </ul>
                 </div>
             </div>

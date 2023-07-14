@@ -7,10 +7,6 @@ Le projet consiste à construire un réseau social interne pour les employés de
 ## Table des matières
 - Fonctionnalités
 - Installation
-- Configuration
-- Utilisation
-- Contribuer
-- Licence
 
 ## Fonctionnalités
 - Interface de connexion et de création de compte
@@ -26,24 +22,23 @@ Le projet consiste à construire un réseau social interne pour les employés de
      npm install
      ```
 2. Configurer les variables d'environnement
-    Modifier le fichier .env avec vos informations
+    Créer le fichier .env à la racine avec vos informations :
+    SECRET_DB (lien de connexion à MongoDB)
+    PORT (ex : 3500)
 3. Créer la base de données avec MongoDB
 4. Lancer le serveur avec :
     ```
     nodemon server
     ```
-5. Se connecter avec le compte Admin
-    Identifiant `administrateur@gmail.com` 
-    Mot de passe `Admin@1234`
 
 ## Installer le Frontend
 1. Dans le terminal du frontend, installer les dépendances
      ```
      npm install
      ```
-2. Configurer les variables d'environnement
-    Modifier le fichier .env avec vos informations
-4. Lancer le serveur avec :
+2. Lancer le serveur avec :
     ```
     npm start
     ```
+
+3. Pour le compte administrateur, modifier dans la base de données dans le modèle utilisateur user : admin à 1

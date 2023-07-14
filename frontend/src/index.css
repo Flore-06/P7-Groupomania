@@ -122,6 +122,12 @@ img {
     background-color: #3d4050;
     color: white;
   }
+
+  @media (max-width:480px) {
+    .navbar a {
+        font-size: 25px;
+      }
+} 
   
   .navbar .active {
     background-color: #2b2c38;
@@ -315,6 +321,12 @@ text-decoration: none;
     align-items: center;
     padding: 100px 50px 50px 50px;
 }
+
+@media (max-width:480px) {
+    .section-bienvenue {
+        padding: 80px 20px 50px 20px;
+    }
+} 
 
 
 
