@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import Modal from 'react-modal';
 import axios from '../api/axios';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEllipsisH} from "@fortawesome/free-solid-svg-icons";
+import { faEllipsisH, faPenToSquare, faTrash} from "@fortawesome/free-solid-svg-icons";
 
 
 const LOAD_POST_URL = '/posts';
@@ -140,8 +140,14 @@ const DropdownMenu = (post) => {
 
                 <div className={`dropdown-menu ${open? 'active' : 'inactive'}`}>
                     <ul>
-                        <button className="option-post" onClick={() => openModal(post.idPost)}>Modifier le post</button>
-                        <button className="option-post" onClick={() => deletePost(post.idPost)}>Supprimer le post</button>
+                        <button className="option-post" onClick={() => openModal(post.idPost)}>
+                            <FontAwesomeIcon icon={faPenToSquare}/>
+                            Modifier le post
+                        </button>
+                        <button className="option-post option-supprimer-post" onClick={() => deletePost(post.idPost)}>
+                            <FontAwesomeIcon icon={faTrash}/>
+                            Supprimer le post
+                        </button>
                     </ul>
                 </div>
             </div>

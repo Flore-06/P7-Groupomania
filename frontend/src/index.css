@@ -616,6 +616,8 @@ text-decoration: none;
 
   .option-post{
     display: flex;
+    align-items: center;
+    gap: 10px;
     background-color: white;
     color: rgba(var(--first-color), 1);
     font-family: 'Lato', sans-serif;
@@ -633,6 +635,10 @@ text-decoration: none;
     color: black;
     border-radius: 8px;
     transform: none;
+  }
+
+  .option-supprimer-post:hover {
+    color: rgba(var(--second-color), 1);
   }
 
   .input-post-modifier {
