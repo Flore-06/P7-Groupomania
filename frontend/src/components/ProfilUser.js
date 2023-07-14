@@ -154,7 +154,7 @@ const ProfilUser = () => {
                             alt="icone admin"
                             className="admin-image"
                         ></img>
-                        <label htmlFor="image" className='label-image-upload'>
+                        <label htmlFor="image" className='label-image-upload' aria-label="Un champ pour modifier la photo de profil">
                             <div className="icone-new-add-file">
                             <FontAwesomeIcon icon={faPlus} className="icone-a-droite icone-new-add-file"/>
                             <FontAwesomeIcon icon={faImage} className="icone-a-droite icone-new-add-file"/>
@@ -181,6 +181,7 @@ const ProfilUser = () => {
                             type="text"
                             id="prenom"
                             placeholder="Changez ici le prénom"
+                            aria-label="Un champ de texte pour modifier le prénom"
                             onChange={(e) => setFirstname(e.target.value)}
                             />
                         </div>
@@ -192,6 +193,7 @@ const ProfilUser = () => {
                             type="text"
                             id="nom"
                             placeholder="Changez ici le nom"
+                            aria-label="Un champ de texte pour modifier le nom"
                             onChange={(e) => setUsername(e.target.value)}
                             />
                         </div>
@@ -229,7 +231,7 @@ const ProfilUser = () => {
                         onChange={(e) => setPasswordConfirmation(e.target.value)}
                         value = {passwordconfirmation}
                         required
-                        aria-describedby="confirmnote"
+                        
                     />
                 
                     <p>

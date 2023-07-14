@@ -23,9 +23,9 @@ const Header = () => {
     return (
         
         <div className="navbar">
-                <NavLink to="/"><FontAwesomeIcon icon={faHome}/></NavLink>
-                <NavLink to="/profil-user" style={{width:'34%'}}><FontAwesomeIcon icon={faUser}/></NavLink>
-                <NavLink to="/login" onClick={logout}><FontAwesomeIcon icon={faRightFromBracket}/></NavLink>
+                <NavLink to="/" aria-label="Lien vers page d'accueil"><FontAwesomeIcon icon={faHome}/></NavLink>
+                <NavLink to="/profil-user" aria-label="Lien vers page de profil" style={{width:'34%'}}><FontAwesomeIcon icon={faUser}/></NavLink>
+                <NavLink to="/login" aria-label="Lien pour se déconnecter" onClick={logout}><FontAwesomeIcon icon={faRightFromBracket}/></NavLink>
         </div>
 
         

@@ -107,7 +107,7 @@ const CreatePost = () => {
                                 </div>                                
                             </div>
 
-                            <label htmlFor="message" className="create-post__text">
+                            <label htmlFor="message" className="create-post__text" aria-label="Un champ de texte pour créer un post">
                                 <textarea
                                     id="message"
                                     placeholder="Que voulez-vous partager ?"
@@ -115,14 +115,14 @@ const CreatePost = () => {
                                     value={message}
                                     required
                                     className="create-post__posttextarea"
-                                    aria-label="Un champ de texte pour créer un post"
+                                    
                                 ></textarea>
                             </label>
                         </div>
                         
                         
                         <div className="create-post__div create-post__fileinput">
-                            <label htmlFor="image" className='label-image-upload'>
+                            <label htmlFor="image" className='label-image-upload' aria-label="Un champ pour ajouter une image au post">
                                 <div className="icone-new-add-file">
                                 <FontAwesomeIcon icon={faPlus} className="icone-a-droite icone-new-add-file"/>
                                 <FontAwesomeIcon icon={faImage} className="icone-a-droite icone-new-add-file"/>

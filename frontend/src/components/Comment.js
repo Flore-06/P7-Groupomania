@@ -45,7 +45,7 @@ const CreateComment = (props) => {
 
         <form onSubmit={handleSubmit}>
         <div className="post-advice__comment"  >
-                <label htmlFor="message" className='label-comment'>
+                <label htmlFor="message" className='label-comment' aria-label="Un champ de texte pour commenter">
                     <textarea
                         id="message"
                         placeholder="Ecrivez un commentaire..."
@@ -53,7 +53,7 @@ const CreateComment = (props) => {
                         value={message}
                         required
                         className="comment-text comment-textarea"
-                        aria-label="Un champ de texte pour commenter"
+                        
                     ></textarea>
                 </label>
                 <button
