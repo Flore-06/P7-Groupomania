@@ -71,7 +71,7 @@ const ProfilUser = () => {
             console.log(JSON.stringify(response?.data));
             console.log(userImg);
         
-            // Redirect to confirmation page
+            // Redirige vers la page de confirmation de modification de profil
             window.location.href = '/confirmation-modification-profil';
             
         } catch (err) {
@@ -124,8 +124,7 @@ const ProfilUser = () => {
             .then(() => {
                 
                 localStorage.clear();
-                // Redirect to login page
-                //window.location.href = '/login';
+                // Redirige vers login page
                 navigate('/login');
             });
     
@@ -253,7 +252,6 @@ const ProfilUser = () => {
                 <button
                         style={{margin: '20px 0px'}}
                         type="submit"
-                        //disabled={isSubmitting}
                         onClick={() => deleteUser()}
                         className="btn btn-block btn-primary btn-supprimer"
                     >

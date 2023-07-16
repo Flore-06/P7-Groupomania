@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
 import { faImage, faPaperPlane, faPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from '../api/axios';
@@ -8,10 +7,6 @@ const CREATE_POST_URL = '/posts';
 const LOAD_USER_URL = '/auth';
 
 const CreatePost = () => {
-
-    const navigate = useNavigate();
-    const location = useLocation();
-    const from = location.state?.from?.pathname || "/";
 
     const [message, setMessage] = useState('');
     const [image, setImage] = useState('');

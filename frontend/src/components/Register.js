@@ -74,7 +74,7 @@ const Register = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        // if button enabled with JS hack
+        
         const v1 = NAME_REGEX.test(name);
         const v2 = SURNAME_REGEX.test(surname);
         const v3 = EMAIL_REGEX.test(email);
@@ -91,11 +91,10 @@ const Register = () => {
                     withCredentials: true
                 }
             );
-            // TODO: remove console.logs before deployment
             console.log(JSON.stringify(response?.data));
 
             setSuccess(true);
-            //clear state and controlled inputs
+
             setName('');
             setSurname('');
             setEmail('');
@@ -103,11 +102,11 @@ const Register = () => {
             setMatchPwd('');
         } catch (err) {
             if (!err?.response) {
-                setErrMsg('No Server Response');
+                setErrMsg('Pas de réponse du serveur');
             } else if (err.response?.status === 409) {
-                setErrMsg('Email already used');
+                setErrMsg('Email déjà utilisé');
             } else {
-                setErrMsg('Registration Failed')
+                setErrMsg("La création d'un compte a échoué")
             }
             errRef.current.focus();
         }

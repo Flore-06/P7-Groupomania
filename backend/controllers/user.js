@@ -111,14 +111,12 @@ exports.getOneUser = (req, res, next) => {
 
     if (req.file === undefined) {
         obj = {name: name, surname: surname};
-        console.log("est passé par là");
     }
 
     else {
         const imageUrl = `${req.protocol}://${req.get('host')}/images/${req.file.filename}`;
         console.log(imageUrl);
         obj = {name: name, surname: surname, imageUrl: imageUrl};
-        console.log("est passé par ici");
     }
     
 
@@ -126,11 +124,9 @@ exports.getOneUser = (req, res, next) => {
     User.findOne({ _id: req.params.id })
     
       .then((user) => { 
-        console.log("est passé par ici");
         console.log(user._id);
 
         // Si id est le même : peut modifier
-        console.log("est passé par là");
         User.updateOne({ _id: req.params.id}, {$set: obj})
         .then(() => res.status(200).json({message : 'User modifié !'}))
         .catch(error => res.status(401).json({ error }));
@@ -142,9 +138,7 @@ exports.getOneUser = (req, res, next) => {
 // Mettre à jour Mot de passe
 exports.modifyPassword = (req, res, next) => {
     let password = req.body.password;
-    console.log(password);
     let passwordconfirmation = req.body.passwordconfirmation;
-    console.log(passwordconfirmation);
     
     let retour = "";
     let message = "";
@@ -160,11 +154,9 @@ exports.modifyPassword = (req, res, next) => {
         User.findOne({ _id: req.params.id })
     
       .then((user) => { 
-        console.log("est passé par ici");
         console.log(user._id);
 
         // Si id est le même : peut modifier
-            console.log("est passé par là");
             bcrypt.hash(req.body.password, 10)
             .then(hash => {
                 User.updateOne({ _id: req.params.id}, {$set: {password: hash}})
@@ -182,9 +174,7 @@ exports.modifyPassword = (req, res, next) => {
 exports.deleteUser = (req, res, next) => {
     const userId = req.params.id;
         const deleteComments = Comment.deleteMany({ user: userId });
-
         const deletePosts = Post.deleteMany({ user: userId });
-        
         const deleteUser = User.findByIdAndDelete(userId);
         
         Promise.all([deleteComments, deletePosts, deleteUser])

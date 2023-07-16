@@ -4,8 +4,6 @@ import axios from '../api/axios';
 
 const DeletePost = props => {
 
-
-
     const [deletePosts, setDeletePost]=useState();
     const deletePosts = async (e) => {
         try {

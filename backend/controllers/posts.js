@@ -28,10 +28,7 @@ exports.getAllPost = (req, res, next) => {
         })
       
     .catch((error) => res.status(400).json({ error }));
-
     // Récupérer tous les posts avec les utilisateurs et les commentaires associés
-
-
 
 };
 
@@ -49,18 +46,14 @@ exports.getOnePost = (req, res, next) => {
 exports.createPost = (req, res, next) => {
 
   const message = req.body.message.slice(1,-1);
-  //message.replace(/["']/g, "");
   const name = req.body.userName.slice(1,-1);
-  //name.replace(/"/g, '');
   const surname = req.body.userSurname.slice(1,-1);
-  //surname.replace(/"/g, '');
   const userid = req.body.userId.replace(/"/g, '');
   
   let obj;
 
   console.log("---"+req.body.userId+"---");
   console.log(userid);
-  console.log("est passé par ici");
   console.log(message);
   console.log(req.body.message);
   console.log(name);
@@ -92,7 +85,6 @@ exports.createPost = (req, res, next) => {
           dislikes: 0,
           usersLiked: [' '],
           usersdisLiked: [' '],};
-        console.log("est passé par ici");
     }
   
       console.log(req.params.id);

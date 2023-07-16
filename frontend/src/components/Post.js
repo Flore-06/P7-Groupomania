@@ -17,8 +17,8 @@ const Post = ({ post }) => {
     const [user, setUser] = useState("");
     const [likes, setLikes] = useState(post.likes);
     const [dislikes, setDislikes] = useState(post.dislikes);
-    const [liked, setLiked] = useState(post.usersLiked.includes(userId)); // Remplacez par l'ID de l'utilisateur connecté
-    const [disliked, setDisliked] = useState(post.usersDisliked.includes(userId)); // Remplacez par l'ID de l'utilisateur connecté
+    const [liked, setLiked] = useState(post.usersLiked.includes(userId));
+    const [disliked, setDisliked] = useState(post.usersDisliked.includes(userId));
 
     useEffect(() => {
    
@@ -58,12 +58,10 @@ const Post = ({ post }) => {
             userId,
           });
       
-          console.log(response.data.message); // Affiche le message de la réponse du backend (optionnel)
-      
+          console.log(response.data.message);
           // Mettre à jour l'état ou effectue d'autres actions nécessaires suite à la mise à jour des likes/dislikes
         } catch (error) {
           console.error(error);
-          // Gére les erreurs de manière appropriée (affichage d'un message d'erreur, redirection, etc.)
         }
       };
       

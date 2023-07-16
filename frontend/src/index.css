@@ -582,7 +582,6 @@ text-decoration: none;
     background-color: #fff;
     border-radius: 8px;
     padding: 10px;
-    width: 200px;
     box-shadow: rgba(0, 0, 0, 0.2) 0px 0px 10px;
     z-index: 999;
   }
@@ -617,6 +616,7 @@ text-decoration: none;
   .option-post{
     display: flex;
     align-items: center;
+    text-align: start;
     gap: 10px;
     background-color: white;
     color: rgba(var(--first-color), 1);

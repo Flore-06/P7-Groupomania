@@ -8,9 +8,6 @@ const app = express();
 // Appel de path : donne accès au chemin du système des fichiers
 const path = require('path');
 
-// Appel de helmet : permet de sécuriser les entêtes http
-//const helmet = require('helmet');
-
 // Appel de dotenv : qui stocke des variables d'environnement
 require('dotenv').config();
 
@@ -21,10 +18,7 @@ const postRoutes = require('./routes/post');
 const commentRoutes = require('./routes/comment');
 const userRoutes = require('./routes/user');
 
-/*app.use(helmet({
-  crossOriginEmbedderPolicy: false,
-  // ...
-}));*/
+
 
 
 // Connecter env à mongoose

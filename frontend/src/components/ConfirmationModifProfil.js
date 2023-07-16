@@ -1,12 +1,8 @@
-import { useNavigate } from "react-router-dom";
 import { Routes, Route } from 'react-router-dom';
 import Header from '../components/Header';
 import { NavLink } from "react-router-dom";
 
 const Profilajour = () => {
-    
-    const navigate = useNavigate();
-    const goBack = () => navigate(-1);
     
     return (
         <main className="light-background">

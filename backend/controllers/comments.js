@@ -55,7 +55,6 @@ exports.createComment = (req, res, next) => {
   .then(comment => {
     // Ajouter l'identifiant du nouveau post au champ posts de l'utilisateur
     
-    //User.findOneAndUpdate({ _id: userobjectId }, { $push: { comments: comment._id } });
     Post.findOneAndUpdate({ _id: postobjectId}, { $push: { comments: comment._id } })
     .exec(function (err, post) {
       if (err) {
