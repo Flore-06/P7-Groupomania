@@ -42,3 +42,6 @@ Le projet consiste à construire un réseau social interne pour les employés de
     ```
 
 3. Pour le compte administrateur, modifier dans la base de données dans le modèle utilisateur user : admin à 1
+Autrement un compte admin a déjà été créé, vous pourrez vous y connecter avec les identifiants suivants.
+E-mail : administrateur@gmail.com
+Mot de passe : Admin@1234
