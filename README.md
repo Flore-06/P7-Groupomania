@@ -30,6 +30,7 @@ Le projet consiste à construire un réseau social interne pour les employés de
     ```
     nodemon server
     ```
+5. Créer un dossier images au pluriel pour que les images puissent d'enregistrer dans le dossier.
 
 ## Installer le Frontend
 1. Dans le terminal du frontend, installer les dépendances

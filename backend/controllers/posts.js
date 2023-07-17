@@ -34,7 +34,6 @@ exports.getAllPost = (req, res, next) => {
 
 // Accéder à un post particulier
 exports.getOnePost = (req, res, next) => {
-  console.log("est passé par lààà");
     Post.findOne({ _id: req.params.id })
       .then((post) => { 
         console.log(post);
